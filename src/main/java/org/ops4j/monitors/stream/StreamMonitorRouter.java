@@ -20,7 +20,6 @@ package org.ops4j.monitors.stream;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A router that handles multicasr distribution of monitor events to registered monitors.
@@ -33,11 +32,7 @@ public class StreamMonitorRouter
     /**
      * List of attached monitors.
      */
-     private ArrayList m_Monitors;
-
-    //--------------------------------------------------------------------
-    // constructors
-    //--------------------------------------------------------------------
+     private ArrayList<StreamMonitor> m_Monitors;
 
    /**
     * Creation of a new network monitor router.
@@ -46,10 +41,6 @@ public class StreamMonitorRouter
     {
         m_Monitors = new ArrayList();
     }
-
-    //--------------------------------------------------------------------
-    // StreamMonitor
-    //--------------------------------------------------------------------
 
    /**
     * Notify all subscribing monitors of a updated event.
@@ -61,10 +52,8 @@ public class StreamMonitorRouter
     {
         synchronized( m_Monitors )
         {
-            Iterator list = m_Monitors.iterator();
-            while( list.hasNext() )
+            for( StreamMonitor monitor : m_Monitors )
             {
-                StreamMonitor monitor = (StreamMonitor) list.next();
                 monitor.notifyUpdate( resource, expected, count );
             }
         }
@@ -78,10 +67,8 @@ public class StreamMonitorRouter
     {
         synchronized( m_Monitors )
         {
-            Iterator list = m_Monitors.iterator();
-            while( list.hasNext() )
+            for( StreamMonitor monitor : m_Monitors )
             {
-                StreamMonitor monitor = (StreamMonitor) list.next();
                 monitor.notifyCompletion( resource );
             }
         }
@@ -97,10 +84,8 @@ public class StreamMonitorRouter
     {
         synchronized( m_Monitors )
         {
-            Iterator list = m_Monitors.iterator();
-            while( list.hasNext() )
+            for( StreamMonitor monitor : m_Monitors )
             {
-                StreamMonitor monitor = (StreamMonitor) list.next();
                 monitor.notifyError( resource, message );
             }
         }
@@ -112,7 +97,7 @@ public class StreamMonitorRouter
     */
     public void addStreamMonitor( StreamMonitor monitor )
     {
-        synchronized( this )
+        synchronized( m_Monitors )
         {
             m_Monitors.add( monitor );
         }
@@ -124,7 +109,7 @@ public class StreamMonitorRouter
      */
      public void removeStreamMonitor( StreamMonitor monitor )
      {
-         synchronized( this )
+         synchronized( m_Monitors )
          {
              m_Monitors.remove( monitor );
          }
@@ -132,7 +117,7 @@ public class StreamMonitorRouter
 
     public int size()
     {
-        synchronized( this )
+        synchronized( m_Monitors )
         {
             return m_Monitors.size();
         }
@@ -140,9 +125,9 @@ public class StreamMonitorRouter
 
     public StreamMonitor getMonitor( int index )
     {
-        synchronized( this )
+        synchronized( m_Monitors )
         {
-            return (StreamMonitor) m_Monitors.get( index );
+            return m_Monitors.get( index );
         }
     }
 }

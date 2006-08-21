@@ -19,7 +19,6 @@
 package org.ops4j.monitors.exception;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A monitor of a Exceptions occuring, and capability to route/delegate these
@@ -37,7 +36,7 @@ public class ExceptionMonitorRouter
     /**
      * List of attached monitors.
      */
-     private ArrayList m_Monitors;
+     private ArrayList<ExceptionMonitor> m_Monitors;
 
    /**
     * Creation of a exception monitor router.
@@ -54,10 +53,8 @@ public class ExceptionMonitorRouter
     {
         synchronized( m_Monitors )
         {
-            Iterator list = m_Monitors.iterator();
-            while( list.hasNext() )
+            for( ExceptionMonitor monitor : m_Monitors )
             {
-                ExceptionMonitor monitor = (ExceptionMonitor) list.next();
                 monitor.exception( source, exception );
             }
         }
@@ -69,7 +66,7 @@ public class ExceptionMonitorRouter
     */
     public void registerExceptionMonitor( ExceptionMonitor monitor )
     {
-        synchronized( this )
+        synchronized( m_Monitors )
         {
             m_Monitors.add( monitor );
         }
@@ -81,7 +78,7 @@ public class ExceptionMonitorRouter
      */
      public void unregisterExceptionMonitor( ExceptionMonitor monitor )
      {
-         synchronized( this )
+         synchronized( m_Monitors )
          {
              m_Monitors.remove( monitor );
          }
@@ -92,7 +89,7 @@ public class ExceptionMonitorRouter
      */
     public int size()
     {
-        synchronized( this )
+        synchronized( m_Monitors )
         {
             return m_Monitors.size();
         }
@@ -103,7 +100,7 @@ public class ExceptionMonitorRouter
      */
     public ExceptionMonitor getMonitor( int index )
     {
-        synchronized( this )
+        synchronized( m_Monitors )
         {
             return (ExceptionMonitor) m_Monitors.get( index );
         }

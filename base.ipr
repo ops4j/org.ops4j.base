@@ -192,11 +192,21 @@
     <option name="GENERATE_IIOP_STUBS" value="false" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
-  <component name="libraryTable" />
+  <component name="libraryTable">
+    <library name="junit-3.8.2">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/junit/junit/3.8.2/junit-3.8.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
   <component name="uidesigner-configuration">
     <option name="INSTRUMENT_CLASSES" value="false" />
     <option name="COPY_FORMS_RUNTIME_TO_OUTPUT" value="true" />
   </component>
-  <UsedPathMacros />
+  <UsedPathMacros>
+    <macro name="M2_REPO" />
+  </UsedPathMacros>
 </project>
 

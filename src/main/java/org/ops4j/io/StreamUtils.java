@@ -101,6 +101,7 @@ public class StreamUtils
                     monitor.notifyUpdate( source, expected, count );
                 }
             }
+            dest.flush();
         }
         finally
         {

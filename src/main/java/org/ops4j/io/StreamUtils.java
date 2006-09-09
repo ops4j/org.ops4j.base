@@ -48,7 +48,8 @@ public class StreamUtils
      * @param src the source input stream
      * @param dest the destination output stream
      * @param closeStreams TRUE if the streams should be closed on completion
-     * @exception IOException if an IO error occurs
+     * @throws IOException if an IO error occurs
+     * @throws NullArgumentException if either the src or dest arguments are null.
      */
     static public void copyStream( InputStream src, OutputStream dest, boolean closeStreams )
         throws IOException, NullArgumentException
@@ -62,7 +63,9 @@ public class StreamUtils
      * @param src the source input stream
      * @param dest the destination output stream
      * @param closeStreams TRUE if the streams should be closed on completion
-     * @exception IOException if an IO error occurs
+     * @param monitor The StreamMonitor to report progress to.
+     * @throws IOException if an IO error occurs
+     * @throws NullArgumentException if either the src or dest arguments are null.
      */
     static public void copyStream( StreamMonitor monitor, URL source, int expected,
                             InputStream src, OutputStream dest, boolean closeStreams )

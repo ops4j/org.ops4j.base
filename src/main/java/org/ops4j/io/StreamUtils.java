@@ -18,15 +18,20 @@
 
 package org.ops4j.io;
 
-import org.ops4j.lang.NullArgumentException;
-import org.ops4j.monitors.stream.StreamMonitor;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.net.URL;
+import org.ops4j.lang.NullArgumentException;
+import org.ops4j.monitors.stream.StreamMonitor;
 
 /**
  * @author <a href="http://www.ops4j.org">Open Particpation Software for Java</a>
@@ -151,5 +156,49 @@ public class StreamUtils
         } while( moreOnIn1 );
         boolean noMoreOnIn2Either = in2.read() == -1;
         return  noMoreOnIn2Either;
+    }
+
+    static public void copyReaderToWriter( Reader in, Writer out, boolean close )
+        throws IOException
+    {
+        try
+        {
+            if( ! (in instanceof BufferedReader ))
+            {
+                in = new BufferedReader( in );
+            }
+            if( ! (out instanceof BufferedWriter ))
+            {
+                out = new BufferedWriter( out );
+            }
+            int ch = in.read();
+            while( ch != -1 )
+            {
+                out.write( ch );
+                ch = in.read();
+            }
+            out.flush();
+        } finally
+        {
+            if( close )
+            {
+                in.close();
+                out.close();
+            }
+        }
+    }
+
+    static public void copyStreamToWriter( InputStream in, Writer out, String encoding, boolean close )
+        throws IOException
+    {
+        InputStreamReader reader = new InputStreamReader( in, encoding );
+        copyReaderToWriter( reader, out, close );
+    }
+
+    static public void copyReaderToStream( Reader in, OutputStream out, String encoding, boolean close )
+        throws IOException
+    {
+        OutputStreamWriter writer = new OutputStreamWriter( out, encoding );
+        copyReaderToWriter( in, writer, close );
     }
 }

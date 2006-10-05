@@ -13,14 +13,17 @@
  * implied.
  *
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  */
 package org.ops4j.io;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import junit.framework.TestCase;
+import junit.framework.ComparisonFailure;
 
 public class StreamUtilTestCase extends TestCase
 {
@@ -158,6 +161,63 @@ public class StreamUtilTestCase extends TestCase
         {
             fail( "OutputStream was closed." );
         }
+    }
+
+    public void testCopyReaderToWriter()
+        throws Exception
+    {
+        String s = "HabbaZout\u4512\u1243\u9812";
+        StringReader reader = new StringReader( s );
+        StringWriter writer = new StringWriter();
+        StreamUtils.copyReaderToWriter( reader, writer, true );
+        assertEquals( s, writer.getBuffer().toString() );
+    }
+
+    public void testCopyReaderToStream()
+        throws Exception
+    {
+        String s = "HabbaZout\u1298\u1243\u9812";
+        StringReader reader = new StringReader( s );
+        ByteArrayOutputStream baos = new ByteArrayOutputStream( );
+        StreamUtils.copyReaderToStream( reader, baos, "UTF-8", true );
+        assertEquals( s, baos.toString() );
+
+        reader = new StringReader( s );
+        baos = new ByteArrayOutputStream( );
+        StreamUtils.copyReaderToStream( reader, baos, "ISO-8859-1", true );
+        //noinspection ErrorNotRethrown
+        try
+        {
+            assertEquals( s, baos.toString() );
+            fail( "Didn't fail incorrect encoding.");
+        } catch( ComparisonFailure e )
+        {
+            // expected
+        }
+    }
+
+    public void testCopyStreamToWriter()
+        throws Exception
+    {
+        String s = "HabbaZout\u1298\u1243\u9812";
+        ByteArrayInputStream in = new ByteArrayInputStream( s.getBytes( "UTF-8" ) );
+        StringWriter writer = new StringWriter();
+        StreamUtils.copyStreamToWriter( in, writer, "UTF-8", true );
+        assertEquals( s, writer.getBuffer().toString() );
+
+        in = new ByteArrayInputStream( s.getBytes( "ISO-8859-1" ) );
+        writer = new StringWriter();
+        StreamUtils.copyStreamToWriter( in, writer, "UTF-8", true );
+        //noinspection ErrorNotRethrown
+        try
+        {
+            assertEquals( s, writer.getBuffer().toString() );
+            fail( "Didn't fail incorrect encoding.");
+        } catch( ComparisonFailure e )
+        {
+            // expected
+        }
+
     }
 
     private static class MyByteArrayOutputStream extends ByteArrayOutputStream

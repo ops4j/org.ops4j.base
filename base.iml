@@ -14,5 +14,8 @@
     <orderEntry type="library" name="junit-3.8.2" level="project" />
     <orderEntryProperties />
   </component>
+  <component name="PluginUploader.UploadConfigurable">
+    <option name="_archivePath" />
+  </component>
 </module>
 

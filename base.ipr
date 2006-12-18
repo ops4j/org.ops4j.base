@@ -9,8 +9,6 @@
   <component name="CodeStyleProjectProfileManger">
     <option name="PROJECT_PROFILE" />
     <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
-    <profiles />
   </component>
   <component name="CodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS" />
@@ -69,7 +67,7 @@
     <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
     <scopes />
     <profiles>
-      <profile version="1.0">
+      <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
         <used_levels>
@@ -106,10 +104,7 @@
         <inspection_tool class="LoopStatementsThatDontLoop" level="WARNING" enabled="false" />
         <inspection_tool class="InstanceofCatchParameter" level="WARNING" enabled="true" />
         <inspection_tool class="JavaLangImport" level="ERROR" enabled="true" />
-        <inspection_tool class="BooleanLiteralComparison" level="WARNING" enabled="false" />
-        <inspection_tool class="ThrowGenericClass" level="WARNING" enabled="true" />
         <inspection_tool class="InfiniteRecursion" level="WARNING" enabled="false" />
-        <inspection_tool class="IgnoreResultOfRead" level="WARNING" enabled="false" />
         <inspection_tool class="ConstantConditions" level="WARNING" enabled="false">
           <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
         </inspection_tool>
@@ -155,7 +150,6 @@
         <inspection_tool class="StaticImport" level="ERROR" enabled="true" />
         <inspection_tool class="NoExplicitFinalizeCalls" level="ERROR" enabled="true" />
         <inspection_tool class="FinalPrivateMethod" level="WARNING" enabled="false" />
-        <inspection_tool class="StringLiteral" level="WARNING" enabled="false" />
         <inspection_tool class="CStyleArrayDeclaration" level="WARNING" enabled="true" />
         <inspection_tool class="ContinueOrBreakFromFinallyBlock" level="ERROR" enabled="true" />
         <inspection_tool class="SynchronizeOnNonFinalField" level="WARNING" enabled="false" />
@@ -364,6 +358,13 @@
   </component>
   <component name="StarteamVcsAdapter" />
   <component name="VssVcs" />
+  <component name="com.intellij.jsf.UserDefinedFacesConfigs">
+    <option name="USER_DEFINED_CONFIGS">
+      <value>
+        <list size="0" />
+      </value>
+    </option>
+  </component>
   <component name="libraryTable">
     <library name="junit-3.8.2">
       <CLASSES>
@@ -378,6 +379,8 @@
     <option name="COPY_FORMS_RUNTIME_TO_OUTPUT" value="true" />
     <option name="DEFAULT_LAYOUT_MANAGER" value="GridLayoutManager" />
   </component>
-  <UsedPathMacros />
+  <UsedPathMacros>
+    <macro name="M2_REPO" />
+  </UsedPathMacros>
 </project>
 

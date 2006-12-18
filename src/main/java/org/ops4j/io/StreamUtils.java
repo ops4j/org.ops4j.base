@@ -20,6 +20,8 @@ package org.ops4j.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,8 +29,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.net.URL;
 import org.ops4j.lang.NullArgumentException;
 import org.ops4j.monitors.stream.StreamMonitor;

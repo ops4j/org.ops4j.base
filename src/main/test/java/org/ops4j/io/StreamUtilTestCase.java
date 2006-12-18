@@ -22,8 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import junit.framework.TestCase;
 import junit.framework.ComparisonFailure;
+import junit.framework.TestCase;
 
 public class StreamUtilTestCase extends TestCase
 {

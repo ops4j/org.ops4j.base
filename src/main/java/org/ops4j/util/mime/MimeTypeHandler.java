@@ -20,15 +20,11 @@ package org.ops4j.util.mime;
 
 import java.util.HashMap;
 
-/**
- * Mimetype utility hanlder.
- */
+/** Mimetype utility hanlder. */
 public final class MimeTypeHandler
 {
-   /**
-    * Static mime type table of artifact types to mimetype strings.
-    */
-    private static final HashMap<String,String> MIME_TYPES = new HashMap<String, String>();
+    /** Static mime type table of artifact types to mimetype strings. */
+    private static final HashMap<String, String> MIME_TYPES = new HashMap<String, String>();
 
     static
     {
@@ -41,32 +37,33 @@ public final class MimeTypeHandler
         MIME_TYPES.put( "link", "application/x-ops4j-link" );
     }
 
-   /**
-    * Return the mimetype given a artifact type.
-    * @param artifactType the artifact type such as "block", "jar", etc.
-    * @return the matching mimetype of null if unknown
-    */
-    static public String getMimeType( String artifactType )
+    /** Disabled constructor. */
+    private MimeTypeHandler()
+    {
+        // disable
+    }
+
+    /**
+     * Return the mimetype given a artifact type.
+     *
+     * @param artifactType the artifact type such as "block", "jar", etc.
+     *
+     * @return the matching mimetype of null if unknown
+     */
+    public static String getMimeType( String artifactType )
     {
         return MIME_TYPES.get( artifactType );
     }
 
     /**
      * Returns the number of MimeTypes that has been defined.
-     *
+     * <p/>
      * Only for use with testcases.
+     *
      * @return the known mimetype count
      */
-    static public int getMimeTypesSize()
+    public static int getMimeTypesSize()
     {
         return MIME_TYPES.size();
-    }
-
-   /**
-    * Disabled constructor.
-    */
-    private MimeTypeHandler()
-    {
-        // disable
     }
 }

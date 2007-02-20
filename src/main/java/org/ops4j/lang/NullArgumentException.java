@@ -20,9 +20,10 @@ package org.ops4j.lang;
 
 import java.util.Properties;
 
-/** Exception thrown when the argument to a method or constructor is
- *  <i>null</i> and not handled by the method/constructor/class.
- *
+/**
+ * Exception thrown when the argument to a method or constructor is
+ * <i>null</i> and not handled by the method/constructor/class.
+ * <p/>
  * The argument in the only constructor of this exception should only
  * take the name of the declared argument that is null, for instance;
  * <code><pre>
@@ -47,12 +48,25 @@ public class NullArgumentException extends IllegalArgumentException
 
     private static final String IS_EMPTY = " is empty string.";
 
+    /**
+     * Constructor.
+     *
+     * @param msg The message to use in the exception describing the problem.
+     */
     public NullArgumentException( String msg )
     {
         super( msg );
     }
 
+    /**
+     * Validates that the object <code>obj</code> is not null.
+     *
+     * @param obj        The object to be tested.
+     * @param objectName The name of the object, which is used to construct the exception message.
+     * @throws NullArgumentException if the stringToCheck is either null or zero characters long.
+     */
     public static void validateNotNull( Object obj, String objectName )
+        throws NullArgumentException
     {
         if( obj == null )
         {
@@ -60,6 +74,13 @@ public class NullArgumentException extends IllegalArgumentException
         }
     }
 
+    /**
+     * Validates that the string is not null and not an empty string.
+     *
+     * @param stringToCheck The object to be tested.
+     * @param argumentName  The name of the object, which is used to construct the exception message.
+     * @throws NullArgumentException if the stringToCheck is either null or zero characters long.
+     */
     public static void validateNotEmpty( String stringToCheck, String argumentName )
         throws NullArgumentException
     {
@@ -70,6 +91,13 @@ public class NullArgumentException extends IllegalArgumentException
         }
     }
 
+    /**
+     * Validates that the Properties instance is not null and that it has entries.
+     *
+     * @param propertiesToCheck The object to be tested.
+     * @param argumentName  The name of the object, which is used to construct the exception message.
+     * @throws NullArgumentException if the Properties instance is null or does not have any entries.
+     */
     public static void validateNotEmpty( Properties propertiesToCheck, String argumentName )
         throws NullArgumentException
     {

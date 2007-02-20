@@ -18,7 +18,6 @@
 
 package org.ops4j.monitors.exception;
 
-
 /**
  * A monitor of a Exceptions occuring.
  *
@@ -29,6 +28,8 @@ public interface ExceptionMonitor
 {
     /** This method is called when an Exception or Throwable occurs.
      *
+     * @param source The source of the exception. That is the class that is throwing the exception.
+     * @param exception The Exception being thrown.
      */
     void exception( ExceptionSource source, Throwable exception );
 }

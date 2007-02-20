@@ -19,17 +19,23 @@ package org.ops4j.monitors.stream;
 
 import org.ops4j.monitors.TooManyMonitorsException;
 
-/** An interface for classes that supports StreamMonitors.
- */
+/** An interface for classes that supports StreamMonitors. */
 public interface StreamSource
 {
-    /** Register a ExceptionMonitor with the source.
+    /**
+     * Register a ExceptionMonitor with the source.
+     *
+     * @param monitor The monitor to register.
+     *
+     * @throws TooManyMonitorsException if the StreamSource can not handle another registration.
      */
     void registerStreamMonitor( StreamMonitor monitor )
         throws TooManyMonitorsException;
 
-    /** Unregister a StreamMonitor with the source.
+    /**
+     * Unregister a StreamMonitor with the source.
+     *
+     * @param monitor The monitor to register.
      */
     void unregisterStreamMonitor( StreamMonitor monitor );
-
 }

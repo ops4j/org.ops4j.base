@@ -20,14 +20,14 @@
 
 package org.ops4j.util.environment;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.File;
 import java.io.InputStream;
-import java.util.Properties;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.Enumeration;
-
+import java.util.HashSet;
+import java.util.Properties;
 
 /**
  * Encapsulates operating system and shell specific access to environment
@@ -38,20 +38,30 @@ import java.util.Enumeration;
  */
 public class Environment extends Properties
 {
-    /**
-     * os.name System property
-     */
+    /** os.name System property */
     public static final String OSNAME = System.getProperty( "os.name" );
 
-    /**
-     * user.name System property
-     */
+    /** user.name System property */
     public static final String USERNAME = System.getProperty( "user.name" );
 
-    /**
-     * the user's platform specific shell executable
-     */
+    private static final HashSet<String> UNICES = new HashSet<String>();
+
+    /** the user's platform specific shell executable */
     private static String m_SHELL = null;
+
+    static
+    {
+        UNICES.add( "Linux" );
+        UNICES.add( "SunOS" );
+        UNICES.add( "Solaris" );
+        UNICES.add( "MPE/iX" );
+        UNICES.add( "AIX" );
+        UNICES.add( "FreeBSD" );
+        UNICES.add( "Irix" );
+        UNICES.add( "Digital Unix" );
+        UNICES.add( "HP-UX" );
+        UNICES.add( "Mac OS X" );
+    }
 
     /**
      * Creates a snapshot of the current shell environment variables for a user.
@@ -63,19 +73,23 @@ public class Environment extends Properties
     {
         Properties properties = getEnvVariables();
         Enumeration list = properties.propertyNames();
-        while ( list.hasMoreElements() )
+        while( list.hasMoreElements() )
         {
-            String key = ( String ) list.nextElement();
+            String key = (String) list.nextElement();
             setProperty( key, properties.getProperty( key ) );
         }
     }
 
-    /** Returns the Data directory of the application for the logged in user.
+    /**
+     * Returns the Data directory of the application for the logged in user.
      * On Unix systems, the $HOME/.<i>applicationname</i> (all lower-case) directory will be returned.
      * On Windows systems, $APPDATA/<i>applicationname</i> (with uppercase, first letter) will be returned.
+     *
      * @param applicationname The name of the application.
-     * @throws EnvironmentException
+     *
      * @return The directory where the application can store data.
+     *
+     * @throws EnvironmentException
      */
     public static File getDataDirectory( String applicationname )
     {
@@ -97,25 +111,28 @@ public class Environment extends Properties
         throw new EnvironmentException( cause );
     }
 
-    /** Returns the System directory of the application for the logged in user.
+    /**
+     * Returns the System directory of the application for the logged in user.
      * This method returns the directory where the application should be, or has been installed,
      * on the system, for the current user. On Unix systems, the following rules are applied;
      * <ol>
-     *  <li>applicationname is made into lowercase.
-     *  <li>application is looked for in the $HOME/<i>applicationname</i></li>
-     *  <li>application is looked for in the /usr/share/<i>applicationname</i></li>
-     *  <li>if the $USER == 'root', then use /usr/share/<i>applicationname</i></li>
-     *  <li>use $HOME/<i>applicationname</i></li>
+     * <li>applicationname is made into lowercase.
+     * <li>application is looked for in the $HOME/<i>applicationname</i></li>
+     * <li>application is looked for in the /usr/share/<i>applicationname</i></li>
+     * <li>if the $USER == 'root', then use /usr/share/<i>applicationname</i></li>
+     * <li>use $HOME/<i>applicationname</i></li>
      * </ol>
      * On Windows, the PROGRAMFILES environment variable is looked up, if not found, then use "C:\Program Files\"
      * and then append the <i>applicationname</i> with an initial uppercase character.
      *
      * @param applicationname The name of the application.
-     * @throws EnvironmentException if the current system in not Windows or Unix/Linux.
      *
      * @return The directory where the application is either installed or can be installed.
+     *
+     * @throws EnvironmentException if the current system in not Windows or Unix/Linux.
      */
     public static File getSystemDirectory( String applicationname )
+        throws EnvironmentException
     {
         if( isUnix() )
         {
@@ -123,11 +140,15 @@ public class Environment extends Properties
             String dirname = "/home/" + USERNAME + name;
             File homeDir = new File( dirname );
             if( homeDir.exists() )
+            {
                 return homeDir;
+            }
             dirname = "/usr/share/" + name;
             File shareDir = new File( dirname );
             if( shareDir.exists() )
+            {
                 return shareDir;
+            }
             if( "root".equals( USERNAME ) )
             {
                 return shareDir;
@@ -144,7 +165,6 @@ public class Environment extends Properties
             String shared = getEnvVariable( "PROGRAMFILES" );
             if( shared == null )
             {
-                // TODO: Niclas: Well, then what??? Can't think of anything better.
                 shared = "C:\\Program Files\\";
             }
             File dir = new File( shared, name );
@@ -155,6 +175,13 @@ public class Environment extends Properties
         throw new EnvironmentException( cause );
     }
 
+    /**
+     * Capitalizes the first character.
+     *
+     * @param applicationname The application name to be capitalized in the first character.
+     *
+     * @return A capitalized first character of the provided application name.
+     */
     private static String toFirstCap( String applicationname )
     {
         char first = applicationname.charAt( 0 );
@@ -167,7 +194,9 @@ public class Environment extends Properties
      * Gets the value of a shell environment variable.
      *
      * @param name the name of variable
+     *
      * @return the String representation of an environment variable value
+     *
      * @throws EnvironmentException if there is a problem accessing the environment
      */
     public static String getEnvVariable( String name )
@@ -195,21 +224,7 @@ public class Environment extends Properties
      */
     public static boolean isUnix()
     {
-        if( -1 != OSNAME.indexOf( "Linux" )
-               || -1 != OSNAME.indexOf( "SunOS" )
-               || -1 != OSNAME.indexOf( "Solaris" )
-               || -1 != OSNAME.indexOf( "MPE/iX" )
-               || -1 != OSNAME.indexOf( "AIX" )
-               || -1 != OSNAME.indexOf( "FreeBSD" )
-               || -1 != OSNAME.indexOf( "Irix" )
-               || -1 != OSNAME.indexOf( "Digital Unix" )
-               || -1 != OSNAME.indexOf( "HP-UX" )
-               || -1 != OSNAME.indexOf( "Mac OS X" ) )
-        {
-            return true;
-        }
-
-        return false;
+        return UNICES.contains( OSNAME );
     }
 
     /**
@@ -219,13 +234,12 @@ public class Environment extends Properties
      */
     public static boolean isMacOsX()
     {
-        if(  -1 != OSNAME.indexOf( "Mac OS X" ) )
+        if( -1 != OSNAME.indexOf( "Mac OS X" ) )
         {
             return true;
         }
         return false;
     }
-
 
     /**
      * Checks to see if the operating system is a Windows variant.
@@ -263,6 +277,7 @@ public class Environment extends Properties
      * property.
      *
      * @return the environment variables and values as Properties
+     *
      * @throws EnvironmentException if os is not recognized
      */
     public static Properties getEnvVariables()
@@ -282,14 +297,13 @@ public class Environment extends Properties
         throw new EnvironmentException( cause );
     }
 
-
     /**
      * Gets the user's shell executable.
      *
      * @return the shell executable for the user
      *
      * @throws EnvironmentException the there is a problem accessing shell
-     * information
+     *                              information
      */
     public static String getUserShell()
         throws EnvironmentException
@@ -331,8 +345,8 @@ public class Environment extends Properties
         }
 
         if( -1 != OSNAME.indexOf( "98" )
-          || -1 != OSNAME.indexOf( "95" )
-          || -1 != OSNAME.indexOf( "Me" ) )
+            || -1 != OSNAME.indexOf( "95" )
+            || -1 != OSNAME.indexOf( "Me" ) )
         {
             m_SHELL = "command.com";
             return m_SHELL;
@@ -346,7 +360,8 @@ public class Environment extends Properties
      * Gets the default login shell used by a mac user.
      *
      * @return the Mac user's default shell as referenced by cmd:
-     *      'nidump passwd /'
+     *         'nidump passwd /'
+     *
      * @throws EnvironmentException if os information is not resolvable
      */
     private static String getMacUserShell()
@@ -364,7 +379,8 @@ public class Environment extends Properties
      * Gets the default login shell used by a unix user.
      *
      * @return the Mac user's default shell as referenced by cmd:
-     *      'nidump passwd /'
+     *         'nidump passwd /'
+     *
      * @throws EnvironmentException if os information is not resolvable
      */
     private static String getUnixUserShell()
@@ -374,13 +390,19 @@ public class Environment extends Properties
         {
             return m_SHELL;
         }
-        String [] args = { "cat", "/etc/passwd" };
+        String[] args = { "cat", "/etc/passwd" };
         return readShellFromPasswdFile( args );
     }
 
-
     // Support Methods.........
 
+    /**
+     * Reads which shell the current user has as settings in the /etc/passwd file.
+     *
+     * @param args commandline arguments needed.
+     *
+     * @return The shell command used by the current user, such as /bin/bash
+     */
     private static String readShellFromPasswdFile( String[] args )
     {
         Process process = null;
@@ -395,12 +417,10 @@ public class Environment extends Properties
         }
         catch( InterruptedException t )
         {
-            // TODO: More meaningful description.
             throw new EnvironmentException( t );
         }
         catch( IOException t )
         {
-            // TODO: More meaningful description.
             throw new EnvironmentException( t );
         }
         finally
@@ -415,6 +435,13 @@ public class Environment extends Properties
         throw new EnvironmentException( message );
     }
 
+    /**
+     * Process a password file.
+     *
+     * @param reader The Reader connected to the password file.
+     *
+     * @throws IOException if an underlying I/O problem occurs.
+     */
     private static void processPasswdFile( BufferedReader reader )
         throws IOException
     {
@@ -442,8 +469,10 @@ public class Environment extends Properties
 
     /**
      * Adds a set of Windows variables to a set of properties.
+     *
      * @return the environment properties
-     * @exception EnvironmentException if an error occurs
+     *
+     * @throws EnvironmentException if an error occurs
      */
     private static Properties getUnixShellVariables()
         throws EnvironmentException
@@ -466,9 +495,11 @@ public class Environment extends Properties
      * Gets the UNIX env executable path.
      *
      * @return the absolute path to the env program
+     *
      * @throws EnvironmentException if it cannot be found
      */
-    private static String getUnixEnv() throws EnvironmentException
+    private static String getUnixEnv()
+        throws EnvironmentException
     {
         File env = new File( "/bin/env" );
 
@@ -486,11 +517,12 @@ public class Environment extends Properties
         throw new EnvironmentException( message );
     }
 
-
     /**
      * Adds a set of Windows variables to a set of properties.
+     *
      * @return the environment properties
-     * @exception EnvironmentException if an error occurs
+     *
+     * @throws EnvironmentException if an error occurs
      */
     private static Properties getWindowsShellVariables()
         throws EnvironmentException
@@ -511,7 +543,14 @@ public class Environment extends Properties
         return properties;
     }
 
-
+    /**
+     * Process the lines of the environment variables returned.
+     *
+     * @param reader     The Reader that containes the lines to be parsed.
+     * @param properties The Properties objects to be populated with the environment variable names and values.
+     *
+     * @throws IOException if an underlying I/O problem occurs.
+     */
     private static void processLinesOfEnvironmentVariables( BufferedReader reader, Properties properties )
         throws IOException
     {
@@ -535,6 +574,15 @@ public class Environment extends Properties
         }
     }
 
+    /**
+     * Starts a OS level process.
+     *
+     * @param exec The commandline arguments, including the process to be started.
+     *
+     * @return The Process instance.
+     *
+     * @throws IOException if an underlying I/O exception occurs.
+     */
     private static Process startProcess( String[] exec )
         throws IOException
     {
@@ -542,6 +590,13 @@ public class Environment extends Properties
         return process;
     }
 
+    /**
+     * Creates a Reader instance for the process output.
+     *
+     * @param process The process to attach the reader to.
+     *
+     * @return A Reader attached to the process.
+     */
     private static BufferedReader createReader( Process process )
     {
         InputStream inputStream = process.getInputStream();
@@ -550,6 +605,14 @@ public class Environment extends Properties
         return reader;
     }
 
+    /**
+     * Reads the environment variables and stores them in a Properties object.
+     *
+     * @param cmdExec    The command to execute to get hold of the environment variables.
+     * @param properties The Properties object to be populated with the environment variables.
+     *
+     * @return The exit value of the OS level process upon its termination.
+     */
     private static int readEnvironment( String cmdExec, Properties properties )
     {
         // fire up the shell and get echo'd results on stdout
@@ -567,12 +630,10 @@ public class Environment extends Properties
         }
         catch( InterruptedException t )
         {
-            // TODO: More meaningful description.
             throw new EnvironmentException( "NA", t );
         }
         catch( IOException t )
         {
-            // TODO: More meaningful description.
             throw new EnvironmentException( "NA", t );
         }
         finally
@@ -587,6 +648,13 @@ public class Environment extends Properties
         return exitValue;
     }
 
+    /**
+     * Closes a Reader.
+     * <p/>
+     * Any exception during the close is printed to the System.err, as no such are expected.
+     *
+     * @param reader The reader to be closed.
+     */
     private static void close( BufferedReader reader )
     {
         try
@@ -601,5 +669,4 @@ public class Environment extends Properties
             e.printStackTrace();
         }
     }
-
 }

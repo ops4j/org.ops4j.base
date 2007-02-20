@@ -18,18 +18,19 @@
 
 package org.ops4j.util.xml;
 
+import java.io.InputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Properties;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.ops4j.util.collections.PropertyResolver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Properties;
-
+import org.xml.sax.SAXException;
 
 /**
  * Utility class supporting the XML document parsing.
@@ -39,14 +40,24 @@ import java.util.Properties;
  */
 public final class ElementHelper
 {
-   /**
-    * Return the root element of the supplied input stream.
-    * @param input the input stream containing a XML definition
-    * @return the root element
-    * @exception Exception if the error occurs during root element establishment
-    */
+    /** Constructor (disabled) */
+    private ElementHelper()
+    {
+    }
+
+    /**
+     * Return the root element of the supplied input stream.
+     *
+     * @param input the input stream containing a XML definition
+     *
+     * @return the root element
+     *
+     * @throws IOException If an underlying I/O problem occured.
+     * @throws ParserConfigurationException if there is a severe problem in the XML parsing subsystem.
+     * @throws SAXException If the XML is malformed in some way.
+     */
     public static Element getRootElement( InputStream input )
-        throws Exception
+        throws ParserConfigurationException, IOException, SAXException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating( false );
@@ -56,12 +67,14 @@ public final class ElementHelper
         return document.getDocumentElement();
     }
 
-   /**
-    * Return a named child relative to a supplied element.
-    * @param root the parent DOM element
-    * @param name the name of a child element
-    * @return the child element of null if the child does not exist
-    */
+    /**
+     * Return a named child relative to a supplied element.
+     *
+     * @param root the parent DOM element
+     * @param name the name of a child element
+     *
+     * @return the child element of null if the child does not exist
+     */
     public static Element getChild( Element root, String name )
     {
         if( null == root )
@@ -77,12 +90,14 @@ public final class ElementHelper
         return (Element) list.item( 0 );
     }
 
-   /**
-    * Return all children matching the supplied element name.
-    * @param root the parent DOM element
-    * @param name the name against which child element will be matched
-    * @return the array of child elements with a matching name
-    */
+    /**
+     * Return all children matching the supplied element name.
+     *
+     * @param root the parent DOM element
+     * @param name the name against which child element will be matched
+     *
+     * @return the array of child elements with a matching name
+     */
     public static Element[] getChildren( Element root, String name )
     {
         if( null == root )
@@ -92,7 +107,7 @@ public final class ElementHelper
         NodeList list = root.getElementsByTagName( name );
         int n = list.getLength();
         ArrayList<Element> result = new ArrayList<Element>();
-        for( int i=0; i < n; i++ )
+        for( int i = 0; i < n; i++ )
         {
             Node item = list.item( i );
             if( item instanceof Element )
@@ -100,16 +115,18 @@ public final class ElementHelper
                 result.add( (Element) item );
             }
         }
-        Element[] retval = new Element[ result.size() ];
+        Element[] retval = new Element[result.size()];
         result.toArray( retval );
         return retval;
     }
 
-   /**
-    * Return all children of the supplied parent.
-    * @param root the parent DOM element
-    * @return the array of all children
-    */
+    /**
+     * Return all children of the supplied parent.
+     *
+     * @param root the parent DOM element
+     *
+     * @return the array of all children
+     */
     public static Element[] getChildren( Element root )
     {
         if( null == root )
@@ -123,7 +140,7 @@ public final class ElementHelper
             return new Element[0];
         }
         ArrayList<Element> result = new ArrayList<Element>();
-        for( int i=0; i < n; i++ )
+        for( int i = 0; i < n; i++ )
         {
             Node item = list.item( i );
             if( item instanceof Element )
@@ -132,16 +149,18 @@ public final class ElementHelper
             }
         }
 
-        Element[] retval = new Element[ result.size() ];
+        Element[] retval = new Element[result.size()];
         result.toArray( retval );
         return retval;
     }
 
-   /**
-    * Return the value of an element.
-    * @param node the DOM node
-    * @return the node value
-    */
+    /**
+     * Return the value of an element.
+     *
+     * @param node the DOM node
+     *
+     * @return the node value
+     */
     public static String getValue( Element node )
     {
         if( null == node )
@@ -160,24 +179,28 @@ public final class ElementHelper
         return normalize( value );
     }
 
-   /**
-    * Return the value of an element attribute.
-    * @param node the DOM node
-    * @param key the attribute key
-    * @return the attribute value or null if the attribute is undefined
-    */
+    /**
+     * Return the value of an element attribute.
+     *
+     * @param node the DOM node
+     * @param key  the attribute key
+     *
+     * @return the attribute value or null if the attribute is undefined
+     */
     public static String getAttribute( Element node, String key )
     {
         return getAttribute( node, key, null );
     }
 
-   /**
-    * Return the value of an element attribute.
-    * @param node the DOM node
-    * @param key the attribute key
-    * @param def the default value if the attribute is undefined
-    * @return the attribute value or the default value if undefined
-    */
+    /**
+     * Return the value of an element attribute.
+     *
+     * @param node the DOM node
+     * @param key  the attribute key
+     * @param def  the default value if the attribute is undefined
+     *
+     * @return the attribute value or the default value if undefined
+     */
     public static String getAttribute( Element node, String key, String def )
     {
         if( null == node )
@@ -196,31 +219,28 @@ public final class ElementHelper
         return normalize( value );
     }
 
-   /**
-    * Parse the value for any property tokens relative to system properties.
-    * @param value the value to parse
-    * @return the normalized string
-    */
+    /**
+     * Parse the value for any property tokens relative to system properties.
+     *
+     * @param value the value to parse
+     *
+     * @return the normalized string
+     */
     private static String normalize( String value )
     {
         return normalize( value, System.getProperties() );
     }
 
-   /**
-    * Parse the value for any property tokens relative to the supplied properties.
-    * @param value the value to parse
-    * @param props the reference properties
-    * @return the normalized string
-    */
+    /**
+     * Parse the value for any property tokens relative to the supplied properties.
+     *
+     * @param value the value to parse
+     * @param props the reference properties
+     *
+     * @return the normalized string
+     */
     private static String normalize( String value, Properties props )
     {
         return PropertyResolver.resolve( props, value );
-    }
-
-   /**
-    * Constructor (disabled)
-    */
-    private ElementHelper()
-    {
     }
 }

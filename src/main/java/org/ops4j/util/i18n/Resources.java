@@ -30,41 +30,29 @@ import java.util.ResourceBundle;
 /**
  * A class to simplify extracting localized strings, icons
  * and other common resources from a ResourceBundle.
- *
+ * <p/>
  * Reworked to mirror behaviour of StringManager from Tomcat (format() to getString()).
  *
  * @author <a href="http://www.ops4j.org">Open Participation Software for Java</a>
  */
 public final class Resources
 {
-   /**
-    * Span width constant.
-    */
+    /** Span width constant. */
     private static final int SPAN = 100;
 
-   /**
-    * Random seed.
-    */
+    /** Random seed. */
     private static final Random RANDOM = new Random();
 
-   /**
-    * Locale of Resources
-    */
+    /** Locale of Resources */
     private final Locale m_locale;
 
-   /**
-    * Resource bundle referenced by manager
-    */
+    /** Resource bundle referenced by manager */
     private ResourceBundle m_bundle;
 
-   /**
-    * Base name of resource bundle
-    */
+    /** Base name of resource bundle */
     private String m_baseName;
 
-   /**
-    * ClassLoader from which to load resources
-    */
+    /** ClassLoader from which to load resources */
     private ClassLoader m_classLoader;
 
     /**
@@ -81,7 +69,7 @@ public final class Resources
      * Constructor that builds a manager in default locale
      * using specified ClassLoader.
      *
-     * @param baseName the base name of ResourceBundle
+     * @param baseName    the base name of ResourceBundle
      * @param classLoader the classLoader to load ResourceBundle from
      */
     public Resources( String baseName, ClassLoader classLoader )
@@ -93,7 +81,7 @@ public final class Resources
      * Constructor that builds a manager in specified locale.
      *
      * @param baseName the base name of ResourceBundle
-     * @param locale the Locale for resource bundle
+     * @param locale   the Locale for resource bundle
      */
     public Resources( String baseName, Locale locale )
     {
@@ -103,8 +91,8 @@ public final class Resources
     /**
      * Constructor that builds a manager in specified locale.
      *
-     * @param baseName the base name of ResourceBundle
-     * @param locale the Locale for resource bundle
+     * @param baseName    the base name of ResourceBundle
+     * @param locale      the Locale for resource bundle
      * @param classLoader the classLoader to load ResourceBundle from
      */
     public Resources( String baseName, Locale locale, ClassLoader classLoader )
@@ -125,10 +113,12 @@ public final class Resources
     /**
      * Retrieve a boolean from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource boolean
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public boolean getBoolean( String key, boolean defaultValue )
         throws MissingResourceException
@@ -147,8 +137,10 @@ public final class Resources
      * Retrieve a boolean from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource boolean
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public boolean getBoolean( String key )
         throws MissingResourceException
@@ -161,10 +153,12 @@ public final class Resources
     /**
      * Retrieve a byte from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource byte
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public byte getByte( String key, byte defaultValue )
         throws MissingResourceException
@@ -183,8 +177,10 @@ public final class Resources
      * Retrieve a byte from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource byte
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public byte getByte( String key )
         throws MissingResourceException
@@ -206,10 +202,12 @@ public final class Resources
     /**
      * Retrieve a char from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource char
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public char getChar( String key, char defaultValue )
         throws MissingResourceException
@@ -228,8 +226,10 @@ public final class Resources
      * Retrieve a char from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource char
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public char getChar( String key )
         throws MissingResourceException
@@ -252,10 +252,12 @@ public final class Resources
     /**
      * Retrieve a short from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource short
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public short getShort( String key, short defaultValue )
         throws MissingResourceException
@@ -274,8 +276,10 @@ public final class Resources
      * Retrieve a short from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource short
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public short getShort( String key )
         throws MissingResourceException
@@ -297,10 +301,12 @@ public final class Resources
     /**
      * Retrieve a integer from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource integer
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public int getInteger( String key, int defaultValue )
         throws MissingResourceException
@@ -319,8 +325,10 @@ public final class Resources
      * Retrieve a integer from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource integer
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public int getInteger( String key )
         throws MissingResourceException
@@ -342,10 +350,12 @@ public final class Resources
     /**
      * Retrieve a long from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource long
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public long getLong( String key, long defaultValue )
         throws MissingResourceException
@@ -364,8 +374,10 @@ public final class Resources
      * Retrieve a long from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource long
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public long getLong( String key )
         throws MissingResourceException
@@ -387,10 +399,12 @@ public final class Resources
     /**
      * Retrieve a float from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource float
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public float getFloat( String key, float defaultValue )
         throws MissingResourceException
@@ -409,8 +423,10 @@ public final class Resources
      * Retrieve a float from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource float
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public float getFloat( String key )
         throws MissingResourceException
@@ -432,10 +448,12 @@ public final class Resources
     /**
      * Retrieve a double from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource double
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public double getDouble( String key, double defaultValue )
         throws MissingResourceException
@@ -454,8 +472,10 @@ public final class Resources
      * Retrieve a double from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource double
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public double getDouble( String key )
         throws MissingResourceException
@@ -477,10 +497,12 @@ public final class Resources
     /**
      * Retrieve a date from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource date
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public Date getDate( String key, Date defaultValue )
         throws MissingResourceException
@@ -499,8 +521,10 @@ public final class Resources
      * Retrieve a date from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource date
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public Date getDate( String key )
         throws MissingResourceException
@@ -524,10 +548,12 @@ public final class Resources
     /**
      * Retrieve a time from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource time
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public Date getTime( String key, Date defaultValue )
         throws MissingResourceException
@@ -546,8 +572,10 @@ public final class Resources
      * Retrieve a time from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource time
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public Date getTime( String key )
         throws MissingResourceException
@@ -571,10 +599,12 @@ public final class Resources
     /**
      * Retrieve a time from bundle.
      *
-     * @param key the key of resource
+     * @param key          the key of resource
      * @param defaultValue the default value if key is missing
+     *
      * @return the resource time
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public Date getDateTime( String key, Date defaultValue )
         throws MissingResourceException
@@ -593,8 +623,10 @@ public final class Resources
      * Retrieve a date + time from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource date + time
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public Date getDateTime( String key )
         throws MissingResourceException
@@ -619,8 +651,10 @@ public final class Resources
      * Retrieve a raw string from bundle.
      *
      * @param key the key of resource
+     *
      * @return the resource string
-     * @exception MissingResourceException if the requested key is unknown
+     *
+     * @throws MissingResourceException if the requested key is unknown
      */
     public String getString( String key )
         throws MissingResourceException
@@ -632,77 +666,84 @@ public final class Resources
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key, Object arg1 )
     {
-        Object[] args = new Object[]{arg1};
+        Object[] args = new Object[] { arg1 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
      * @param arg2 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key, Object arg1, Object arg2 )
     {
-        Object[] args = new Object[]{arg1, arg2};
+        Object[] args = new Object[] { arg1, arg2 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
      * @param arg2 an arg
      * @param arg3 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key,
                              Object arg1,
                              Object arg2,
-                             Object arg3 )
+                             Object arg3
+    )
     {
-        Object[] args = new Object[]{arg1, arg2, arg3};
+        Object[] args = new Object[] { arg1, arg2, arg3 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
      * @param arg2 an arg
      * @param arg3 an arg
      * @param arg4 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key,
                              Object arg1,
                              Object arg2,
                              Object arg3,
-                             Object arg4 )
+                             Object arg4
+    )
     {
-        Object[] args = new Object[]{arg1, arg2, arg3, arg4};
+        Object[] args = new Object[] { arg1, arg2, arg3, arg4 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
      * @param arg2 an arg
      * @param arg3 an arg
      * @param arg4 an arg
      * @param arg5 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key,
@@ -710,22 +751,24 @@ public final class Resources
                              Object arg2,
                              Object arg3,
                              Object arg4,
-                             Object arg5 )
+                             Object arg5
+    )
     {
-        Object[] args = new Object[]{arg1, arg2, arg3, arg4, arg5};
+        Object[] args = new Object[] { arg1, arg2, arg3, arg4, arg5 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
      * @param arg2 an arg
      * @param arg3 an arg
      * @param arg4 an arg
      * @param arg5 an arg
      * @param arg6 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key,
@@ -734,16 +777,17 @@ public final class Resources
                              Object arg3,
                              Object arg4,
                              Object arg5,
-                             Object arg6 )
+                             Object arg6
+    )
     {
-        Object[] args = new Object[]{arg1, arg2, arg3, arg4, arg5, arg6};
+        Object[] args = new Object[] { arg1, arg2, arg3, arg4, arg5, arg6 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param arg1 an arg
      * @param arg2 an arg
      * @param arg3 an arg
@@ -751,6 +795,7 @@ public final class Resources
      * @param arg5 an arg
      * @param arg6 an arg
      * @param arg7 an arg
+     *
      * @return the formatted string
      */
     public String getString( String key,
@@ -760,17 +805,19 @@ public final class Resources
                              Object arg4,
                              Object arg5,
                              Object arg6,
-                             Object arg7 )
+                             Object arg7
+    )
     {
-        Object[] args = new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7};
+        Object[] args = new Object[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7 };
         return format( key, args );
     }
 
     /**
      * Retrieve a string from resource bundle and format it with specified args.
      *
-     * @param key the key for resource
+     * @param key  the key for resource
      * @param args an array of args
+     *
      * @return the formatted string
      */
     public String format( String key, Object[] args )
@@ -817,6 +864,7 @@ public final class Resources
      * that this Manager does not provide simplified access to.
      *
      * @return the ResourceBundle
+     *
      * @throws MissingResourceException if an error occurs
      */
     public ResourceBundle getBundle()
@@ -849,7 +897,9 @@ public final class Resources
      * Other types cause an exception.
      *
      * @param key the key to resource
+     *
      * @return the string resource
+     *
      * @throws MissingResourceException if an error occurs
      */
     private String getPatternString( String key )

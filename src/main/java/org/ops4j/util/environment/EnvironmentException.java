@@ -27,14 +27,10 @@ package org.ops4j.util.environment;
  */
 public class EnvironmentException extends RuntimeException
 {
-   /**
-    * the environment variable name if available
-    */
+    /** the environment variable name if available */
     private final String m_variable;
 
-   /**
-    * root cause
-    */
+    /** root cause */
     private final Throwable m_cause;
 
     /**
@@ -52,7 +48,6 @@ public class EnvironmentException extends RuntimeException
         m_cause = cause;
     }
 
-
     /**
      * Creates an exception denoting a failure while attempting to access an
      * environment variable within an operating system and shell specific
@@ -68,14 +63,13 @@ public class EnvironmentException extends RuntimeException
         m_cause = null;
     }
 
-
     /**
      * Creates an exception denoting a failure while attempting to access an
      * environment variable within an operating system and shell specific
      * environment that is caused by another exception.
      *
      * @param variable the variable whose value was to be accessed
-     * @param cause the underlying exception that caused the failure
+     * @param cause    the underlying exception that caused the failure
      */
     EnvironmentException( final String variable, final Throwable cause )
     {
@@ -85,14 +79,13 @@ public class EnvironmentException extends RuntimeException
         m_cause = cause;
     }
 
-
     /**
      * Creates an exception denoting a failure while attempting to access an
      * environment variable within an operating system and shell specific
      * environment.
      *
      * @param variable the variable whose value was to be accessed
-     * @param message the reason for the access failure
+     * @param message  the reason for the access failure
      */
     EnvironmentException( final String variable, final String message )
     {
@@ -101,7 +94,6 @@ public class EnvironmentException extends RuntimeException
         m_variable = variable;
         m_cause = null;
     }
-
 
     /**
      * Gets the variable that was to be accessed.
@@ -113,7 +105,6 @@ public class EnvironmentException extends RuntimeException
         return m_variable;
     }
 
-
     /**
      * Return the causal exception.
      *
@@ -124,17 +115,18 @@ public class EnvironmentException extends RuntimeException
         return m_cause;
     }
 
-
     /**
      * Prepends variable name to the base message.
      *
+     * @return the message of the Exception.
+     * 
      * @see java.lang.Throwable#getMessage()
      */
     public String getMessage()
     {
         String base = super.getMessage();
 
-        if ( null == base )
+        if( null == base )
         {
             return "Failed to access " + m_variable + " environment variable";
         }

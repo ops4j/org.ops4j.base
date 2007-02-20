@@ -17,14 +17,15 @@
  */
 package org.ops4j.io;
 
-import org.ops4j.monitors.stream.StreamMonitor;
-import java.net.URL;
 import java.io.PrintStream;
+import java.net.URL;
+import org.ops4j.monitors.stream.StreamMonitor;
 
-/** PrintStreamMonitor is a convenience implementation of the StreamMonitor for output to
+/**
+ * PrintStreamMonitor is a convenience implementation of the StreamMonitor for output to
  * a PrintStream, such as <code>System.out</code>.
- *
- * <p>
+ * <p/>
+ * <p/>
  * Example of usage;
  * <pre><code>
  *      StreamMonitor monitor = new PrintStreamMonitor( System.out );
@@ -40,11 +41,22 @@ public class PrintStreamMonitor
     private long m_start;
     private PrintStream m_out;
 
+    /**
+     *
+     * @param out The PrintStream that should receive the monitored output.
+     */
     public PrintStreamMonitor( PrintStream out )
     {
         m_out = out;
     }
 
+    /**
+     * Notify the monitor of the update in the download status.
+     *
+     * @param resource the name of the remote resource being downloaded.
+     * @param expected the expected number of bytes to be downloaded.
+     * @param count    the number of bytes downloaded.
+     */
     public void notifyUpdate( URL resource, int expected, int count )
     {
         if( m_first )
@@ -53,18 +65,31 @@ public class PrintStreamMonitor
             m_start = System.currentTimeMillis();
             m_first = false;
         }
-        int completed = (count * 100) / expected;
-        m_out.print( resource.toExternalForm() + " : " + completed + "%    \r");
+        int completed = ( count * 100 ) / expected;
+        m_out.print( resource.toExternalForm() + " : " + completed + "%    \r" );
     }
 
+    /**
+     * Notify the monitor of the successful completion of a download
+     * process.
+     *
+     * @param resource the name of the remote resource.
+     */
     public void notifyCompletion( URL resource )
     {
         long now = System.currentTimeMillis();
         long time = now - m_start;
         int kBps = (int) ( m_expected / time );
-        m_out.println( resource.toExternalForm() + " : " + kBps + " kBps.          ");
+        m_out.println( resource.toExternalForm() + " : " + kBps + " kBps.          " );
     }
 
+    /**
+     * Notify the monitor of the an error during the download
+     * process.
+     *
+     * @param resource the name of the remote resource.
+     * @param message  a non-localized message describing the problem in english.
+     */
     public void notifyError( URL resource, String message )
     {
         m_out.println( resource.toExternalForm() + " : " + message );

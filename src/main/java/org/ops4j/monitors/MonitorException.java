@@ -18,8 +18,18 @@
 
 package org.ops4j.monitors;
 
+/**
+ * MonitorException is used to indicate problems in the Monitor subsystem.
+ * 
+ */
 public class MonitorException extends RuntimeException
 {
+    /**
+     * Constructor of a MonitorException
+     *
+     * @param message The message.
+     * @param exception The Exception that is the underlying cause.
+     */
     public MonitorException( String message, Throwable exception )
     {
         super( message, exception );

@@ -34,13 +34,14 @@ public interface StreamMonitor
      *
      * @param resource the name of the remote resource being downloaded.
      * @param expected the expected number of bytes to be downloaded.
-     * @param count the number of bytes downloaded.
+     * @param count    the number of bytes downloaded.
      */
     void notifyUpdate( URL resource, int expected, int count );
 
     /**
      * Notify the monitor of the successful completion of a download
      * process.
+     *
      * @param resource the name of the remote resource.
      */
     void notifyCompletion( URL resource );
@@ -48,8 +49,9 @@ public interface StreamMonitor
     /**
      * Notify the monitor of the an error during the download
      * process.
+     *
      * @param resource the name of the remote resource.
-     * @param message a non-localized message describing the problem in english.
+     * @param message  a non-localized message describing the problem in english.
      */
     void notifyError( URL resource, String message );
 }

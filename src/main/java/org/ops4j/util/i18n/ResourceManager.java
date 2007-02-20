@@ -30,21 +30,23 @@ import java.util.Locale;
  */
 public final class ResourceManager
 {
-    /**
-     * Permission needed to clear complete cache.
-     */
+    /** Permission needed to clear complete cache. */
     private static final RuntimePermission CLEAR_CACHE_PERMISSION = new RuntimePermission( "i18n.clearCompleteCache" );
 
-    /**
-     * Resource lookup table.
-     */
+    /** Resource lookup table. */
     private static final HashMap<String, WeakReference<Resources>> RESOURCES =
         new HashMap<String, WeakReference<Resources>>();
+
+    /** Private Constructor to block instantiation. */
+    private ResourceManager()
+    {
+    }
 
     /**
      * Retrieve resource with specified basename.
      *
      * @param baseName the basename
+     *
      * @return the Resources
      */
     public static Resources getBaseResources( String baseName )
@@ -57,6 +59,7 @@ public final class ResourceManager
      *
      * @param baseName    the basename
      * @param classLoader the classLoader to load resources from
+     *
      * @return the Resources
      */
     public static Resources getBaseResources( String baseName, ClassLoader classLoader )
@@ -79,7 +82,8 @@ public final class ResourceManager
      *
      * @param baseName    the basename
      * @param classLoader the classLoader to load resources from
-     * @param locale the locale of the resources requested.
+     * @param locale      the locale of the resources requested.
+     *
      * @return the Resources
      */
     public static Resources getBaseResources( String baseName, Locale locale, ClassLoader classLoader )
@@ -137,6 +141,7 @@ public final class ResourceManager
      * Retrieve cached resource.
      *
      * @param baseName the resource key
+     *
      * @return resources the resources object
      */
     private static Resources getCachedResource( String baseName )
@@ -160,6 +165,7 @@ public final class ResourceManager
      * The basename is determined by name postfixed with ".Resources".
      *
      * @param name the name to use when looking up resources
+     *
      * @return the Resources
      */
     public static Resources getResources( String name )
@@ -173,6 +179,7 @@ public final class ResourceManager
      * postfixed with ".Resources".
      *
      * @param clazz the Class
+     *
      * @return the Resources
      */
     public static Resources getPackageResources( Class clazz )
@@ -185,8 +192,9 @@ public final class ResourceManager
      * The basename is determined by name of classes package
      * postfixed with ".Resources".
      *
-     * @param clazz the Class
+     * @param clazz  the Class
      * @param locale the locale of the package resources requested.
+     *
      * @return the Resources
      */
     public static Resources getPackageResources( Class clazz, Locale locale )
@@ -200,6 +208,7 @@ public final class ResourceManager
      * postfixed with "Resources".
      *
      * @param clazz the Class
+     *
      * @return the Resources
      */
     public static Resources getClassResources( Class clazz )
@@ -214,6 +223,7 @@ public final class ResourceManager
      *
      * @param clazz  the Class
      * @param locale the requested Locale.
+     *
      * @return the Resources
      */
     public static Resources getClassResources( Class clazz, Locale locale )
@@ -227,6 +237,7 @@ public final class ResourceManager
      * postfixed with ".Resources".
      *
      * @param clazz the Class
+     *
      * @return the resource basename
      */
     public static String getPackageResourcesBaseName( Class clazz )
@@ -259,17 +270,11 @@ public final class ResourceManager
      * The basename is determined by name of Class postfixed with "Resources".
      *
      * @param clazz the Class
+     *
      * @return the resource basename
      */
     public static String getClassResourcesBaseName( Class clazz )
     {
         return clazz.getName() + "Resources";
-    }
-
-    /**
-     * Private Constructor to block instantiation.
-     */
-    private ResourceManager()
-    {
     }
 }

@@ -30,14 +30,22 @@ import java.util.StringTokenizer;
  */
 public final class PropertyResolver
 {
-   /**
-    * Symbol substitution from properties.
-    * Replace any occurances of ${[key]} with the value of the property
-    * assigned to the [key] in the supplied properties argument.
-    * @param props the source properties from which substitution is resolved
-    * @param value a string containing possibly multiple ${[value]} sequences
-    * @return the expanded string
-    */
+
+    /** Null constructor. */
+    private PropertyResolver()
+    {
+    }
+
+    /**
+     * Symbol substitution from properties.
+     * Replace any occurances of ${[key]} with the value of the property
+     * assigned to the [key] in the supplied properties argument.
+     *
+     * @param props the source properties from which substitution is resolved
+     * @param value a string containing possibly multiple ${[value]} sequences
+     *
+     * @return the expanded string
+     */
     public static String resolve( Properties props, String value )
     {
         if( value == null )
@@ -59,60 +67,83 @@ public final class PropertyResolver
         Stack<String> stack = new Stack<String>();
         StringTokenizer st = new StringTokenizer( value, "${}", true );
 
-        while ( st.hasMoreTokens() )
+        while( st.hasMoreTokens() )
         {
             String token = st.nextToken();
-            if( "}".equals( token ) )
-            {
-                String name = stack.pop();
-                String open = stack.pop();
-                if( "${".equals( open ) )
-                {
-                    String propValue = System.getProperty( name );
-                    if( propValue == null )
-                    {
-                        propValue = props.getProperty( name );
-                    }
-                    if( propValue == null )
-                    {
-                        push( stack, "${" + name + "}" );
-                    }
-                    else
-                    {
-                        push( stack, propValue );
-                    }
-                }
-                else
-                {
-                    push( stack, "${" + name + "}" );
-                }
-            }
-            else
-            {
-                if( "$".equals( token ) )
-                {
-                    stack.push( "$" );
-                }
-                else
-                {
-                    push( stack, token );
-                }
-            }
+            processToken( token, stack, props );
         }
         String result = "";
-        while ( stack.size() > 0 )
+        while( stack.size() > 0 )
         {
             result = stack.pop() + result;
         }
         return result;
     }
 
-   /**
-    * Pushes a value on a stack
-    * @param stack the stack
-    * @param value the value
-    */
-    private static void push( Stack<String> stack , String value )
+    /** Process one token.
+     *
+     * @param token The token to process.
+     * @param stack The parser Stack.
+     * @param props The Properties to replace.
+     */
+    private static void processToken( String token, Stack<String> stack, Properties props )
+    {
+        if( "}".equals( token ) )
+        {
+            String name = stack.pop();
+            String open = stack.pop();
+            if( "${".equals( open ) )
+            {
+                startProperty( name, props, stack );
+            }
+            else
+            {
+                push( stack, "${" + name + "}" );
+            }
+        }
+        else
+        {
+            if( "$".equals( token ) )
+            {
+                stack.push( "$" );
+            }
+            else
+            {
+                push( stack, token );
+            }
+        }
+    }
+
+    /** Starts a new property.
+     *
+     * @param name The name of the property.
+     * @param props The Properties we are exchanging with.
+     * @param stack The parsing stack.
+     */
+    private static void startProperty( String name, Properties props, Stack<String> stack )
+    {
+        String propValue = System.getProperty( name );
+        if( propValue == null )
+        {
+            propValue = props.getProperty( name );
+        }
+        if( propValue == null )
+        {
+            push( stack, "${" + name + "}" );
+        }
+        else
+        {
+            push( stack, propValue );
+        }
+    }
+
+    /**
+     * Pushes a value on a stack
+     *
+     * @param stack the stack
+     * @param value the value
+     */
+    private static void push( Stack<String> stack, String value )
     {
         if( stack.size() > 0 )
         {
@@ -131,13 +162,6 @@ public final class PropertyResolver
         {
             stack.push( value );
         }
-    }
-
-   /**
-    * Null constructor.
-    */
-    private PropertyResolver()
-    {
     }
 }
 

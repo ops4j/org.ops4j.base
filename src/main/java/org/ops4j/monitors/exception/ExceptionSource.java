@@ -18,18 +18,35 @@
 
 package org.ops4j.monitors.exception;
 
+import java.util.List;
 import org.ops4j.monitors.TooManyMonitorsException;
 
-/** An interface for classes that supports ExceptionMonitors.
- */
+/** An interface for classes that supports ExceptionMonitors. */
 public interface ExceptionSource
 {
-    /** Register a ExceptionMonitor with the source.
+    /**
+     * Register a ExceptionMonitor with the source.
+     *
+     * @param monitor The ExceptionMonitor to register.
+     *
+     * @throws TooManyMonitorsException if the ExceptionSource is uncapable of handling any more registrations. If this
+     *                                  Exception is thrown the client should unregister the existing monitor and
+     *                                  replace it with a ExceptionMonitorRouter.
      */
     void registerExceptionMonitor( ExceptionMonitor monitor )
         throws TooManyMonitorsException;
 
-    /** Unregister a ExceptionMonitor with the source.
+    /**
+     * Unregister a ExceptionMonitor with the source.
+     *
+     * @param monitor The ExceptionMonitor to unregister.
      */
     void unregisterExceptionMonitor( ExceptionMonitor monitor );
+
+    /**
+     * Returns all ExceptionMonitors that are registered.
+     *
+     * @return all ExceptionMonitors that are registered.
+     */
+    List<ExceptionMonitor> getExceptionMonitors();
 }

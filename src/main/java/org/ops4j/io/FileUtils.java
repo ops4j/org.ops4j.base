@@ -22,14 +22,31 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.net.MalformedURLException;
-import org.ops4j.monitors.stream.StreamMonitor;
+import java.net.URL;
 import org.ops4j.lang.NullArgumentException;
+import org.ops4j.monitors.stream.StreamMonitor;
 
-public class FileUtils
+/** Utility methods for manipulation of Files. */
+public final class FileUtils
 {
 
+    /** Private Constructor to ensure no instances are created. */
+    private FileUtils()
+    {
+
+    }
+
+    /**
+     * Copies a file.
+     *
+     * @param src     The source file.
+     * @param dest    The destination file.
+     * @param monitor The monitor to use for reporting.
+     *
+     * @throws IOException           if any underlying I/O problem occurs.
+     * @throws FileNotFoundException if the source file does not exist.
+     */
     public static void copyFile( File src, File dest, StreamMonitor monitor )
         throws IOException, FileNotFoundException
     {
@@ -41,25 +58,34 @@ public class FileUtils
             fis = new FileInputStream( src );
             fos = new FileOutputStream( dest );
             StreamUtils.copyStream( monitor, src.toURL(), length, fis, fos, true );
-        } catch( FileNotFoundException e )
+        }
+        catch( FileNotFoundException e )
         {
             reportError( monitor, e, src.toURL() );
             throw e;
-        } catch( NullArgumentException e )
+        }
+        catch( NullArgumentException e )
         {
             reportError( monitor, e, src.toURL() );
             throw e;
-        } catch( MalformedURLException e )
+        }
+        catch( MalformedURLException e )
         {
             reportError( monitor, e, src.toURL() );
             throw e;
-        } catch( IOException e )
+        }
+        catch( IOException e )
         {
             reportError( monitor, e, src.toURL() );
             throw e;
         }
     }
 
+    /**
+     * @param monitor The monitor to report to.
+     * @param e       The exception that occurred.
+     * @param url     The URL that was involved.
+     */
     private static void reportError( StreamMonitor monitor, Exception e, URL url )
     {
         if( monitor != null )

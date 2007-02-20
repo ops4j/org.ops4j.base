@@ -201,7 +201,7 @@ public final class ElementHelper
     * @param value the value to parse
     * @return the normalized string
     */
-    static String normalize( String value )
+    private static String normalize( String value )
     {
         return normalize( value, System.getProperties() );
     }
@@ -212,7 +212,7 @@ public final class ElementHelper
     * @param props the reference properties
     * @return the normalized string
     */
-    static String normalize( String value, Properties props )
+    private static String normalize( String value, Properties props )
     {
         return PropertyResolver.resolve( props, value );
     }

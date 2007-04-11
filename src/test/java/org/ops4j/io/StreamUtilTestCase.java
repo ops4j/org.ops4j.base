@@ -180,7 +180,7 @@ public class StreamUtilTestCase extends TestCase
         StringReader reader = new StringReader( s );
         ByteArrayOutputStream baos = new ByteArrayOutputStream( );
         StreamUtils.copyReaderToStream( reader, baos, "UTF-8", true );
-        assertEquals( s, baos.toString() );
+        assertEquals( s, baos.toString("UTF-8") );
 
         reader = new StringReader( s );
         baos = new ByteArrayOutputStream( );
@@ -188,7 +188,7 @@ public class StreamUtilTestCase extends TestCase
         //noinspection ErrorNotRethrown
         try
         {
-            assertEquals( s, baos.toString() );
+            assertEquals( s, baos.toString("ISO-8859-1") );
             fail( "Didn't fail incorrect encoding.");
         } catch( ComparisonFailure e )
         {

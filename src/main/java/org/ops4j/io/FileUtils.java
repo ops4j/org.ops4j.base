@@ -23,15 +23,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import org.ops4j.lang.NullArgumentException;
 import org.ops4j.monitors.stream.StreamMonitor;
 
-/** Utility methods for manipulation of Files. */
+/**
+ * Utility methods for manipulation of Files.
+ */
 public final class FileUtils
 {
 
-    /** Private Constructor to ensure no instances are created. */
+    /**
+     * Private Constructor to ensure no instances are created.
+     */
     private FileUtils()
     {
 
@@ -92,5 +97,63 @@ public final class FileUtils
         {
             monitor.notifyError( url, e.getMessage() );
         }
+    }
+
+    /**
+     * Searches the classpath for the file denoted by the file path and returns the corresponding file.
+     *
+     * @param filePath path to the file
+     *
+     * @return a file corresponding to the path
+     *
+     * @throws FileNotFoundException if the file cannot be found
+     */
+    public static File getFileFromClasspath( final String filePath )
+        throws FileNotFoundException
+    {
+        try
+        {
+            URL fileURL = FileUtils.class.getClassLoader().getResource( filePath );
+            if( fileURL == null )
+            {
+                throw new FileNotFoundException( "File [" + filePath + "] could not be found in classpath" );
+            }
+            return new File( fileURL.toURI() );
+        }
+        catch( URISyntaxException e )
+        {
+            throw new FileNotFoundException( "File [" + filePath + "] could not be found: " + e.getMessage() );
+        }
+    }
+
+    /**
+     * Deletes the file or recursively deletes a directory depending on the file passed. 
+     *
+     * @param file file or directory to be deleted.
+     *
+     * @return true if the file was deleted.
+     */
+    public static boolean delete( final File file )
+    {
+        boolean delete = false;
+        if( file != null && file.exists() )
+        {
+            // even if is a directory try to delete. maybe is empty or maybe is a *nix symbolic link
+            delete = file.delete();
+            if( !delete && file.isDirectory() )
+            {
+                File[] childs = file.listFiles();
+                if( childs != null && childs.length > 0 )
+                {
+                    for( File child : childs )
+                    {
+                        delete( child );
+                    }
+                    // then try again as by now the directory can be empty
+                    delete = file.delete();
+                }
+            }
+        }
+        return delete;
     }
 }

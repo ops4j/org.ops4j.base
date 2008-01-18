@@ -102,7 +102,7 @@ public class PropertiesWriter
      */
     public PropertiesWriter append( final String key, final String value )
     {
-        NullArgumentException.validateNotEmpty( "Key", key );
+        NullArgumentException.validateNotEmpty( key, "Key" );
         String valueToAdd = value;
         if( value == null )
         {

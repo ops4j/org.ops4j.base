@@ -42,6 +42,7 @@ import java.util.Properties;
  */
 public class NullArgumentException extends IllegalArgumentException
 {
+
     private static final long serialVersionUID = 1L;
 
     private static final String IS_NULL = " is null.";
@@ -63,6 +64,7 @@ public class NullArgumentException extends IllegalArgumentException
      *
      * @param obj        The object to be tested.
      * @param objectName The name of the object, which is used to construct the exception message.
+     *
      * @throws NullArgumentException if the stringToCheck is either null or zero characters long.
      */
     public static void validateNotNull( Object obj, String objectName )
@@ -79,6 +81,7 @@ public class NullArgumentException extends IllegalArgumentException
      *
      * @param stringToCheck The object to be tested.
      * @param argumentName  The name of the object, which is used to construct the exception message.
+     *
      * @throws NullArgumentException if the stringToCheck is either null or zero characters long.
      */
     public static void validateNotEmpty( String stringToCheck, String argumentName )
@@ -95,7 +98,8 @@ public class NullArgumentException extends IllegalArgumentException
      * Validates that the Properties instance is not null and that it has entries.
      *
      * @param propertiesToCheck The object to be tested.
-     * @param argumentName  The name of the object, which is used to construct the exception message.
+     * @param argumentName      The name of the object, which is used to construct the exception message.
+     *
      * @throws NullArgumentException if the Properties instance is null or does not have any entries.
      */
     public static void validateNotEmpty( Properties propertiesToCheck, String argumentName )
@@ -107,4 +111,24 @@ public class NullArgumentException extends IllegalArgumentException
             throw new NullArgumentException( argumentName + IS_EMPTY );
         }
     }
+
+    /**
+     * Validates that the array instance is not null and that it has entries.
+     *
+     * @param arrayToCheck The object to be tested.
+     * @param argumentName The name of the object, which is used to construct the exception message.
+     *
+     * @throws NullArgumentException if the array instance is null or does not have any entries.
+     * @since 0.5.0, January 18, 2008
+     */
+    public static void validateNotEmpty( Object[] arrayToCheck, String argumentName )
+        throws NullArgumentException
+    {
+        validateNotNull( arrayToCheck, argumentName );
+        if( arrayToCheck.length == 0 )
+        {
+            throw new NullArgumentException( argumentName + IS_EMPTY );
+        }
+    }
+
 }

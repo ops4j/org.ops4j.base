@@ -77,7 +77,7 @@ public class NullArgumentException extends IllegalArgumentException
     }
 
     /**
-     * Validates that the string is not null and not an empty string.
+     * Validates that the string is not null and not an empty string without trimming the string.
      *
      * @param stringToCheck The object to be tested.
      * @param argumentName  The name of the object, which is used to construct the exception message.
@@ -87,8 +87,24 @@ public class NullArgumentException extends IllegalArgumentException
     public static void validateNotEmpty( String stringToCheck, String argumentName )
         throws NullArgumentException
     {
+        validateNotEmpty( stringToCheck, false, argumentName );
+    }
+
+    /**
+     * Validates that the string is not null and not an empty string.
+     *
+     * @param stringToCheck The object to be tested.
+     * @param trim          If the elements should be trimmed before checking if empty
+     * @param argumentName  The name of the object, which is used to construct the exception message.
+     *
+     * @throws NullArgumentException if the stringToCheck is either null or zero characters long.
+     */
+    public static void validateNotEmpty( String stringToCheck, boolean trim, String argumentName )
+        throws NullArgumentException
+    {
         validateNotNull( stringToCheck, argumentName );
-        if( stringToCheck.length() == 0 )
+        if( stringToCheck.length() == 0
+            || ( trim && stringToCheck.trim().length() == 0 ) )
         {
             throw new NullArgumentException( argumentName + IS_EMPTY );
         }
@@ -128,6 +144,46 @@ public class NullArgumentException extends IllegalArgumentException
         if( arrayToCheck.length == 0 )
         {
             throw new NullArgumentException( argumentName + IS_EMPTY );
+        }
+    }
+
+    /**
+     * Validates that the string array instance is not null and that it has entries that are not null or empty
+     * eithout trimming the string.
+     *
+     * @param arrayToCheck The object to be tested.
+     * @param argumentName The name of the object, which is used to construct the exception message.
+     *
+     * @throws NullArgumentException if the array instance is null or does not have any entries.
+     * @since 0.5.0, January 18, 2008
+     */
+    public static void validateNotEmptyContent( String[] arrayToCheck, String argumentName )
+        throws NullArgumentException
+    {
+        validateNotEmptyContent( arrayToCheck, false, argumentName );
+    }
+
+    /**
+     * Validates that the string array instance is not null and that it has entries that are not null or empty.
+     *
+     * @param arrayToCheck The object to be tested.
+     * @param trim         If the elements should be trimmed before checking if empty
+     * @param argumentName The name of the object, which is used to construct the exception message.
+     *
+     * @throws NullArgumentException if the array instance is null or does not have any entries.
+     * @since 0.5.0, January 18, 2008
+     */
+    public static void validateNotEmptyContent( String[] arrayToCheck, boolean trim, String argumentName )
+        throws NullArgumentException
+    {
+        validateNotEmpty( arrayToCheck, argumentName );
+        for( int i = 0; i < arrayToCheck.length; i++ )
+        {
+            validateNotEmpty( arrayToCheck[ i ], arrayToCheck[ i ] + "[" + i + "]" );
+            if( trim )
+            {
+                validateNotEmpty( arrayToCheck[ i ].trim(), arrayToCheck[ i ] + "[" + i + "]" );
+            }
         }
     }
 

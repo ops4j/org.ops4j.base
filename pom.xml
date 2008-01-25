@@ -111,6 +111,7 @@
   </ciManagement>
 
   <modules>
+    <module>ops4j-base</module>
     <module>ops4j-base-io</module>
     <module>ops4j-base-lang</module>
     <module>ops4j-base-monitors</module>

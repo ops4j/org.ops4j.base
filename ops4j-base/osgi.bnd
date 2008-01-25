@@ -1,0 +1,25 @@
+Bundle-SymbolicName:\
+  ${bundle.symbolicName}
+
+Bundle-Version>:\
+  ${pom.version}
+
+Import-Package:\
+  ${bundle.namespace}.*; version="${pom.version}",\
+  javax.net.ssl,\
+  javax.xml.parsers,\
+  org.w3c.dom,\
+  org.xml.sax
+  
+Export-Package:\
+  ${bundle.namespace}.*; version="${pom.version}"
+
+Embed-Dependency:\
+  *; scope=compile; type=!pom; inline=true
+
+Embed-Transitive: true
+
+-removeheaders:\
+  Embed-Dependency,\
+  Embed-Transitive,\
+  Include-Resource

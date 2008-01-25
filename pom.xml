@@ -3,9 +3,10 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.ops4j.base</groupId>
-  <artifactId>ops4j-base</artifactId>
+  <groupId>org.ops4j</groupId>
+  <artifactId>base</artifactId>
   <version>0.5.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <name>OPS4J - Base</name>
 
@@ -109,6 +110,13 @@
     </notifiers>
   </ciManagement>
 
+  <modules>
+    <module>ops4j-base-io</module>
+    <module>ops4j-base-lang</module>
+    <module>ops4j-base-monitors</module>
+    <module>ops4j-base-net</module>
+  </modules>
+
   <build>
     <plugins>
       <plugin>
@@ -129,7 +137,7 @@
             </property>
           </systemProperties>
         </configuration>
-      </plugin>      
+      </plugin>
     </plugins>
 
     <extensions>
@@ -139,6 +147,23 @@
         <version>1.0-alpha-6</version>
       </extension>
     </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>1.2.0</version>
+          <extensions>true</extensions>
+          <configuration>
+            <instructions>
+              <_include>-osgi.bnd</_include>
+            </instructions>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
   </build>
 
   <dependencies>

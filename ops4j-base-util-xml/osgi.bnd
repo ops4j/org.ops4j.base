@@ -1,0 +1,15 @@
+Bundle-SymbolicName:\
+  ${bundle.symbolicName}
+
+Bundle-Version>:\
+  ${pom.version}
+
+Import-Package:\
+  ${bundle.namespace}.*; version="${pom.version}",\
+  javax.xml.parsers,\
+  org.ops4j.util.collections.*;  version="${pom.version}",\
+  org.w3c.dom,\
+  org.xml.sax
+  
+Export-Package:\
+  ${bundle.namespace}.*; version="${pom.version}"

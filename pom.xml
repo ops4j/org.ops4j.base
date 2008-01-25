@@ -118,6 +118,7 @@
     <module>ops4j-base-util</module>
     <module>ops4j-base-util-collections</module>
     <module>ops4j-base-util-property</module>
+    <module>ops4j-base-util-xml</module>
   </modules>
 
   <build>

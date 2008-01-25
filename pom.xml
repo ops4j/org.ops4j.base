@@ -117,6 +117,7 @@
     <module>ops4j-base-net</module>
     <module>ops4j-base-util</module>
     <module>ops4j-base-util-collections</module>
+    <module>ops4j-base-util-property</module>
   </modules>
 
   <build>

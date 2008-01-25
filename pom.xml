@@ -116,6 +116,7 @@
     <module>ops4j-base-monitors</module>
     <module>ops4j-base-net</module>
     <module>ops4j-base-util</module>
+    <module>ops4j-base-util-collections</module>
   </modules>
 
   <build>

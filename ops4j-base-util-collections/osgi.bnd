@@ -1,0 +1,12 @@
+Bundle-SymbolicName:\
+  ${bundle.symbolicName}
+
+Bundle-Version>:\
+  ${pom.version}
+
+Import-Package:\
+  ${bundle.namespace}.*; version="${pom.version}",\
+  org.ops4j.lang.*;  version="${pom.version}"
+
+Export-Package:\
+  ${bundle.namespace}.*; version="${pom.version}"

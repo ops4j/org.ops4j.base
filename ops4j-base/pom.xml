@@ -19,6 +19,8 @@
     OPS4J Base - Assembly of all modules.
   </description>
 
+  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
+
   <properties>
     <bundle.symbolicName>org.ops4j.base</bundle.symbolicName>
     <bundle.namespace>org.ops4j</bundle.namespace>

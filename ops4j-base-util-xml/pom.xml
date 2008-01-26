@@ -19,6 +19,8 @@
     OPS4J Base - Utilities/Extensions related to xml.
   </description>
 
+  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
+
   <properties>
     <bundle.symbolicName>org.ops4j.base.util.xml</bundle.symbolicName>
     <bundle.namespace>org.ops4j.util.xml</bundle.namespace>
@@ -33,7 +35,7 @@
     </plugins>
   </build>
 
- <dependencies>
+  <dependencies>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-lang</artifactId>

@@ -19,6 +19,8 @@
     OPS4J Base - Utilities/Extensions related to java.lang.
   </description>
 
+  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
+
   <properties>
     <bundle.symbolicName>org.ops4j.base.lang</bundle.symbolicName>
     <bundle.namespace>org.ops4j.lang</bundle.namespace>

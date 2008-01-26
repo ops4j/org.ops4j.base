@@ -19,6 +19,8 @@
     OPS4J Base - Utilities/Extensions related to java.util.
   </description>
 
+  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
+
   <properties>
     <bundle.symbolicName>org.ops4j.base.util</bundle.symbolicName>
     <bundle.namespace>org.ops4j.util</bundle.namespace>

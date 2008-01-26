@@ -13,14 +13,14 @@
     Utility classes and extensions to be used in OPS4J projects.
   </description>
 
+  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
+
   <organization>
     <name>OPS4J - Open Participation Software for Java</name>
     <url>http://www.ops4j.org/</url>
   </organization>
 
   <inceptionYear>2006</inceptionYear>
-
-  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
 
   <licenses>
     <license>

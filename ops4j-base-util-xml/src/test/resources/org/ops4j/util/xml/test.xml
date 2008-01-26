@@ -1,7 +1,7 @@
 <habba>
-  <zout name="suput">${org.ops4j.base}</zout>
+  <zout name="suput" >${org.ops4j.base}</zout>
   <zout name="dravel">Hoppalong</zout>
-  <lingondricka oxo="soppa">vasaloppet</lingondricka>
+  <lingondricka oxo="soppa" >vasaloppet </lingondricka>
   <zout name="byggnadsmateriel">Spanplanka</zout>
   <frysskydd mycketkallt="${org.ops4j.base}">installerat
   </frysskydd>

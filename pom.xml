@@ -9,6 +9,9 @@
   <packaging>pom</packaging>
 
   <name>OPS4J - Base</name>
+  <description>
+    Utility classes and extensions to be used in OPS4J projects.
+  </description>
 
   <organization>
     <name>OPS4J - Open Participation Software for Java</name>

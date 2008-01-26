@@ -37,22 +37,35 @@ import java.util.ResourceBundle;
  */
 public final class Resources
 {
-    /** Span width constant. */
+
+    /**
+     * Span width constant.
+     */
     private static final int SPAN = 100;
 
-    /** Random seed. */
+    /**
+     * Random seed.
+     */
     private static final Random RANDOM = new Random();
 
-    /** Locale of Resources */
+    /**
+     * Locale of Resources
+     */
     private final Locale m_locale;
 
-    /** Resource bundle referenced by manager */
+    /**
+     * Resource bundle referenced by manager
+     */
     private ResourceBundle m_bundle;
 
-    /** Base name of resource bundle */
+    /**
+     * Base name of resource bundle
+     */
     private String m_baseName;
 
-    /** ClassLoader from which to load resources */
+    /**
+     * ClassLoader from which to load resources
+     */
     private ClassLoader m_classLoader;
 
     /**
@@ -195,7 +208,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a byte value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -245,7 +259,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a char value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -294,7 +309,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a short value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -343,7 +359,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a integer value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -392,7 +409,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a long value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -441,7 +459,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a float value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -490,7 +509,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a double value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -541,7 +561,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a date value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -592,7 +613,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a time value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -643,7 +665,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Expecting a time value but got " + value,
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 
@@ -673,7 +696,7 @@ public final class Resources
      */
     public String getString( String key, Object arg1 )
     {
-        Object[] args = new Object[] { arg1 };
+        Object[] args = new Object[]{ arg1 };
         return format( key, args );
     }
 
@@ -688,7 +711,7 @@ public final class Resources
      */
     public String getString( String key, Object arg1, Object arg2 )
     {
-        Object[] args = new Object[] { arg1, arg2 };
+        Object[] args = new Object[]{ arg1, arg2 };
         return format( key, args );
     }
 
@@ -708,7 +731,7 @@ public final class Resources
                              Object arg3
     )
     {
-        Object[] args = new Object[] { arg1, arg2, arg3 };
+        Object[] args = new Object[]{ arg1, arg2, arg3 };
         return format( key, args );
     }
 
@@ -730,7 +753,7 @@ public final class Resources
                              Object arg4
     )
     {
-        Object[] args = new Object[] { arg1, arg2, arg3, arg4 };
+        Object[] args = new Object[]{ arg1, arg2, arg3, arg4 };
         return format( key, args );
     }
 
@@ -754,7 +777,7 @@ public final class Resources
                              Object arg5
     )
     {
-        Object[] args = new Object[] { arg1, arg2, arg3, arg4, arg5 };
+        Object[] args = new Object[]{ arg1, arg2, arg3, arg4, arg5 };
         return format( key, args );
     }
 
@@ -780,7 +803,7 @@ public final class Resources
                              Object arg6
     )
     {
-        Object[] args = new Object[] { arg1, arg2, arg3, arg4, arg5, arg6 };
+        Object[] args = new Object[]{ arg1, arg2, arg3, arg4, arg5, arg6 };
         return format( key, args );
     }
 
@@ -808,7 +831,7 @@ public final class Resources
                              Object arg7
     )
     {
-        Object[] args = new Object[] { arg1, arg2, arg3, arg4, arg5, arg6, arg7 };
+        Object[] args = new Object[]{ arg1, arg2, arg3, arg4, arg5, arg6, arg7 };
         return format( key, args );
     }
 
@@ -923,7 +946,8 @@ public final class Resources
         {
             throw new MissingResourceException( "Unable to find resource of appropriate type.",
                                                 "java.lang.String",
-                                                key );
+                                                key
+            );
         }
     }
 }

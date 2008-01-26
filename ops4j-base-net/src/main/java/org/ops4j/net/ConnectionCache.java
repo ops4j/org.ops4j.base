@@ -24,18 +24,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.WeakHashMap;
+import org.ops4j.monitors.TooManyMonitorsException;
 import org.ops4j.monitors.exception.ExceptionMonitor;
 import org.ops4j.monitors.exception.ExceptionSource;
-import org.ops4j.monitors.TooManyMonitorsException;
 
-/** This class is to be used to cache URLConnections. */
+/**
+ * This class is to be used to cache URLConnections.
+ */
 public final class ConnectionCache
     implements Runnable, ExceptionSource
 {
-    /** Dummy Object. */
+
+    /**
+     * Dummy Object.
+     */
     private static final Object DUMMY = new Object();
 
-    /** Instance */
+    /**
+     * Instance
+     */
     private static ConnectionCache m_instance;
 
     private HashMap<Object, Entry> m_hardStore;
@@ -50,7 +57,9 @@ public final class ConnectionCache
         m_instance = new ConnectionCache();
     }
 
-    /** Private constructor to ensure singleton. */
+    /**
+     * Private constructor to ensure singleton.
+     */
     private ConnectionCache()
     {
         m_hardStore = new HashMap<Object, Entry>();

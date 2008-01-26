@@ -30,10 +30,15 @@ import java.util.ArrayList;
 public class StreamMonitorRouter
     implements StreamMonitor
 {
-    /** List of attached monitors. */
+
+    /**
+     * List of attached monitors.
+     */
     private final ArrayList<StreamMonitor> m_Monitors;
 
-    /** Creation of a new network monitor router. */
+    /**
+     * Creation of a new network monitor router.
+     */
     public StreamMonitorRouter()
     {
         m_Monitors = new ArrayList<StreamMonitor>();
@@ -117,9 +122,10 @@ public class StreamMonitorRouter
         }
     }
 
-    /** Returns the number of Monitors that are being handled by this router.
+    /**
+     * Returns the number of Monitors that are being handled by this router.
      *
-     * @return  the number of Monitors that are being handled by this router.
+     * @return the number of Monitors that are being handled by this router.
      */
     public int size()
     {
@@ -129,9 +135,11 @@ public class StreamMonitorRouter
         }
     }
 
-    /** Returns a Monitor.
+    /**
+     * Returns a Monitor.
      *
      * @param index The index in the List of the Monitor to return.
+     *
      * @return a regsitered StreamMonitor.
      */
     public StreamMonitor getMonitor( int index )

@@ -36,13 +36,13 @@ import org.ops4j.monitors.stream.StreamMonitor;
 public class PrintStreamMonitor
     implements StreamMonitor
 {
+
     private boolean m_first = true;
     private int m_expected;
     private long m_start;
     private PrintStream m_out;
 
     /**
-     *
      * @param out The PrintStream that should receive the monitored output.
      */
     public PrintStreamMonitor( PrintStream out )

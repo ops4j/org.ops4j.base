@@ -16,12 +16,13 @@
  */
 package org.ops4j.util.xml;
 
+import java.io.InputStream;
 import junit.framework.TestCase;
 import org.w3c.dom.Element;
-import java.io.InputStream;
 
 public class ElementHelperTest extends TestCase
 {
+
     private InputStream m_input;
 
     protected void setUp()
@@ -68,10 +69,10 @@ public class ElementHelperTest extends TestCase
         Element elem = ElementHelper.getRootElement( m_input );
         Element[] children = ElementHelper.getChildren( elem );
         assertEquals( 5, children.length );
-        assertEquals( "suput", children[0].getAttribute( "name" ) );
-        assertEquals( "dravel", children[1].getAttribute( "name" ) );
-        assertEquals( "soppa", children[2].getAttribute( "oxo" ) );
-        assertEquals( "byggnadsmateriel", children[3].getAttribute( "name" ) );
+        assertEquals( "suput", children[ 0 ].getAttribute( "name" ) );
+        assertEquals( "dravel", children[ 1 ].getAttribute( "name" ) );
+        assertEquals( "soppa", children[ 2 ].getAttribute( "oxo" ) );
+        assertEquals( "byggnadsmateriel", children[ 3 ].getAttribute( "name" ) );
     }
 
     public void testGetSomeChildren()
@@ -80,9 +81,9 @@ public class ElementHelperTest extends TestCase
         Element elem = ElementHelper.getRootElement( m_input );
         Element[] children = ElementHelper.getChildren( elem, "zout" );
         assertEquals( 3, children.length );
-        assertEquals( "suput", children[0].getAttribute( "name" ) );
-        assertEquals( "dravel", children[1].getAttribute( "name" ) );
-        assertEquals( "byggnadsmateriel", children[2].getAttribute( "name" ) );
+        assertEquals( "suput", children[ 0 ].getAttribute( "name" ) );
+        assertEquals( "dravel", children[ 1 ].getAttribute( "name" ) );
+        assertEquals( "byggnadsmateriel", children[ 2 ].getAttribute( "name" ) );
     }
 
     public void testGetValue()
@@ -95,7 +96,7 @@ public class ElementHelperTest extends TestCase
 
         child = ElementHelper.getChild( elem, "frysskydd" );
         value = ElementHelper.getValue( child );
-        assertEquals( "installerat\n  ", value);
+        assertEquals( "installerat\n  ", value );
     }
 
     public void testGetNormalizedValue()
@@ -108,7 +109,7 @@ public class ElementHelperTest extends TestCase
     }
 
     public void testGetAttribute()
-    throws Exception
+        throws Exception
     {
         Element elem = ElementHelper.getRootElement( m_input );
         Element child = ElementHelper.getChild( elem, "frysskydd" );

@@ -30,14 +30,21 @@ import java.util.Locale;
  */
 public final class ResourceManager
 {
-    /** Permission needed to clear complete cache. */
+
+    /**
+     * Permission needed to clear complete cache.
+     */
     private static final RuntimePermission CLEAR_CACHE_PERMISSION = new RuntimePermission( "i18n.clearCompleteCache" );
 
-    /** Resource lookup table. */
+    /**
+     * Resource lookup table.
+     */
     private static final HashMap<String, WeakReference<Resources>> RESOURCES =
         new HashMap<String, WeakReference<Resources>>();
 
-    /** Private Constructor to block instantiation. */
+    /**
+     * Private Constructor to block instantiation.
+     */
     private ResourceManager()
     {
     }

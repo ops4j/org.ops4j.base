@@ -19,9 +19,12 @@ package org.ops4j.monitors.stream;
 
 import org.ops4j.monitors.TooManyMonitorsException;
 
-/** An interface for classes that supports StreamMonitors. */
+/**
+ * An interface for classes that supports StreamMonitors.
+ */
 public interface StreamSource
 {
+
     /**
      * Register a ExceptionMonitor with the source.
      *

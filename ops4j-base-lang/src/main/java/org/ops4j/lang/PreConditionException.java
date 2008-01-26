@@ -25,6 +25,7 @@ package org.ops4j.lang;
  */
 public class PreConditionException extends RuntimeException
 {
+
     /**
      * PreCondition constructor.
      *

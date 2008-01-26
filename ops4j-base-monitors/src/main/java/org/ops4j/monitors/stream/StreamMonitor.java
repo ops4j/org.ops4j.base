@@ -29,6 +29,7 @@ import java.net.URL;
  */
 public interface StreamMonitor
 {
+
     /**
      * Notify the monitor of the update in the download status.
      *

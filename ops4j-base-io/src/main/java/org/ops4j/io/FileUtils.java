@@ -127,7 +127,7 @@ public final class FileUtils
     }
 
     /**
-     * Deletes the file or recursively deletes a directory depending on the file passed. 
+     * Deletes the file or recursively deletes a directory depending on the file passed.
      *
      * @param file file or directory to be deleted.
      *

@@ -31,7 +31,9 @@ import java.util.StringTokenizer;
 public final class PropertyResolver
 {
 
-    /** Null constructor. */
+    /**
+     * Null constructor.
+     */
     private PropertyResolver()
     {
     }
@@ -80,7 +82,8 @@ public final class PropertyResolver
         return result;
     }
 
-    /** Process one token.
+    /**
+     * Process one token.
      *
      * @param token The token to process.
      * @param stack The parser Stack.
@@ -114,9 +117,10 @@ public final class PropertyResolver
         }
     }
 
-    /** Starts a new property.
+    /**
+     * Starts a new property.
      *
-     * @param name The name of the property.
+     * @param name  The name of the property.
      * @param props The Properties we are exchanging with.
      * @param stack The parsing stack.
      */

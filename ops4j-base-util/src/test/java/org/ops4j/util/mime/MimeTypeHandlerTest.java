@@ -20,6 +20,7 @@ import junit.framework.TestCase;
 
 public class MimeTypeHandlerTest extends TestCase
 {
+
     public void testJarType()
     {
         String type = "jar";
@@ -54,12 +55,14 @@ public class MimeTypeHandlerTest extends TestCase
         String mime = MimeTypeHandler.getMimeType( type );
         assertEquals( "image/gif", mime );
     }
+
     public void testJpgType()
     {
         String type = "jpg";
         String mime = MimeTypeHandler.getMimeType( type );
         assertEquals( "image/jpg", mime );
     }
+
     public void testLinkType()
     {
         String type = "link";

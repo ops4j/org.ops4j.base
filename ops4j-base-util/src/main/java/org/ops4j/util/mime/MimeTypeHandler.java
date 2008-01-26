@@ -20,10 +20,15 @@ package org.ops4j.util.mime;
 
 import java.util.HashMap;
 
-/** Mimetype utility hanlder. */
+/**
+ * Mimetype utility hanlder.
+ */
 public final class MimeTypeHandler
 {
-    /** Static mime type table of artifact types to mimetype strings. */
+
+    /**
+     * Static mime type table of artifact types to mimetype strings.
+     */
     private static final HashMap<String, String> MIME_TYPES = new HashMap<String, String>();
 
     static
@@ -37,7 +42,9 @@ public final class MimeTypeHandler
         MIME_TYPES.put( "link", "application/x-ops4j-link" );
     }
 
-    /** Disabled constructor. */
+    /**
+     * Disabled constructor.
+     */
     private MimeTypeHandler()
     {
         // disable

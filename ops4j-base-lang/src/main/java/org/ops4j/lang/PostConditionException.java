@@ -40,9 +40,9 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the object is not null.
      *
-     * @param object The object to be validated.
-     *
+     * @param object     The object to be validated.
      * @param identifier The name of the object.
+     *
      * @throws PostConditionException if the object is null.
      */
     public static void validateNotNull( Object object, String identifier )
@@ -57,9 +57,9 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the object is null.
      *
-     * @param object The object to be validated.
-     *
+     * @param object     The object to be validated.
      * @param identifier The name of the object.
+     *
      * @throws PostConditionException if the object is not null.
      */
     public static void validateNull( Object object, String identifier )
@@ -78,8 +78,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value > limit</code>.
      *
      * @param identifier The name of the object.
-     * @param limit The limit that the value must exceed.
-     * @param value The value to be tested.
+     * @param limit      The limit that the value must exceed.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateGreaterThan( long value, long limit, String identifier )
@@ -98,8 +99,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value > limit</code>.
      *
      * @param identifier The name of the object.
-     * @param limit The limit that the value must exceed.
-     * @param value The value to be tested.
+     * @param limit      The limit that the value must exceed.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateGreaterThan( double value, double limit, String identifier )
@@ -118,8 +120,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value > limit</code>.
      *
      * @param identifier The name of the object.
-     * @param limit The limit that the value must exceed.
-     * @param value The value to be tested.
+     * @param limit      The limit that the value must exceed.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateGreaterThan( Number value, Number limit, String identifier )
@@ -138,8 +141,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value < limit</code>.
      *
      * @param identifier The name of the object.
-     * @param limit The limit that the value must be smaller than.
-     * @param value The value to be tested.
+     * @param limit      The limit that the value must be smaller than.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateLesserThan( long value, long limit, String identifier )
@@ -158,8 +162,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value < limit</code>.
      *
      * @param identifier The name of the object.
-     * @param limit The limit that the value must be smaller than.
-     * @param value The value to be tested.
+     * @param limit      The limit that the value must be smaller than.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateLesserThan( double value, double limit, String identifier )
@@ -178,8 +183,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value < limit</code>.
      *
      * @param identifier The name of the object.
-     * @param limit The limit that the value must be smaller than.
-     * @param value The value to be tested.
+     * @param limit      The limit that the value must be smaller than.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateLesserThan( Number value, Number limit, String identifier )
@@ -198,8 +204,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value == condition</code>.
      *
      * @param identifier The name of the object.
-     * @param condition The condition value.
-     * @param value The value to be tested.
+     * @param condition  The condition value.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateEqualTo( long value, long condition, String identifier )
@@ -218,8 +225,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value == condition</code>.
      *
      * @param identifier The name of the object.
-     * @param condition The condition value.
-     * @param value The value to be tested.
+     * @param condition  The condition value.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateEqualTo( double value, double condition, String identifier )
@@ -238,8 +246,9 @@ public class PostConditionException extends RuntimeException
      * This method ensures that <code>value == condition</code>.
      *
      * @param identifier The name of the object.
-     * @param condition The condition value.
-     * @param value The value to be tested.
+     * @param condition  The condition value.
+     * @param value      The value to be tested.
+     *
      * @throws PostConditionException if the condition is not met.
      */
     public static void validateEqualTo( Number value, Number condition, String identifier )

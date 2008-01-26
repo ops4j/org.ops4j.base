@@ -22,9 +22,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
@@ -39,10 +39,15 @@ import org.ops4j.monitors.stream.StreamMonitor;
  */
 public final class StreamUtils
 {
-    /** Buffer size. */
+
+    /**
+     * Buffer size.
+     */
     private static final int BUFFER_SIZE = 102400;
 
-    /** Private constructor to ensure no instances are created. */
+    /**
+     * Private constructor to ensure no instances are created.
+     */
     private StreamUtils()
     {
     }

@@ -178,18 +178,18 @@ public class StreamUtilTestCase extends TestCase
     {
         String s = "HabbaZout\u1298\u1243\u9812";
         StringReader reader = new StringReader( s );
-        ByteArrayOutputStream baos = new ByteArrayOutputStream( );
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         StreamUtils.copyReaderToStream( reader, baos, "UTF-8", true );
-        assertEquals( s, baos.toString("UTF-8") );
+        assertEquals( s, baos.toString( "UTF-8" ) );
 
         reader = new StringReader( s );
-        baos = new ByteArrayOutputStream( );
+        baos = new ByteArrayOutputStream();
         StreamUtils.copyReaderToStream( reader, baos, "ISO-8859-1", true );
         //noinspection ErrorNotRethrown
         try
         {
-            assertEquals( s, baos.toString("ISO-8859-1") );
-            fail( "Didn't fail incorrect encoding.");
+            assertEquals( s, baos.toString( "ISO-8859-1" ) );
+            fail( "Didn't fail incorrect encoding." );
         } catch( ComparisonFailure e )
         {
             // expected
@@ -212,7 +212,7 @@ public class StreamUtilTestCase extends TestCase
         try
         {
             assertEquals( s, writer.getBuffer().toString() );
-            fail( "Didn't fail incorrect encoding.");
+            fail( "Didn't fail incorrect encoding." );
         } catch( ComparisonFailure e )
         {
             // expected
@@ -245,6 +245,7 @@ public class StreamUtilTestCase extends TestCase
 
     private static class MyByteArrayInputStream extends ByteArrayInputStream
     {
+
         private boolean m_closed = false;
 
         public MyByteArrayInputStream( byte[] buf )

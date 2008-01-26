@@ -20,18 +20,21 @@ package org.ops4j.monitors;
 
 import org.ops4j.monitors.exception.ExceptionSource;
 
-/** This Exception is thrown when the MonitorSource can not register any
+/**
+ * This Exception is thrown when the MonitorSource can not register any
  * more Monitors.
  */
 public class TooManyMonitorsException extends MonitorException
 {
+
     private final int m_max;
     private final ExceptionSource m_source;
 
-    /** Constructor
+    /**
+     * Constructor
      *
      * @param source The ExceptionSource,
-     * @param max The maximum number of monitors that can be registered at the ExceptionSource.
+     * @param max    The maximum number of monitors that can be registered at the ExceptionSource.
      */
     public TooManyMonitorsException( ExceptionSource source, int max )
     {
@@ -42,6 +45,7 @@ public class TooManyMonitorsException extends MonitorException
 
     /**
      * Returns he maximum number of monitors that can be registered at the ExceptionSource.
+     *
      * @return The maximum number of monitors that can be registered at the ExceptionSource.
      */
     public int getMaxMonitorsAllowed()
@@ -49,7 +53,8 @@ public class TooManyMonitorsException extends MonitorException
         return m_max;
     }
 
-    /** Returns the ExceptionSource that can't deal with too many ExceptionMonitors.
+    /**
+     * Returns the ExceptionSource that can't deal with too many ExceptionMonitors.
      *
      * @return The ExceptionSource unable to cope.
      */

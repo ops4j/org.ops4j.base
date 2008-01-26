@@ -35,18 +35,24 @@ import java.util.List;
 public class ExceptionMonitorRouter
     implements ExceptionMonitor, ExceptionSource
 {
-    /** List of attached monitors. */
+
+    /**
+     * List of attached monitors.
+     */
     private final ArrayList<ExceptionMonitor> m_monitors;
 
-    /** Creation of a exception monitor router. */
+    /**
+     * Creation of a exception monitor router.
+     */
     public ExceptionMonitorRouter()
     {
         m_monitors = new ArrayList<ExceptionMonitor>();
     }
 
-    /** This method is called when an Exception or Throwable occurs.
+    /**
+     * This method is called when an Exception or Throwable occurs.
      *
-     * @param source The source of the Exception.
+     * @param source    The source of the Exception.
      * @param exception The Exception being thrown.
      */
     public void exception( ExceptionSource source, Throwable exception )

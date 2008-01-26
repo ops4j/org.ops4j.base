@@ -27,10 +27,15 @@ package org.ops4j.util.environment;
  */
 public class EnvironmentException extends RuntimeException
 {
-    /** the environment variable name if available */
+
+    /**
+     * the environment variable name if available
+     */
     private final String m_variable;
 
-    /** root cause */
+    /**
+     * root cause
+     */
     private final Throwable m_cause;
 
     /**
@@ -119,7 +124,7 @@ public class EnvironmentException extends RuntimeException
      * Prepends variable name to the base message.
      *
      * @return the message of the Exception.
-     * 
+     *
      * @see java.lang.Throwable#getMessage()
      */
     public String getMessage()

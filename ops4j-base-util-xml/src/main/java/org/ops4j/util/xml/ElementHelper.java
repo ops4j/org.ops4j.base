@@ -18,19 +18,19 @@
 
 package org.ops4j.util.xml;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.ops4j.util.collections.PropertyResolver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.ops4j.util.collections.PropertyResolver;
 
 /**
  * Utility class supporting the XML document parsing.
@@ -40,7 +40,10 @@ import org.xml.sax.SAXException;
  */
 public final class ElementHelper
 {
-    /** Constructor (disabled) */
+
+    /**
+     * Constructor (disabled)
+     */
     private ElementHelper()
     {
     }
@@ -52,9 +55,9 @@ public final class ElementHelper
      *
      * @return the root element
      *
-     * @throws IOException If an underlying I/O problem occured.
+     * @throws IOException                  If an underlying I/O problem occured.
      * @throws ParserConfigurationException if there is a severe problem in the XML parsing subsystem.
-     * @throws SAXException If the XML is malformed in some way.
+     * @throws SAXException                 If the XML is malformed in some way.
      */
     public static Element getRootElement( InputStream input )
         throws ParserConfigurationException, IOException, SAXException

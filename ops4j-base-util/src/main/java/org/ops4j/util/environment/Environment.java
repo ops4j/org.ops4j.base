@@ -22,9 +22,9 @@ package org.ops4j.util.environment;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Properties;
@@ -38,15 +38,22 @@ import java.util.Properties;
  */
 public class Environment extends Properties
 {
-    /** os.name System property */
+
+    /**
+     * os.name System property
+     */
     public static final String OSNAME = System.getProperty( "os.name" );
 
-    /** user.name System property */
+    /**
+     * user.name System property
+     */
     public static final String USERNAME = System.getProperty( "user.name" );
 
     private static final HashSet<String> UNICES = new HashSet<String>();
 
-    /** the user's platform specific shell executable */
+    /**
+     * the user's platform specific shell executable
+     */
     private static String m_SHELL = null;
 
     static
@@ -88,8 +95,6 @@ public class Environment extends Properties
      * @param applicationname The name of the application.
      *
      * @return The directory where the application can store data.
-     *
-     * @throws EnvironmentException
      */
     public static File getDataDirectory( String applicationname )
     {
@@ -621,7 +626,7 @@ public class Environment extends Properties
         int exitValue = 99;
         try
         {
-            String[] args = new String[] { cmdExec };
+            String[] args = new String[]{ cmdExec };
             process = startProcess( args );
             reader = createReader( process );
             processLinesOfEnvironmentVariables( reader, properties );

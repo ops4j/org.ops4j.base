@@ -21,9 +21,12 @@ package org.ops4j.monitors.exception;
 import java.util.List;
 import org.ops4j.monitors.TooManyMonitorsException;
 
-/** An interface for classes that supports ExceptionMonitors. */
+/**
+ * An interface for classes that supports ExceptionMonitors.
+ */
 public interface ExceptionSource
 {
+
     /**
      * Register a ExceptionMonitor with the source.
      *

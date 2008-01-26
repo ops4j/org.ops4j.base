@@ -19,8 +19,6 @@
     OPS4J Base - Utilities/Extensions related to java.net.
   </description>
 
-  <url>http://wiki.ops4j.org/confluence/x/KARN</url>
-
   <properties>
     <bundle.symbolicName>org.ops4j.base.net</bundle.symbolicName>
     <bundle.namespace>org.ops4j.net</bundle.namespace>

@@ -31,9 +31,10 @@ public class Pipe
 
     private final InputStream m_in;
     private final OutputStream m_out;
-    private Object m_processStream;
+    private volatile Object m_processStream;
 
     private volatile Thread m_thread;
+    private static final int READ_BUFFER = 8192;
 
     public Pipe( InputStream processStream, OutputStream systemStream )
     {
@@ -76,11 +77,30 @@ public class Pipe
 
     public synchronized void stop()
     {
+
         if( null == m_processStream || null == m_thread )
         {
             return;
         }
 
+        // flush pipe:
+        try
+        {
+            byte[] cbuf = new byte[READ_BUFFER];
+            while( m_in.available() != 0 )
+            {
+                if( !readAndFlush( cbuf ) )
+                {
+                    break;
+                }
+                ;
+            }
+
+        }
+        catch( IOException e )
+        {
+            // we are just flushing out all we can get while stopping..
+        }
         Thread t = m_thread;
         m_thread = null;
 
@@ -98,7 +118,7 @@ public class Pipe
          * PAXRUNNER-68: http://issues.ops4j.org/jira/browse/PAXRUNNER-68
          * PAXRUNNER-80: http://issues.ops4j.org/jira/browse/PAXRUNNER-80
          */
-        byte[] cbuf = new byte[8192];
+        byte[] cbuf = new byte[READ_BUFFER];
         while( Thread.currentThread() == m_thread )
         {
             try
@@ -106,16 +126,19 @@ public class Pipe
                 if( m_in.available() == 0 )
                 {
                     // don't block in case this thread is being stopped...
-                    try {Thread.sleep(100);} catch (InterruptedException e) {}
+                    try
+                    {
+                        Thread.sleep( 100 );
+                    }
+                    catch( InterruptedException e )
+                    {
+                    }
                     continue;
                 }
-                int bytesRead = m_in.read( cbuf, 0, 8192 );
-                if( bytesRead == -1 )
+                if( !readAndFlush( cbuf ) )
                 {
                     break;
                 }
-                m_out.write( cbuf, 0, bytesRead );
-                m_out.flush();
             }
             catch( IOException e )
             {
@@ -141,5 +164,25 @@ public class Pipe
         {
             m_processStream = null;
         }
+    }
+
+    /**
+     * Reads from m_in and writes to m_out
+     *
+     * @param cbuf buffer being used to read into (reused)
+     *
+     * @return true if read was != -1 , otherwise false (which usually means to end reading from m_in for the caller)
+     */
+    private boolean readAndFlush( byte[] cbuf )
+        throws IOException
+    {
+        int bytesRead = m_in.read( cbuf, 0, READ_BUFFER );
+        if( bytesRead == -1 )
+        {
+            return false;
+        }
+        m_out.write( cbuf, 0, bytesRead );
+        m_out.flush();
+        return true;
     }
 }

@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.ops4j</groupId>
   <artifactId>base</artifactId>
-  <version>0.5.2-SNAPSHOT</version>
+  <version>0.5.2</version>
   <packaging>pom</packaging>
 
   <name>OPS4J Base</name>
@@ -37,13 +36,13 @@
       <post>general@lists.ops4j.org</post>
       <subscribe>general-subscribe@lists.ops4j.org</subscribe>
       <unsubscribe>general-unsubscribe@lists.ops4j.org</unsubscribe>
-      <archive/>
+      <archive />
     </mailingList>
   </mailingLists>
 
   <scm>
-    <developerConnection>scm:svn:https://scm.ops4j.org/repos/ops4j/projects/base</developerConnection>
-    <connection>scm:svn:https://scm.ops4j.org/repos/ops4j/projects/base</connection>
+    <developerConnection>scm:svn:https://scm.ops4j.org/repos/ops4j/qa/base/base-0.5.2</developerConnection>
+    <connection>scm:svn:https://scm.ops4j.org/repos/ops4j/qa/base/base-0.5.2</connection>
   </scm>
 
   <developers>

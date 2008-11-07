@@ -115,9 +115,12 @@ public class Pipe
             }
             catch( final IOException e )
             {
-                e.printStackTrace();
+                if( null != m_sink )
+                {
+                    e.printStackTrace();
+                }
             }
-            catch( final InterruptedException e )
+            catch( final Exception e )
             {
                 // do nothing
             }
@@ -131,7 +134,7 @@ public class Pipe
             is.available();
             return is;
         }
-        catch( final IOException e )
+        catch( final Exception e )
         {
             return null;
         }
@@ -144,7 +147,7 @@ public class Pipe
             os.flush();
             return os;
         }
-        catch( final IOException e )
+        catch( final Exception e )
         {
             return null;
         }

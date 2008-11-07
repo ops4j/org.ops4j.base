@@ -1,5 +1,5 @@
 /*
- * Copyright 2006 Niclas Hedhman.
+ * Copyright 2008 Stuart McCulloch.
  *
  * Licensed  under the  Apache License,  Version 2.0  (the "License");
  * you may not use  this file  except in  compliance with the License.
@@ -17,172 +17,153 @@
  */
 package org.ops4j.io;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Map;
+import java.util.WeakHashMap;
 
-/**
- * TODO add unit tests
- * TODO add Javadoc
- */
 public class Pipe
-    implements Runnable
 {
+    private static final int READ_BUF_SIZE = 8192;
+
+    private static final Map<InputStream, Pump> PUMPS = new WeakHashMap<InputStream, Pump>();
 
     private final InputStream m_in;
     private final OutputStream m_out;
-    private volatile Object m_processStream;
 
-    private volatile Thread m_thread;
-    private static final int READ_BUFFER = 8192;
+    private Pump m_pump;
 
-    public Pipe( InputStream processStream, OutputStream systemStream )
+    public Pipe( final InputStream processStream, final OutputStream systemStream )
     {
         m_in = processStream;
         m_out = systemStream;
-        m_processStream = m_in;
     }
 
-    public Pipe( OutputStream processStream, InputStream systemStream )
+    public Pipe( final OutputStream processStream, final InputStream systemStream )
     {
         m_in = systemStream;
         m_out = processStream;
-        m_processStream = m_out;
     }
 
     public synchronized Pipe start( final String name )
     {
-        if( null == m_processStream || null != m_thread )
+        if( null == m_pump && null != m_in && null != m_out )
         {
-            return this;
+            m_pump = startPump( m_in );
+            m_pump.setName( name );
+            m_pump.connect( m_out );
         }
-
-        if( m_in != m_processStream )
-        {
-            try
-            {
-                m_in.available();
-            }
-            catch( IOException e )
-            {
-                return this;
-            }
-        }
-
-        m_thread = new Thread( this, name );
-        m_thread.setDaemon( true );
-        m_thread.start();
         return this;
     }
 
     public synchronized void stop()
     {
-
-        if( null == m_processStream || null == m_thread )
+        if( null != m_pump )
         {
-            return;
+            m_pump.connect( null );
+            m_pump.setName( m_pump.getName() + " (disconnected)" );
+            m_pump = null;
         }
-
-        // flush pipe:
-        try
-        {
-            byte[] cbuf = new byte[READ_BUFFER];
-            while( m_in.available() != 0 )
-            {
-                if( !readAndFlush( cbuf ) )
-                {
-                    break;
-                }
-                ;
-            }
-
-        }
-        catch( IOException e )
-        {
-            // we are just flushing out all we can get while stopping..
-        }
-        Thread t = m_thread;
-        m_thread = null;
-
-        t.interrupt();
     }
 
-    public void run()
+    private static class Pump extends Thread
     {
-        /*
-         * Note: The original code only read characters from the stream one at a
-         * time. This corrupted the output by interleaving data from System.out
-         * and System.err.  The below reads bytes from in blocks as they are made
-         * available by the Platform process.  This groups the data as appropriate
-         * to prevent this interleaving.  The bugs related to this are:
-         * PAXRUNNER-68: http://issues.ops4j.org/jira/browse/PAXRUNNER-68
-         * PAXRUNNER-80: http://issues.ops4j.org/jira/browse/PAXRUNNER-80
-         */
-        byte[] cbuf = new byte[READ_BUFFER];
-        while( Thread.currentThread() == m_thread )
+        private final InputStream m_source;
+        private OutputStream m_sink;
+
+        public Pump( final InputStream source )
+        {
+            m_source = source;
+        }
+
+        public void connect( final OutputStream sink )
+        {
+            synchronized( this )
+            {
+                m_sink = sink;
+                notify();
+            }
+        }
+
+        @Override
+        public void run()
         {
             try
             {
-                if( m_in.available() == 0 )
-                {
-                    // don't block in case this thread is being stopped...
-                    try
-                    {
-                        Thread.sleep( 100 );
-                    }
-                    catch( InterruptedException e )
-                    {
-                    }
-                    continue;
-                }
-                if( !readAndFlush( cbuf ) )
-                {
-                    break;
-                }
-            }
-            catch( IOException e )
-            {
-                if( Thread.currentThread() == m_thread )
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
+                final byte[] buf = new byte[READ_BUF_SIZE];
 
-        try
-        {
-            if( m_in == m_processStream )
-            {
-                m_in.close();
+                while( null != validate( m_source ) )
+                {
+                    final int n = m_source.read( buf );
+                    if( n == -1 )
+                    {
+                        break;
+                    }
+
+                    synchronized( this )
+                    {
+                        while( null == validate( m_sink ) )
+                        {
+                            wait();
+                        }
+
+                        m_sink.write( buf, 0, n );
+                        m_sink.flush();
+                    }
+                }
             }
-        }
-        catch( IOException e )
-        {
-            // ignore
-        }
-        finally
-        {
-            m_processStream = null;
+            catch( final IOException e )
+            {
+                e.printStackTrace();
+            }
+            catch( final InterruptedException e )
+            {
+                // do nothing
+            }
         }
     }
 
-    /**
-     * Reads from m_in and writes to m_out
-     *
-     * @param cbuf buffer being used to read into (reused)
-     *
-     * @return true if read was != -1 , otherwise false (which usually means to end reading from m_in for the caller)
-     */
-    private boolean readAndFlush( byte[] cbuf )
-        throws IOException
+    static InputStream validate( final InputStream is )
     {
-        int bytesRead = m_in.read( cbuf, 0, READ_BUFFER );
-        if( bytesRead == -1 )
+        try
         {
-            return false;
+            is.available();
+            return is;
         }
-        m_out.write( cbuf, 0, bytesRead );
-        m_out.flush();
-        return true;
+        catch( final IOException e )
+        {
+            return null;
+        }
+    }
+
+    static OutputStream validate( final OutputStream os )
+    {
+        try
+        {
+            os.flush();
+            return os;
+        }
+        catch( final IOException e )
+        {
+            return null;
+        }
+    }
+
+    static Pump startPump( final InputStream is )
+    {
+        synchronized( PUMPS )
+        {
+            Pump pump = PUMPS.get( is );
+            if( null == pump )
+            {
+                pump = new Pump( is );
+                pump.setDaemon( true );
+                pump.start();
+
+                PUMPS.put( is, pump );
+            }
+            return pump;
+        }
     }
 }

@@ -44,7 +44,7 @@ public class Pipe
      * thread will be re-used when new data appears. When streams are closed,
      * the relevant thread will break out of the read() and safely shutdown.
      */
-    private static final Map<InputStream, Pump> PUMPS = new WeakHashMap<InputStream, Pump>();
+    static final Map<InputStream, Pump> PUMPS = new WeakHashMap<InputStream, Pump>();
 
     private final InputStream m_in;
     private final OutputStream m_out;
@@ -169,6 +169,17 @@ public class Pipe
             catch( final Exception e )
             {
                 // ignore spurious exceptions
+            }
+            finally
+            {
+                synchronized( PUMPS )
+                {
+                    // stopping, so remove ourselves
+                    if( PUMPS.get( m_source ) == this )
+                    {
+                        PUMPS.remove( m_source );
+                    }
+                }
             }
         }
     }

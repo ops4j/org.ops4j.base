@@ -6,12 +6,12 @@
     <relativePath>../</relativePath>
     <groupId>org.ops4j</groupId>
     <artifactId>base</artifactId>
-    <version>0.5.3-SNAPSHOT</version>
+    <version>0.5.3</version>
   </parent>
 
   <groupId>org.ops4j.base</groupId>
   <artifactId>ops4j-base</artifactId>
-  <version>0.5.3-SNAPSHOT</version>
+  <version>0.5.3</version>
   <packaging>bundle</packaging>
 
   <name>OPS4J Base - All</name>
@@ -37,49 +37,49 @@
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-io</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-lang</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-monitors</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-net</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-collections</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-property</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-xml</artifactId>
-      <version>0.5.3-SNAPSHOT</version>
+      <version>0.5.3</version>
       <optional>true</optional>
     </dependency>
   </dependencies>

@@ -1,7 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.ops4j</groupId>
+    <artifactId>master</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  
   <groupId>org.ops4j</groupId>
   <artifactId>base</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -14,74 +22,10 @@
 
   <url>http://www.ops4j.org/projects/base/</url>
 
-  <organization>
-    <name>OPS4J - Open Participation Software for Java</name>
-    <url>http://www.ops4j.org/</url>
-  </organization>
-
-  <inceptionYear>2006</inceptionYear>
-
-  <licenses>
-    <license>
-      <name>Apache License v2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>Copyrights retained by each developer.</comments>
-    </license>
-  </licenses>
-
-  <mailingLists>
-    <mailingList>
-      <name>General OPS4J</name>
-      <post>general@lists.ops4j.org</post>
-      <subscribe>general-subscribe@lists.ops4j.org</subscribe>
-      <unsubscribe>general-unsubscribe@lists.ops4j.org</unsubscribe>
-      <archive />
-    </mailingList>
-  </mailingLists>
-
   <scm>
     <developerConnection>scm:svn:https://scm.ops4j.org/repos/ops4j/projects/base</developerConnection>
     <connection>scm:svn:https://scm.ops4j.org/repos/ops4j/projects/base</connection>
   </scm>
-
-  <developers>
-    <developer>
-      <id>niclas</id>
-      <name>Niclas Hedhman</name>
-      <email>niclas@hedhman.org</email>
-      <url>http://www.codedragons.com</url>
-      <organization>Jayway Malaysia Sdn Bhd</organization>
-      <organizationUrl>http://www.jayway.net</organizationUrl>
-      <roles>
-        <role>ProjectLead</role>
-        <role>ReleaseManager</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>UTC+8</timezone>
-    </developer>
-    <developer>
-      <id>adreghiciu</id>
-      <name>Alin Dreghiciu</name>
-      <email>adreghiciu@gmail.com</email>
-      <roles>
-        <role>Developer</role>
-      </roles>
-      <timezone>UTC+2</timezone>
-    </developer>
-  </developers>
-
-  <contributors>
-    <contributor>
-      <name>Stephen McConnell</name>
-      <organization>Apache Software Foundation</organization>
-    </contributor>
-  </contributors>
-
-  <issueManagement>
-    <system>jira</system>
-    <url>http://issues.ops4j.org/jira/browse/BASE</url>
-  </issueManagement>
 
   <distributionManagement>
     <site>
@@ -90,49 +34,16 @@
     </site>
   </distributionManagement>
 
-  <ciManagement>
-    <system>bamboo</system>
-    <url>http://ci.ops4j.org/</url>
-    <notifiers>
-      <notifier>
-        <type>email</type>
-        <sendOnError>true</sendOnError>
-        <sendOnFailure>true</sendOnFailure>
-        <sendOnWarning>true</sendOnWarning>
-        <sendOnSuccess>false</sendOnSuccess>
-      </notifier>
-    </notifiers>
-  </ciManagement>
-
-  <modules>
-    <module>ops4j-base</module>
-    <module>ops4j-base-io</module>
-    <module>ops4j-base-lang</module>
-    <module>ops4j-base-monitors</module>
-    <module>ops4j-base-net</module>
-    <module>ops4j-base-util</module>
-    <module>ops4j-base-util-collections</module>
-    <module>ops4j-base-util-property</module>
-    <module>ops4j-base-util-xml</module>
-  </modules>
+  <issueManagement>
+    <system>jira</system>
+    <url>http://issues.ops4j.org/jira/browse/BASE</url>
+  </issueManagement>
 
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-site-plugin</artifactId>
-      </plugin>
-      <plugin>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.0-beta-6</version>
         <configuration>
-          <preparationGoals>clean install</preparationGoals>
           <tagBase>https://scm.ops4j.org/repos/ops4j/qa/base</tagBase>
         </configuration>
       </plugin>
@@ -152,34 +63,14 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemProperties>
-            <property>
-              <name>net.sourceforge.cobertura.datafile</name>
-              <value>${basedir}/target/cobertura/cobertura.ser</value>
-            </property>
-          </systemProperties>
-        </configuration>
-      </plugin>
     </plugins>
-
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh-external</artifactId>
-        <version>1.0-alpha-6</version>
-      </extension>
-    </extensions>
 
     <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
-          <version>1.4.0</version>
+          <version>2.0.0</version>
           <extensions>true</extensions>
           <configuration>
             <instructions>
@@ -189,7 +80,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
   </build>
 
   <dependencies>
@@ -201,127 +91,49 @@
     </dependency>
   </dependencies>
 
-  <profiles>
-    <profile>
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>repos.ops4j</id>
-      <distributionManagement>
-        <repository>
-          <id>ops4j.releases.deploy</id>
-          <url>scpexe://repository.ops4j.org/var/http/repository.ops4j.org/mvn-releases</url>
-        </repository>
-        <snapshotRepository>
-          <id>ops4j.snapshots.deploy</id>
-          <url>scpexe://repository.ops4j.org/var/http/repository.ops4j.org/mvn-snapshots</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>repos.sonatype</id>
-      <distributionManagement>
-        <repository>
-          <id>sonatype.releases.deploy</id>
-          <url>http://oss.sonatype.org/content/repositories/ops4j-releases/</url>
-        </repository>
-        <snapshotRepository>
-          <id>sonatype.snapshots.deploy</id>
-          <url>http://oss.sonatype.org/content/repositories/ops4j-snapshots/</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>repos.sonatype.staging</id>
-      <distributionManagement>
-        <repository>
-          <id>sonatype.staging.releases.deploy</id>
-          <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-      </distributionManagement>
-    </profile>
-  </profiles>
+  <developers>
+    <developer>
+      <id>niclas</id>
+      <name>Niclas Hedhman</name>
+      <email>niclas@hedhman.org</email>
+      <url>http://www.codedragons.com</url>
+      <organization>Jayway Malaysia Sdn Bhd</organization>
+      <organizationUrl>http://www.jayway.net</organizationUrl>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>UTC+8</timezone>
+    </developer>
+    <developer>
+      <id>adreghiciu</id>
+      <name>Alin Dreghiciu</name>
+      <email>adreghiciu@gmail.com</email>
+      <roles>
+        <role>ProjectLead</role>
+        <role>ReleaseManager</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>UTC+2</timezone>
+    </developer>
+  </developers>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <minmemory>128m</minmemory>
-          <maxmemory>512</maxmemory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <configuration>
-          <targetJdk>1.5</targetJdk>
-          <sourceEncoding>utf-8</sourceEncoding>
-          <minimumTokens>100</minimumTokens>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <configuration>
-          <configLocation>src/site/ops4j-format.xml</configLocation>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <configuration>
-          <aggregate>true</aggregate>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jxr-plugin</artifactId>
-        <version>2.0</version>
-        <configuration>
-          <aggregate>true</aggregate>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-        <version>2.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <configuration>
-          <aggregate>true</aggregate>
-        </configuration>
-      </plugin>
+  <contributors>
+    <contributor>
+      <name>Stephen McConnell</name>
+      <organization>Apache Software Foundation</organization>
+    </contributor>
+  </contributors>
 
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <tagBase>https://scm.ops4j.org/repos/ops4j/qa/base</tagBase>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
+  <modules>
+    <module>ops4j-base</module>
+    <module>ops4j-base-io</module>
+    <module>ops4j-base-lang</module>
+    <module>ops4j-base-monitors</module>
+    <module>ops4j-base-net</module>
+    <module>ops4j-base-util</module>
+    <module>ops4j-base-util-collections</module>
+    <module>ops4j-base-util-property</module>
+    <module>ops4j-base-util-xml</module>
+  </modules>
 
 </project>

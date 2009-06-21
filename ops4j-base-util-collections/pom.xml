@@ -38,6 +38,7 @@
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-lang</artifactId>
       <version>1.0.1-SNAPSHOT</version>
+      <type>bundle</type>
     </dependency>
   </dependencies>
 

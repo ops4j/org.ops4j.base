@@ -129,15 +129,6 @@
         <option name="VARIABLE_ANNOTATION_WRAP" value="5" />
         <option name="SPACE_WITHIN_ANNOTATION_PARENTHESES" value="true" />
         <option name="ENUM_CONSTANTS_WRAP" value="5" />
-        <ADDITIONAL_INDENT_OPTIONS fileType="">
-          <option name="INDENT_SIZE" value="4" />
-          <option name="CONTINUATION_INDENT_SIZE" value="8" />
-          <option name="TAB_SIZE" value="4" />
-          <option name="USE_TAB_CHARACTER" value="false" />
-          <option name="SMART_TABS" value="false" />
-          <option name="LABEL_INDENT_SIZE" value="0" />
-          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
-        </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="java">
           <option name="INDENT_SIZE" value="4" />
           <option name="CONTINUATION_INDENT_SIZE" value="4" />
@@ -258,9 +249,22 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
-  <component name="ErrorTreeViewConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="HIDE_WARNINGS" value="false" />
+  <component name="FacetAutodetectingManager">
+    <autodetection-disabled>
+      <facet-type id="Osmorc">
+        <modules>
+          <module name="ops4j-base-lang" />
+          <module name="ops4j-base-monitors" />
+          <module name="ops4j-base-util-property" />
+          <module name="ops4j-base" />
+          <module name="ops4j-base-io" />
+          <module name="ops4j-base-util" />
+          <module name="ops4j-base-util-collections" />
+          <module name="ops4j-base-util-xml" />
+          <module name="ops4j-base-net" />
+        </modules>
+      </facet-type>
+    </autodetection-disabled>
   </component>
   <component name="HierarchyBrowserManager">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -270,13 +274,13 @@
   <component name="IdProvider" IDEtalkID="4451B5B5A99F7794544410A3C9A2B92B" />
   <component name="InspectionProjectProfileManager">
     <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
     <profiles>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
-        <inspection_tool class="UNUSED_SYMBOL" level="WARNING" enabled="true">
+        <inspection_tool class="UNUSED_SYMBOL" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="LOCAL_VARIABLE" value="true" />
           <option name="FIELD" value="true" />
           <option name="METHOD" value="true" />
@@ -468,7 +472,13 @@
   <component name="ProjectDetails">
     <option name="projectName" value="base" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="adreghiciu" />
+  </component>
   <component name="ProjectFileVersion" converted="true" />
+  <component name="ProjectKey">
+    <option name="state" value="https://scm.ops4j.org/repos/ops4j/projects/base/base.ipr" />
+  </component>
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -498,20 +508,6 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <showStructure />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-    </navigator>
   </component>
   <component name="ResourceManagerContainer">
     <option name="myResourceBundles">
@@ -595,11 +591,6 @@
     <option name="ALTERNATIVE_WORKING_PATH" value="" />
     <option name="LOCK_ON_CHECKOUT" value="false" />
     <option name="UNLOCK_ON_CHECKIN" value="false" />
-  </component>
-  <component name="StructureViewFactory">
-    <option name="AUTOSCROLL_MODE" value="true" />
-    <option name="AUTOSCROLL_FROM_SOURCE" value="false" />
-    <option name="ACTIVE_ACTIONS" value="" />
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="myVersion" value="124" />
@@ -829,18 +820,18 @@
   <component name="libraryTable">
     <library name="Maven: junit:junit:4.4">
       <CLASSES>
-        <root url="jar://$M2_REPO$/junit/junit/4.4/junit-4.4.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.4/junit-4.4.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/junit/junit/4.4/junit-4.4-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.4/junit-4.4-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/junit/junit/4.4/junit-4.4-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.4/junit-4.4-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
   <UsedPathMacros>
-    <macro name="M2_REPO" />
+    <macro name="MAVEN_REPOSITORY" description="Maven Local Repostiry" />
   </UsedPathMacros>
 </project>
 

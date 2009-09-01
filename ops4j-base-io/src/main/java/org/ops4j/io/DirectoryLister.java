@@ -40,9 +40,13 @@ public class DirectoryLister
      */
     private final File m_dir;
     /**
-     * File name filter.
+     * File path include filters.
      */
-    private final Pattern m_filter;
+    private final Pattern[] m_includes;
+    /**
+     * File path exclude filters.
+     */
+    private final Pattern[] m_excludes;
 
     /**
      * Creates a new directory lister.
@@ -54,8 +58,30 @@ public class DirectoryLister
     {
         NullArgumentException.validateNotNull( dir, "Directory" );
         NullArgumentException.validateNotNull( filter, "Filter" );
+
         m_dir = dir;
-        m_filter = filter;
+        m_includes = new Pattern[]{ filter };
+        m_excludes = new Pattern[0];
+    }
+
+    /**
+     * Creates a new directory lister.
+     *
+     * @param dir      the base directory from where the files should be listed
+     * @param includes filters to be used to include entries from the directory
+     * @param excludes filters to be used to exclude entries from the directory
+     */
+    public DirectoryLister( final File dir,
+                            final Pattern[] includes,
+                            final Pattern[] excludes )
+    {
+        NullArgumentException.validateNotNull( dir, "Directory" );
+        NullArgumentException.validateNotNull( includes, "Include filters" );
+        NullArgumentException.validateNotNull( includes, "Exclude filters" );
+
+        m_dir = dir;
+        m_includes = includes;
+        m_excludes = excludes;
     }
 
     /**
@@ -70,7 +96,7 @@ public class DirectoryLister
         // then we filter them based on configured filter
         for( String fileName : fileNames )
         {
-            if( m_filter == null || m_filter.matcher( fileName ).matches() )
+            if( matchesIncludes( fileName ) && !matchesExcludes( fileName ) )
             {
                 File fileToAdd = new File( m_dir, fileName );
                 if( !fileToAdd.isHidden() && !fileName.startsWith( "." ) )
@@ -80,6 +106,48 @@ public class DirectoryLister
             }
         }
         return content;
+    }
+
+    /**
+     * Checks if the file name matches inclusion patterns.
+     *
+     * @param fileName file name to be matched
+     *
+     * @return true if matches, false otherwise
+     */
+    private boolean matchesIncludes( final String fileName )
+    {
+        if( m_includes.length == 0 )
+        {
+            return true;
+        }
+        for( Pattern include : m_includes )
+        {
+            if( include.matcher( fileName ).matches() )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the file name matches exclusion patterns.
+     *
+     * @param fileName file name to be matched
+     *
+     * @return true if matches, false otherwise
+     */
+    private boolean matchesExcludes( final String fileName )
+    {
+        for( Pattern include : m_excludes )
+        {
+            if( include.matcher( fileName ).matches() )
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

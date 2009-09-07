@@ -5,7 +5,14 @@ Bundle-Version>:\
   ${pom.version}
 
 Import-Package:\
-  ${bundle.namespace}.*; version="${pom.version}"
+  ${bundle.namespace}.*; version="${pom.version}",\
+  org.apache.commons.logging
 
+Private-Package:\
+  org.ops4j.io.*,\
+  org.ops4j.lang.*,\
+  org.ops4j.monitors.*
+
+  
 Export-Package:\
   ${bundle.namespace}.*; version="${pom.version}"

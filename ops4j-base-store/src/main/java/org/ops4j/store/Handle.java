@@ -22,7 +22,7 @@ package org.ops4j.store;
  * You can store/reference binary objects using this handle during the validity determined by the implementation
  * of BinaryStore of choice.
  */
-public interface BinaryHandle
+public interface Handle
 {
 
     String getIdentification();

@@ -23,7 +23,7 @@ import java.net.URI;
 /**
  * Entity Store Style Interface to store and retrieve data of type T.
  */
-public interface BinaryStore<T>
+public interface Store<T>
 {
 
     /**
@@ -35,7 +35,7 @@ public interface BinaryStore<T>
      *
      * @throws IOException in case incoming object cannot be read (if it involves IO)
      */
-    BinaryHandle store( T inp )
+    Handle store( T inp )
         throws IOException;
 
     /**
@@ -47,7 +47,7 @@ public interface BinaryStore<T>
      *
      * @throws IOException if loading resource involves IO, things can always go wrong.
      */
-    T load( BinaryHandle handle )
+    T load( Handle handle )
         throws IOException;
 
     /**
@@ -65,7 +65,7 @@ public interface BinaryStore<T>
      * @throws IOException                   if IO is involved, things may go mad.
      * @throws UnsupportedOperationException implementation may not support this.
      */
-    URI getLocation( BinaryHandle handle )
+    URI getLocation( Handle handle )
         throws IOException;
 
 }

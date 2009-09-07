@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ops4j.store;
+package org.ops4j.store.intern;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,6 +31,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ops4j.io.StreamUtils;
 import org.ops4j.io.FileUtils;
+import org.ops4j.store.Store;
+import org.ops4j.store.Handle;
 
 /**
  * Entity store like implementation.
@@ -39,20 +41,16 @@ import org.ops4j.io.FileUtils;
  *
  * Uses an SHA-1 hash for indexing.
  */
-public class TemporaryBinaryStore implements BinaryStore<InputStream>
+public class TemporaryStore implements Store<InputStream>
 {
 
-    private static Log LOG = LogFactory.getLog( TemporaryBinaryStore.class );
+    private static Log LOG = LogFactory.getLog( TemporaryStore.class );
     private File m_dir;
 
-    public TemporaryBinaryStore()
+    public TemporaryStore( final File folder, final boolean flushStoreage )
     {
-        this( false );
-    }
+        m_dir = folder;
 
-    public TemporaryBinaryStore( boolean flushStoreage )
-    {
-        m_dir = new File( System.getProperty( "java.io.tmpdir" ) + "/tb" );
         if( m_dir.exists() && flushStoreage )
         {
             FileUtils.delete( m_dir );
@@ -61,7 +59,7 @@ public class TemporaryBinaryStore implements BinaryStore<InputStream>
         LOG.debug( "Storage Area is " + m_dir.getAbsolutePath() );
     }
 
-    public BinaryHandle store( InputStream inp )
+    public Handle store( InputStream inp )
         throws IOException
     {
         LOG.debug( "Enter store()" );
@@ -76,7 +74,9 @@ public class TemporaryBinaryStore implements BinaryStore<InputStream>
         fis.close();
         if( !getLocation( h ).exists() )
         {
-            StreamUtils.copyStream( new FileInputStream( intermediate ), new FileOutputStream( getLocation( h ) ), true );
+            StreamUtils.copyStream( new FileInputStream( intermediate ), new FileOutputStream( getLocation( h ) ),
+                                    true
+            );
         }
         else
         {
@@ -84,7 +84,7 @@ public class TemporaryBinaryStore implements BinaryStore<InputStream>
         }
         intermediate.delete();
 
-        BinaryHandle handle = new BinaryHandle()
+        Handle handle = new Handle()
         {
 
             public String getIdentification()
@@ -101,13 +101,13 @@ public class TemporaryBinaryStore implements BinaryStore<InputStream>
         return new File( m_dir, "tinybundles_" + id + ".bin" );
     }
 
-    public InputStream load( BinaryHandle handle )
+    public InputStream load( Handle handle )
         throws IOException
     {
         return new FileInputStream( getLocation( handle.getIdentification() ) );
     }
 
-    public URI getLocation( BinaryHandle handle )
+    public URI getLocation( Handle handle )
         throws IOException
     {
         return getLocation( handle.getIdentification() ).toURI();
@@ -132,13 +132,16 @@ public class TemporaryBinaryStore implements BinaryStore<InputStream>
                 storeHere.write( bytes, 0, numRead );
             }
             sha1hash = md.digest();
-        } catch( NoSuchAlgorithmException e )
+        }
+        catch( NoSuchAlgorithmException e )
         {
             throw new RuntimeException( e );
-        } catch( FileNotFoundException e )
+        }
+        catch( FileNotFoundException e )
         {
             throw new RuntimeException( e );
-        } catch( IOException e )
+        }
+        catch( IOException e )
         {
             throw new RuntimeException( e );
         }
@@ -163,7 +166,8 @@ public class TemporaryBinaryStore implements BinaryStore<InputStream>
                     buf.append( (char) ( 'a' + ( halfbyte - 10 ) ) );
                 }
                 halfbyte = data[ i ] & 0x0F;
-            } while( two_halfs++ < 1 );
+            }
+            while( two_halfs++ < 1 );
         }
         return buf.toString();
     }

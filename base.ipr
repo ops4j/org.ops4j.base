@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project relativePaths="true" version="4">
+  <component name="AntConfiguration">
+    <defaultAnt bundledAnt="true" />
+  </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
@@ -132,6 +135,15 @@
         <ADDITIONAL_INDENT_OPTIONS fileType="java">
           <option name="INDENT_SIZE" value="4" />
           <option name="CONTINUATION_INDENT_SIZE" value="4" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="js">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
           <option name="TAB_SIZE" value="4" />
           <option name="USE_TAB_CHARACTER" value="false" />
           <option name="SMART_TABS" value="false" />
@@ -474,6 +486,7 @@
   </component>
   <component name="ProjectDictionaryState">
     <dictionary name="adreghiciu" />
+    <dictionary name="tonit" />
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
@@ -497,6 +510,7 @@
       <module fileurl="file://$PROJECT_DIR$/ops4j-base-lang/ops4j-base-lang.iml" filepath="$PROJECT_DIR$/ops4j-base-lang/ops4j-base-lang.iml" />
       <module fileurl="file://$PROJECT_DIR$/ops4j-base-monitors/ops4j-base-monitors.iml" filepath="$PROJECT_DIR$/ops4j-base-monitors/ops4j-base-monitors.iml" />
       <module fileurl="file://$PROJECT_DIR$/ops4j-base-net/ops4j-base-net.iml" filepath="$PROJECT_DIR$/ops4j-base-net/ops4j-base-net.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ops4j-base-store/ops4j-base-store.iml" filepath="$PROJECT_DIR$/ops4j-base-store/ops4j-base-store.iml" />
       <module fileurl="file://$PROJECT_DIR$/ops4j-base-util/ops4j-base-util.iml" filepath="$PROJECT_DIR$/ops4j-base-util/ops4j-base-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/ops4j-base-util-collections/ops4j-base-util-collections.iml" filepath="$PROJECT_DIR$/ops4j-base-util-collections/ops4j-base-util-collections.iml" />
       <module fileurl="file://$PROJECT_DIR$/ops4j-base-util-property/ops4j-base-util-property.iml" filepath="$PROJECT_DIR$/ops4j-base-util-property/ops4j-base-util-property.iml" />
@@ -604,7 +618,7 @@
     <option name="UPDATE_RECURSIVELY" value="true" />
     <option name="MERGE_DRY_RUN" value="false" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <configuration useDefault="true">$PROJECT_DIR$/../../../../.subversion</configuration>
+    <configuration useDefault="true">/.subversion</configuration>
     <myIsUseDefaultProxy>true</myIsUseDefaultProxy>
   </component>
   <component name="TodoView">

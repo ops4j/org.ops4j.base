@@ -113,6 +113,15 @@
       </roles>
       <timezone>UTC+2</timezone>
     </developer>
+     <developer>
+      <id>tonit</id>
+      <name>Toni Menzel</name>
+      <email>toni@okidokiteam.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>UTC+1</timezone>
+    </developer>
   </developers>
 
   <contributors>
@@ -132,6 +141,8 @@
     <module>ops4j-base-util-collections</module>
     <module>ops4j-base-util-property</module>
     <module>ops4j-base-util-xml</module>
+    <module>ops4j-base-store</module>
+    
   </modules>
 
 </project>

@@ -55,7 +55,7 @@ public final class ElementHelper
      *
      * @return the root element
      *
-     * @throws IOException                  If an underlying I/O problem occured.
+     * @throws IOException                  If an underlying I/O problem occurred.
      * @throws ParserConfigurationException if there is a severe problem in the XML parsing subsystem.
      * @throws SAXException                 If the XML is malformed in some way.
      */
@@ -65,6 +65,17 @@ public final class ElementHelper
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating( false );
         factory.setNamespaceAware( false );
+        try
+        {
+            factory.setFeature( "http://xml.org/sax/features/namespaces", false );
+            factory.setFeature( "http://xml.org/sax/features/validation", false );
+            factory.setFeature( "http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false );
+            factory.setFeature( "http://apache.org/xml/features/nonvalidating/load-external-dtd", false );
+        }
+        catch( Throwable ignore )
+        {
+            // ignore. we did our best.
+        }
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse( input );
         return document.getDocumentElement();

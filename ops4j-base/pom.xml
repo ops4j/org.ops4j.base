@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.ops4j</groupId>
     <artifactId>base</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>org.ops4j.base</groupId>
   <artifactId>ops4j-base</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>OPS4J Base - All</name>
@@ -37,56 +37,56 @@
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-io</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-lang</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-monitors</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-net</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-collections</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-property</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-xml</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2-SNAPSHOT</version>
       <optional>true</optional>
       <type>bundle</type>
     </dependency>

@@ -18,6 +18,7 @@
 
 package org.ops4j.util.xml;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.ops4j.util.collections.PropertyResolver;
 
@@ -77,6 +80,26 @@ public final class ElementHelper
             // ignore. we did our best.
         }
         DocumentBuilder builder = factory.newDocumentBuilder();
+        try
+        {
+            // return an empty entity resolver if parser will ask for it, such disabling any validation 
+            builder.setEntityResolver(
+                new EntityResolver()
+                {
+                    public InputSource resolveEntity( java.lang.String publicId, java.lang.String systemId )
+                        throws SAXException, java.io.IOException
+                    {
+                        return new InputSource(
+                            new ByteArrayInputStream( "<?xml version='1.0' encoding='UTF-8'?>".getBytes() )
+                        );
+                    }
+                }
+            );
+        }
+        catch( Throwable ignore )
+        {
+            // ignore. we did our best.
+        }
         Document document = builder.parse( input );
         return document.getDocumentElement();
     }

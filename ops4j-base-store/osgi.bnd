@@ -7,9 +7,7 @@ Bundle-Version>:\
 Import-Package:\
   ${bundle.namespace}.*; version="${pom.version}",\
   org.apache.commons.logging,\
-  org.ops4j.io.*;  version="${pom.version}",\
-  org.ops4j.lang.*;  version="${pom.version}",\
-  org.ops4j.monitors.*;  version="${pom.version}"
+  org.ops4j.io.*;  version="${pom.version}"
   
 Export-Package:\
   ${bundle.namespace}.*; version="${pom.version}"

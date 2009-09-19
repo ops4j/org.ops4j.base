@@ -12,7 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ops4j-base-lang" exported="" />
-    <orderEntry type="module" module-name="ops4j-base-lang" exported="" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.4" level="project" />
   </component>
 </module>

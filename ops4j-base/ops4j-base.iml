@@ -13,16 +13,6 @@
     <orderEntry type="module" module-name="ops4j-base-monitors" />
     <orderEntry type="module" module-name="ops4j-base-net" />
     <orderEntry type="module" module-name="ops4j-base-store" />
-    <orderEntry type="module" module-name="ops4j-base-io" exported="" />
-    <orderEntry type="module" module-name="ops4j-base-util" />
-    <orderEntry type="module" module-name="ops4j-base-util-collections" />
-    <orderEntry type="module" module-name="ops4j-base-util-property" />
-    <orderEntry type="module" module-name="ops4j-base-util-xml" />
-    <orderEntry type="module" module-name="ops4j-base-io" />
-    <orderEntry type="module" module-name="ops4j-base-lang" />
-    <orderEntry type="module" module-name="ops4j-base-monitors" />
-    <orderEntry type="module" module-name="ops4j-base-net" />
-    <orderEntry type="module" module-name="ops4j-base-store" />
     <orderEntry type="module" module-name="ops4j-base-util" />
     <orderEntry type="module" module-name="ops4j-base-util-collections" />
     <orderEntry type="module" module-name="ops4j-base-util-property" />

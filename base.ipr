@@ -616,6 +616,92 @@
     <option name="UNLOCK_ON_CHECKIN" value="false" />
   </component>
   <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchMap">
+                <map>
+                  <entry key="https://scm.ops4j.org/repos/ops4j/qa/base">
+                    <value>
+                      <list>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1252521544019" />
+                          <option name="revision" value="16151" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-1.2.0" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1252520842258" />
+                          <option name="revision" value="16145" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-1.1.1" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1252053377245" />
+                          <option name="revision" value="16055" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-1.1.0" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1244900346915" />
+                          <option name="revision" value="15425" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-1.0.0" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1226600165435" />
+                          <option name="revision" value="13255" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-0.5.3" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1225457979622" />
+                          <option name="revision" value="13102" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-0.5.2" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1224530154906" />
+                          <option name="revision" value="13001" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-0.5.1" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1201490493426" />
+                          <option name="revision" value="10331" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/base-0.5.0" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1171967707990" />
+                          <option name="revision" value="4959" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/ops4j-base-0.4.0" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1166419922652" />
+                          <option name="revision" value="4794" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/ops4j-base-0.3.0" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1157797955812" />
+                          <option name="revision" value="4522" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/QA_0.2.1_2006Sept9" />
+                        </SvnBranchItem>
+                        <SvnBranchItem>
+                          <option name="creationDateMillis" value="1157796792759" />
+                          <option name="revision" value="4518" />
+                          <option name="url" value="https://scm.ops4j.org/repos/ops4j/qa/base/QA_0.1.0_2006Mar26" />
+                        </SvnBranchItem>
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://scm.ops4j.org/repos/ops4j/qa/base" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://scm.ops4j.org/repos/ops4j/projects/base" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="myVersion" value="124" />
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>

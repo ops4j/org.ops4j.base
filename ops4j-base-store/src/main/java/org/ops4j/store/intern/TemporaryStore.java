@@ -80,7 +80,7 @@ public class TemporaryStore implements Store<InputStream>
         }
         else
         {
-            LOG.info( "Object for " + h + " already exists in store." );
+            LOG.debug( "Object for " + h + " already exists in store." );
         }
         intermediate.delete();
 

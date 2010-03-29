@@ -101,7 +101,7 @@ public class DirectoryLister
                 File fileToAdd = new File( m_dir, fileName );
                 if( !fileToAdd.isHidden() && !fileName.startsWith( "." ) )
                 {
-                    content.add( fileToAdd.toURL() );
+                    content.add( fileToAdd.toURI().toURL() );
                 }
             }
         }

@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.ops4j</groupId>
     <artifactId>base</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>org.ops4j.base</groupId>
   <artifactId>ops4j-base-store</artifactId>
-  <version>1.2.2-SNAPSHOT</version>
+  <version>1.2.2</version>
   <packaging>bundle</packaging>
 
   <name>OPS4J Base - Store</name>
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-io</artifactId>
-      <version>1.2.2-SNAPSHOT</version>
+      <version>1.2.2</version>
     </dependency>
   </dependencies>
 </project>

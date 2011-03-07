@@ -27,8 +27,8 @@ import java.io.FileNotFoundException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.net.URI;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.ops4j.io.StreamUtils;
 import org.ops4j.io.FileUtils;
 import org.ops4j.store.Store;
@@ -44,7 +44,7 @@ import org.ops4j.store.Handle;
 public class TemporaryStore implements Store<InputStream>
 {
 
-    private static Log LOG = LogFactory.getLog( TemporaryStore.class );
+    private static Logger LOG = LoggerFactory.getLogger( TemporaryStore.class );
     private File m_dir;
 
     public TemporaryStore( final File folder, final boolean flushStoreage )

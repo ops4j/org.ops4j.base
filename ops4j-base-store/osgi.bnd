@@ -6,7 +6,7 @@ Bundle-Version>:\
 
 Import-Package:\
   ${bundle.namespace}.*; version="${pom.version}",\
-  org.apache.commons.logging,\
+  org.slf4j,\
   org.ops4j.io.*;  version="${pom.version}"
   
 Export-Package:\

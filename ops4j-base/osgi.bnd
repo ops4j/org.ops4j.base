@@ -10,6 +10,7 @@ Import-Package:\
   javax.net.ssl,\
   javax.xml.parsers,\
   org.w3c.dom,\
+  org.slf4j,\
   org.xml.sax
   
 Export-Package:\

@@ -12,6 +12,9 @@ Import-Package:\
   org.w3c.dom,\
   org.slf4j,\
   org.xml.sax
+
+Ignore-Package:\
+  org.slf4j.impl
   
 Export-Package:\
   ${bundle.namespace}.*; version="${pom.version}"

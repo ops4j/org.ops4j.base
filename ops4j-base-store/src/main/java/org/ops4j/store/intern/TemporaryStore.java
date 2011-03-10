@@ -45,7 +45,7 @@ public class TemporaryStore implements Store<InputStream>
 {
 
     private static Logger LOG = LoggerFactory.getLogger( TemporaryStore.class );
-    private File m_dir;
+    final private File m_dir;
 
     public TemporaryStore( final File folder, final boolean flushStoreage )
     {

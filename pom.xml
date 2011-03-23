@@ -20,11 +20,15 @@
 
   <url>http://www.ops4j.org/projects/base/</url>
 
-  <scm>
-    <developerConnection>scm:svn:https://scm.ops4j.org/repos/ops4j/projects/base</developerConnection>
-    <connection>scm:svn:https://scm.ops4j.org/repos/ops4j/projects/base</connection>
-    <url>http://scm.ops4j.org/browse/OPS4J/qa/master-1.0.4/base</url>
+   <scm>
+    <connection>scm:git:git://github.com/ops4j/org.ops4j.base.git</connection>
+    <developerConnection>${release-base-altGitURL}</developerConnection>
+    <url>http://github.com/ops4j/org.ops4j.base/tree/master</url>
   </scm>
+
+   <properties>
+      <release-base-altGitURL>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</release-base-altGitURL>
+   </properties>
 
   <distributionManagement>
     <site>

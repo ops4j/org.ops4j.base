@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.ops4j</groupId>
     <artifactId>base</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>org.ops4j.base</groupId>
   <artifactId>ops4j-base-util-xml</artifactId>
-  <version>1.2.3</version>
+  <version>1.2.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>OPS4J Base - Util - XML</name>
@@ -37,12 +37,12 @@
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-lang</artifactId>
-      <version>1.2.3</version>
+      <version>1.2.4-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-util-collections</artifactId>
-      <version>1.2.3</version>
+      <version>1.2.4-SNAPSHOT</version>
     </dependency>
   </dependencies>
 

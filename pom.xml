@@ -10,7 +10,7 @@
   
   <groupId>org.ops4j</groupId>
   <artifactId>base</artifactId>
-  <version>1.2.3-SNAPSHOT</version>
+  <version>1.2.3</version>
   <packaging>pom</packaging>
 
   <name>OPS4J Base</name>

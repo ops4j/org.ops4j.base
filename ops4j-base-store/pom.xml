@@ -42,7 +42,7 @@
     <dependency>
       <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-io</artifactId>
-      <version>1.2.4-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

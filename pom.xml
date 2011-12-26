@@ -166,6 +166,7 @@
         <module>ops4j-base-util-property</module>
         <module>ops4j-base-util-xml</module>
         <module>ops4j-base-store</module>
+        <module>ops4j-base-spi</module>
     </modules>
 
 </project>

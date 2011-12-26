@@ -9,4 +9,12 @@
   <groupId>org.ops4j.base</groupId>
   <artifactId>ops4j-base-spi</artifactId>
   <name>OPS4J Base - Service Provider Access</name>
+  <dependencies>
+    <dependency>
+        <groupId>org.kohsuke.metainf-services</groupId>
+        <artifactId>metainf-services</artifactId>
+        <version>1.2</version>
+        <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

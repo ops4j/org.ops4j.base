@@ -35,6 +35,12 @@
   <dependencies>
     <dependency>
       <groupId>org.ops4j.base</groupId>
+      <artifactId>ops4j-base-exec</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.base</groupId>
       <artifactId>ops4j-base-io</artifactId>
       <version>${project.version}</version>
       <optional>true</optional>

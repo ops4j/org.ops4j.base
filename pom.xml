@@ -1,19 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.ops4j</groupId>
-    <artifactId>master</artifactId>
-    <version>2.0.0</version>
-  </parent>
-  
-  <artifactId>base</artifactId>
-  <version>1.3.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <parent>
+        <groupId>org.ops4j</groupId>
+        <artifactId>master</artifactId>
+        <version>2.0.0</version>
+    </parent>
 
-  <name>OPS4J Base</name>
-  <description>
+    <artifactId>base</artifactId>
+    <version>1.3.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>OPS4J Base</name>
+    <description>
     Utility classes and extensions to be used in OPS4J projects.
   </description>
 
@@ -40,6 +41,31 @@
         <system>jira</system>
         <url>http://issues.ops4j.org/jira/browse/BASE</url>
     </issueManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.5.11</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.9</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>0.9.20</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>0.9.20</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -98,7 +124,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.9</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -156,16 +181,17 @@
 
     <modules>
         <module>ops4j-base</module>
+        <module>ops4j-base-exec</module>
         <module>ops4j-base-io</module>
         <module>ops4j-base-lang</module>
         <module>ops4j-base-monitors</module>
         <module>ops4j-base-net</module>
+        <module>ops4j-base-spi</module>
+        <module>ops4j-base-store</module>
         <module>ops4j-base-util</module>
         <module>ops4j-base-util-collections</module>
         <module>ops4j-base-util-property</module>
         <module>ops4j-base-util-xml</module>
-        <module>ops4j-base-store</module>
-        <module>ops4j-base-spi</module>
     </modules>
 
 </project>

@@ -138,7 +138,7 @@ public class DefaultJavaRunner
         Runtime.getRuntime().addShutdownHook( m_shutdownHook );
 
         LOG.debug( "Added shutdown hook." );
-        LOG.info( "Runner has successfully finished his job!" );
+        LOG.info( "DefaultJavaRunner completed successfully" );
 
         if( m_wait )
         {

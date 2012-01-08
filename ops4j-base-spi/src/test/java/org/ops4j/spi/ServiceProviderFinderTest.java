@@ -17,7 +17,7 @@
  */
 package org.ops4j.spi;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -28,6 +28,8 @@ import static org.ops4j.spi.ServiceProviderFinder.loadAnyServiceProvider;
 import static org.ops4j.spi.ServiceProviderFinder.loadUniqueServiceProvider;
 
 import java.util.List;
+
+import javax.swing.text.StyleContext.SmallAttributeSet;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -88,6 +90,16 @@ public class ServiceProviderFinderTest
         IceCreamService service = loadUniqueServiceProvider( IceCreamService.class );
         assertThat(service, is(notNullValue()));
         assertThat(service, is(instanceOf( VanillaService.class )));
+    }
+    
+    @Test 
+    public void loadUniqueIsNotRepeatable() {
+        IceCreamService service1 = loadUniqueServiceProvider( IceCreamService.class );
+        assertThat(service1, is(notNullValue()));
+
+        IceCreamService service2 = loadUniqueServiceProvider( IceCreamService.class );
+        assertThat(service2, is(notNullValue()));
+        assertThat(service2, is(not(sameInstance(service1))));
     }
     
     @Test

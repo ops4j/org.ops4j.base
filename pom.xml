@@ -18,7 +18,7 @@
     Utility classes and extensions to be used in OPS4J projects.
   </description>
 
-    <url>http://www.ops4j.org/projects/base/</url>
+    <url>http://team.ops4j.org/wiki/display/base/</url>
 
     <scm>
         <connection>scm:git:git://github.com/ops4j/org.ops4j.base.git</connection>
@@ -29,13 +29,6 @@
     <properties>
         <release-base-altGitURL>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</release-base-altGitURL>
     </properties>
-
-    <distributionManagement>
-        <site>
-            <id>ops4j.website.deploy</id>
-            <url>scpexe://www.ops4j.org/var/http/www.ops4j.org/projects/base</url>
-        </site>
-    </distributionManagement>
 
     <issueManagement>
         <system>jira</system>
@@ -57,24 +50,18 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.0.0</version>
+                <version>0.9.20</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.0.0</version>
+                <version>0.9.20</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <tagBase>https://scm.ops4j.org/repos/ops4j/qa/base</tagBase>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>retrotranslator-maven-plugin</artifactId>

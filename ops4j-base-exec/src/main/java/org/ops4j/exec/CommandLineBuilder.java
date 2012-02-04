@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ops4j.base.exec;
+package org.ops4j.exec;
 
 /**
  * Provides easy building of command line for a java runtime.

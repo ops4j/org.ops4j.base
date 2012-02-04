@@ -15,10 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ops4j.base.exec;
+package org.ops4j.exec;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+import org.ops4j.exec.DefaultJavaRunner;
+import org.ops4j.exec.ExecutionException;
 
 /**
  * {@link DefaultJavaRunner} unit tests.

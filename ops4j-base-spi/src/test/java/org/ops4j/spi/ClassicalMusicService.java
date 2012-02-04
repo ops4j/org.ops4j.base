@@ -17,14 +17,12 @@
  */
 package org.ops4j.spi;
 
-import org.kohsuke.MetaInfServices;
 
-@MetaInfServices
 public class ClassicalMusicService implements MusicService
 {
 
     public String getGenre()
     {
-        return "Pop";
+        return "Classical";
     }
 }

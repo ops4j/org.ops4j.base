@@ -17,10 +17,12 @@
  */
 package org.ops4j.spi;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.ops4j.spi.ServiceProviderFinder.findAnyServiceProvider;
 import static org.ops4j.spi.ServiceProviderFinder.findServiceProviders;
@@ -28,8 +30,6 @@ import static org.ops4j.spi.ServiceProviderFinder.loadAnyServiceProvider;
 import static org.ops4j.spi.ServiceProviderFinder.loadUniqueServiceProvider;
 
 import java.util.List;
-
-import javax.swing.text.StyleContext.SmallAttributeSet;
 
 import org.junit.Rule;
 import org.junit.Test;

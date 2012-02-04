@@ -1,0 +1,2 @@
+org.ops4j.spi.ClassicalMusicService
+org.ops4j.spi.PopMusicService

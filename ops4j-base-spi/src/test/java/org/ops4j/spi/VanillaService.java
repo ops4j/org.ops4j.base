@@ -17,9 +17,7 @@
  */
 package org.ops4j.spi;
 
-import org.kohsuke.MetaInfServices;
 
-@MetaInfServices
 public class VanillaService implements IceCreamService
 {
 

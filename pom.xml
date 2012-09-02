@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>base</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OPS4J Base</name>
@@ -23,7 +23,7 @@
         <connection>scm:git:git://github.com/ops4j/org.ops4j.base.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</developerConnection>
         <url>http://github.com/ops4j/org.ops4j.base/tree/master</url>
-      <tag>base-1.4.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <issueManagement>

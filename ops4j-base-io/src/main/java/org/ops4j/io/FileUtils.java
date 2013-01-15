@@ -141,6 +141,14 @@ public final class FileUtils {
         return delete;
     }
 
+    /**
+     * Constructs an array of {@link File} objects from a given {@link String}
+     * array
+     * 
+     * @param names
+     *            the names to convert
+     * @return the file object array
+     */
     public static File[] pathNamesToFiles(String... names) {
         File[] files = new File[names.length];
         for (int i = 0; i < files.length; i++) {

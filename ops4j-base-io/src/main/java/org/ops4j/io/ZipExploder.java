@@ -13,10 +13,10 @@
 package org.ops4j.io;
 
 import java.io.BufferedInputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -111,10 +111,30 @@ public class ZipExploder {
      *            target directory name (should already exist)
      * @exception IOException
      *                error creating a target file
+     * @deprecated use {@link #process(File[], File[], File)} for a type save
+     *             variant of this method
      */
+    @Deprecated
     public void process(String[] zipNames, String[] jarNames, String destDir) throws IOException {
-        processZips(zipNames, destDir);
-        processJars(jarNames, destDir);
+        //Delegation to preferred method
+        process(FileUtils.pathNamesToFiles(zipNames), FileUtils.pathNamesToFiles(jarNames), new File(destDir));
+    }
+
+    /**
+     * Explode source JAR and/or ZIP files into a target directory
+     * 
+     * @param zipFiles
+     *            source files
+     * @param jarFiles
+     *            source files
+     * @param destDir
+     *            target directory (should already exist)
+     * @exception IOException
+     *                error creating a target file
+     */
+    public void process(File[] zipFiles, File[] jarFiles, File destDir) throws IOException {
+        processZips(zipFiles, destDir);
+        processJars(jarFiles, destDir);
     }
 
     /**
@@ -126,10 +146,28 @@ public class ZipExploder {
      *            target directory name (should already exist)
      * @exception IOException
      *                error creating a target file
+     * @deprecated use {@link #processJars(File[], File)} for a type save
+     *             variant
      */
+    @Deprecated
     public void processJars(String[] jarNames, String destDir) throws IOException {
-        for (int i = 0; i < jarNames.length; i++) {
-            processFile(jarNames[i], destDir);
+        //Delegation to preferred method
+        processJars(FileUtils.pathNamesToFiles(jarNames), new File(destDir));
+    }
+
+    /**
+     * Explode source JAR files into a target directory
+     * 
+     * @param jarFiles
+     *            list of source files
+     * @param destDir
+     *            target directory name (should already exist)
+     * @exception IOException
+     *                error creating a target file
+     */
+    public void processJars(File[] jarFiles, File destDir) throws IOException {
+        for (int i = 0; i < jarFiles.length; i++) {
+            processFile(jarFiles[i], destDir);
         }
     }
 
@@ -142,10 +180,28 @@ public class ZipExploder {
      *            target directory name (should already exist)
      * @exception IOException
      *                error creating a target file
+     * @deprecated use {@link #processZips(File[], File)} for a type save
+     *             variant
      */
+    @Deprecated
     public void processZips(String[] zipNames, String destDir) throws IOException {
-        for (int i = 0; i < zipNames.length; i++) {
-            processFile(zipNames[i], destDir);
+        //Delegation to preferred method
+        processZips(FileUtils.pathNamesToFiles(zipNames), new File(destDir));
+    }
+
+    /**
+     * Explode source ZIP files into a target directory
+     * 
+     * @param zipFiles
+     *            list of source files
+     * @param destDir
+     *            target directory name (should already exist)
+     * @exception IOException
+     *                error creating a target file
+     */
+    public void processZips(File[] zipFiles, File destDir) throws IOException {
+        for (int i = 0; i < zipFiles.length; i++) {
+            processFile(zipFiles[i], destDir);
         }
     }
 
@@ -158,38 +214,53 @@ public class ZipExploder {
      *            target directory name (should already exist)
      * @exception IOException
      *                error creating a target file
+     * @deprecated use {@link #processFile(File, File)} for a type save variant
      */
+    @Deprecated
     public void processFile(String zipName, String destDir) throws IOException {
-        String source = new File(zipName).getCanonicalPath();
-        String dest = new File(destDir).getCanonicalPath();
+        //Delegation to preferred method
+        processFile(new File(zipName), new File(destDir));
+    }
+
+    /**
+     * Explode source ZIP or JAR file into a target directory
+     * 
+     * @param zipFile
+     *            source file
+     * @param destDir
+     *            target directory (should already exist)
+     * @exception IOException
+     *                error creating a target file
+     */
+    public void processFile(File zipFile, File destDir) throws IOException {
+        if (!destDir.exists()) {
+            throw new IOException("Destionation directory '" + destDir + "' does not exists, or can't be read!");
+        }
         ZipFile f = null;
         try {
-            f = new ZipFile(source);
+            f = new ZipFile(zipFile);
             Map<String, ZipEntry> fEntries = getEntries(f);
-            String[] names = (String[]) fEntries.keySet().toArray(new String[] {});
+            String[] names = fEntries.keySet().toArray(new String[] {});
             if (sortNames) {
                 Arrays.sort(names);
             }
             // copy all files
             for (int i = 0; i < names.length; i++) {
                 String name = names[i];
-                ZipEntry e = (ZipEntry) fEntries.get(name);
-                copyFileEntry(dest, f, e);
+                ZipEntry e = fEntries.get(name);
+                copyFileEntry(destDir, f, e);
             }
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             String msg = ioe.getMessage();
-            if (msg.indexOf(zipName) < 0) {
-                msg += " - " + zipName;
+            if (msg.indexOf(zipFile.toString()) < 0) {
+                msg += " - " + zipFile.toString();
             }
             throw new IOException(msg);
-        }
-        finally {
+        } finally {
             if (f != null) {
                 try {
                     f.close();
-                }
-                catch (IOException ioe) {
+                } catch (IOException ioe) {
                 }
             }
         }
@@ -213,25 +284,37 @@ public class ZipExploder {
      * @param zf
      * @param ze
      * @throws IOException
+     * @deprecated use {@link #copyFileEntry(File, ZipFile, ZipEntry)} for a
+     *             type save variant
      */
+    @Deprecated
     public void copyFileEntry(String destDir, ZipFile zf, ZipEntry ze) throws IOException {
-        DataInputStream dis = new DataInputStream(new BufferedInputStream(zf.getInputStream(ze)));
+        //Delegation to preferred method
+        copyFileEntry(new File(destDir), zf, ze);
+    }
+
+    /**
+     * copy a single entry from the archive
+     * 
+     * @param destDir
+     * @param zf
+     * @param ze
+     * @throws IOException
+     */
+    public void copyFileEntry(File destDir, ZipFile zf, ZipEntry ze) throws IOException {
+        BufferedInputStream dis = new BufferedInputStream(zf.getInputStream(ze));
         try {
             copyFileEntry(destDir, ze.isDirectory(), ze.getName(), dis);
-        }
-        finally {
+        } finally {
             try {
                 dis.close();
-            }
-            catch (IOException ioe) {
+            } catch (IOException ioe) {
             }
         }
     }
 
-    protected void copyFileEntry(String destDir, boolean destIsDir, String destFile,
-            DataInputStream dis) throws IOException {
-        byte[] bytes = readAllBytes(dis);
-        File file = new File(destFile);
+    protected void copyFileEntry(File destDir, boolean destIsDir, String destFileName, InputStream dis) throws IOException {
+        File file = new File(destFileName);
         String parent = file.getParent();
         if (parent != null && parent.length() > 0) {
             File dir = new File(destDir, parent);
@@ -239,45 +322,12 @@ public class ZipExploder {
                 dir.mkdirs();
             }
         }
-        File outFile = new File(destDir, destFile);
+        File outFile = new File(destDir, destFileName);
         if (destIsDir) {
             outFile.mkdir();
+        } else {
+            StreamUtils.copyStream(dis, new FileOutputStream(outFile), true);
         }
-        else {
-            FileOutputStream fos = new FileOutputStream(outFile);
-            try {
-                fos.write(bytes, 0, bytes.length);
-            }
-            finally {
-                try {
-                    fos.close();
-                }
-                catch (IOException ioe) {
-                }
-            }
-        }
-    }
-
-    // *** below may be slow for large files ***
-    /** Read all the bytes in a ZIPed file */
-    protected byte[] readAllBytes(DataInputStream is) throws IOException {
-        byte[] bytes = new byte[0];
-        for (int len = is.available(); len > 0; len = is.available()) {
-            byte[] xbytes = new byte[len];
-            int count = is.read(xbytes);
-            if (count > 0) {
-                byte[] nbytes = new byte[bytes.length + count];
-                System.arraycopy(bytes, 0, nbytes, 0, bytes.length);
-                System.arraycopy(xbytes, 0, nbytes, bytes.length, count);
-                bytes = nbytes;
-            }
-            else if (count < 0) {
-                // accommodate apparent bug in IBM JVM where
-                // available() always returns positive value on some files
-                break;
-            }
-        }
-        return bytes;
     }
 
     protected void print(String s) {
@@ -287,14 +337,12 @@ public class ZipExploder {
     /** Print command help text. */
     protected static void printHelp() {
         System.out.println();
-        System.out.println("Usage: java " + ZipExploder.class.getName()
-                + " (-jar jarFilename... | -zip zipFilename...)... -dir destDir {-verbose}");
+        System.out.println("Usage: java " + ZipExploder.class.getName() + " (-jar jarFilename... | -zip zipFilename...)... -dir destDir {-verbose}");
         System.out.println("Where:");
         System.out.println("  jarFilename path to source jar, may repeat");
         System.out.println("  zipFilename path to source zip, may repeat");
         System.out.println("  destDir    path to target directory; should exist");
-        System.out
-                .println("Note: one -jar or -zip is required; switch case or order is not important");
+        System.out.println("Note: one -jar or -zip is required; switch case or order is not important");
     }
 
     protected static void reportError(String msg) {
@@ -327,38 +375,30 @@ public class ZipExploder {
                     jarActive = true;
                     zipActive = false;
                     destDirActive = false;
-                }
-                else if (arg.equalsIgnoreCase("zip")) {
+                } else if (arg.equalsIgnoreCase("zip")) {
                     zipActive = true;
                     jarActive = false;
                     destDirActive = false;
-                }
-                else if (arg.equalsIgnoreCase("dir")) {
+                } else if (arg.equalsIgnoreCase("dir")) {
                     jarActive = false;
                     zipActive = false;
                     destDirActive = true;
-                }
-                else if (arg.equalsIgnoreCase("verbose")) {
+                } else if (arg.equalsIgnoreCase("verbose")) {
                     verbose = true;
-                }
-                else {
+                } else {
                     reportError("Invalid switch - " + arg);
                 }
-            }
-            else {
+            } else {
                 if (jarActive) {
                     jarNames.add(arg);
-                }
-                else if (zipActive) {
+                } else if (zipActive) {
                     zipNames.add(arg);
-                }
-                else if (destDirActive) {
+                } else if (destDirActive) {
                     if (destDir != null) {
                         reportError("duplicate argument - " + "-destDir");
                     }
                     destDir = arg;
-                }
-                else {
+                } else {
                     reportError("Too many parameters - " + arg);
                 }
             }
@@ -367,16 +407,13 @@ public class ZipExploder {
             reportError("Missing parameters");
         }
         if (verbose) {
-            System.out.println("Effective command: " + ZipExploder.class.getName() + " "
-                    + (jarNames.size() > 0 ? "-jars " + jarNames + " " : "")
+            System.out.println("Effective command: " + ZipExploder.class.getName() + " " + (jarNames.size() > 0 ? "-jars " + jarNames + " " : "")
                     + (zipNames.size() > 0 ? "-zips " + zipNames + " " : "") + "-dir " + destDir);
         }
         try {
             ZipExploder ze = new ZipExploder(verbose);
-            ze.process((String[]) zipNames.toArray(new String[zipNames.size()]),
-                    (String[]) jarNames.toArray(new String[jarNames.size()]), destDir);
-        }
-        catch (IOException ioe) {
+            ze.process(FileUtils.pathNamesToFiles(zipNames.toArray(new String[zipNames.size()])), FileUtils.pathNamesToFiles(jarNames.toArray(new String[jarNames.size()])), new File(destDir));
+        } catch (IOException ioe) {
             System.err.println("Exception - " + ioe.getMessage());
             ioe.printStackTrace(); // *** debug ***
             System.exit(2);

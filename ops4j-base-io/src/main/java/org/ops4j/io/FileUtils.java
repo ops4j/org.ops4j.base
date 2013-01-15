@@ -25,129 +25,113 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 import org.ops4j.lang.NullArgumentException;
 import org.ops4j.monitors.stream.StreamMonitor;
 
 /**
  * Utility methods for manipulation of Files.
  */
-public final class FileUtils
-{
+public final class FileUtils {
 
     /**
      * Private Constructor to ensure no instances are created.
      */
-    private FileUtils()
-    {
+    private FileUtils() {
 
     }
 
     /**
      * Copies a file.
-     *
-     * @param src     The source file.
-     * @param dest    The destination file.
-     * @param monitor The monitor to use for reporting.
-     *
-     * @throws IOException           if any underlying I/O problem occurs.
-     * @throws FileNotFoundException if the source file does not exist.
+     * 
+     * @param src
+     *            The source file.
+     * @param dest
+     *            The destination file.
+     * @param monitor
+     *            The monitor to use for reporting.
+     * @throws IOException
+     *             if any underlying I/O problem occurs.
+     * @throws FileNotFoundException
+     *             if the source file does not exist.
      */
-    public static void copyFile( File src, File dest, StreamMonitor monitor )
-        throws IOException, FileNotFoundException
-    {
+    public static void copyFile(File src, File dest, StreamMonitor monitor) throws IOException, FileNotFoundException {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         int length = (int) src.length();
-        try
-        {
-            fis = new FileInputStream( src );
-            fos = new FileOutputStream( dest );
-            StreamUtils.copyStream( monitor, src.toURL(), length, fis, fos, true );
-        }
-        catch( FileNotFoundException e )
-        {
-            reportError( monitor, e, src.toURL() );
+        try {
+            fis = new FileInputStream(src);
+            fos = new FileOutputStream(dest);
+            StreamUtils.copyStream(monitor, src.toURI().toURL(), length, fis, fos, true);
+        } catch (FileNotFoundException e) {
+            reportError(monitor, e, src.toURI().toURL());
             throw e;
-        }
-        catch( NullArgumentException e )
-        {
-            reportError( monitor, e, src.toURL() );
+        } catch (NullArgumentException e) {
+            reportError(monitor, e, src.toURI().toURL());
             throw e;
-        }
-        catch( MalformedURLException e )
-        {
-            reportError( monitor, e, src.toURL() );
+        } catch (MalformedURLException e) {
+            reportError(monitor, e, src.toURI().toURL());
             throw e;
-        }
-        catch( IOException e )
-        {
-            reportError( monitor, e, src.toURL() );
+        } catch (IOException e) {
+            reportError(monitor, e, src.toURI().toURL());
             throw e;
         }
     }
 
     /**
-     * @param monitor The monitor to report to.
-     * @param e       The exception that occurred.
-     * @param url     The URL that was involved.
+     * @param monitor
+     *            The monitor to report to.
+     * @param e
+     *            The exception that occurred.
+     * @param url
+     *            The URL that was involved.
      */
-    private static void reportError( StreamMonitor monitor, Exception e, URL url )
-    {
-        if( monitor != null )
-        {
-            monitor.notifyError( url, e.getMessage() );
+    private static void reportError(StreamMonitor monitor, Exception e, URL url) {
+        if (monitor != null) {
+            monitor.notifyError(url, e.getMessage());
         }
     }
 
     /**
-     * Searches the classpath for the file denoted by the file path and returns the corresponding file.
-     *
-     * @param filePath path to the file
-     *
+     * Searches the classpath for the file denoted by the file path and returns
+     * the corresponding file.
+     * 
+     * @param filePath
+     *            path to the file
      * @return a file corresponding to the path
-     *
-     * @throws FileNotFoundException if the file cannot be found
+     * @throws FileNotFoundException
+     *             if the file cannot be found
      */
-    public static File getFileFromClasspath( final String filePath )
-        throws FileNotFoundException
-    {
-        try
-        {
-            URL fileURL = FileUtils.class.getClassLoader().getResource( filePath );
-            if( fileURL == null )
-            {
-                throw new FileNotFoundException( "File [" + filePath + "] could not be found in classpath" );
+    public static File getFileFromClasspath(final String filePath) throws FileNotFoundException {
+        try {
+            URL fileURL = FileUtils.class.getClassLoader().getResource(filePath);
+            if (fileURL == null) {
+                throw new FileNotFoundException("File [" + filePath + "] could not be found in classpath");
             }
-            return new File( fileURL.toURI() );
-        }
-        catch( URISyntaxException e )
-        {
-            throw new FileNotFoundException( "File [" + filePath + "] could not be found: " + e.getMessage() );
+            return new File(fileURL.toURI());
+        } catch (URISyntaxException e) {
+            throw new FileNotFoundException("File [" + filePath + "] could not be found: " + e.getMessage());
         }
     }
 
     /**
-     * Deletes the file or recursively deletes a directory depending on the file passed.
-     *
-     * @param file file or directory to be deleted.
-     *
+     * Deletes the file or recursively deletes a directory depending on the file
+     * passed.
+     * 
+     * @param file
+     *            file or directory to be deleted.
      * @return true if the file was deleted.
      */
-    public static boolean delete( final File file )
-    {
+    public static boolean delete(final File file) {
         boolean delete = false;
-        if( file != null && file.exists() )
-        {
+        if (file != null && file.exists()) {
             // even if is a directory try to delete. maybe is empty or maybe is a *nix symbolic link
             delete = file.delete();
-            if( !delete && file.isDirectory() )
-            {
+            if (!delete && file.isDirectory()) {
                 File[] childs = file.listFiles();
-                if( childs != null && childs.length > 0 )
-                {
-                    for( File child : childs )
-                    {
-                        delete( child );
+                if (childs != null && childs.length > 0) {
+                    for (File child : childs) {
+                        delete(child);
                     }
                     // then try again as by now the directory can be empty
                     delete = file.delete();
@@ -156,4 +140,16 @@ public final class FileUtils
         }
         return delete;
     }
+
+    public static File[] pathNamesToFiles(String... names) {
+        File[] files = new File[names.length];
+        for (int i = 0; i < files.length; i++) {
+            String pathname = names[i];
+            if (pathname != null) {
+                files[i] = new File(pathname);
+            }
+        }
+        return files;
+    }
+
 }

@@ -21,45 +21,48 @@ import java.io.IOException;
 
 /**
  * An {@link java.io.IOException}
- *
+ * 
  * @author Alin Dreghiciu
  * @since 1.1.0, August 31, 2009
  */
-public class HierarchicalIOException
-    extends IOException
-{
+public class HierarchicalIOException extends IOException {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3608772268419554801L;
 
     /**
      * Constructor.
-     *
-     * @param message exception message
+     * 
+     * @param message
+     *            exception message
      */
-    public HierarchicalIOException( final String message )
-    {
-        super( message );
+    public HierarchicalIOException(final String message) {
+        super(message);
     }
 
     /**
      * Constructor.
-     *
-     * @param message exception message
-     * @param cause   exception cause
+     * 
+     * @param message
+     *            exception message
+     * @param cause
+     *            exception cause
      */
-    public HierarchicalIOException( final String message,
-                                    final Throwable cause )
-    {
-        super( message );
-        initCause( cause );
+    public HierarchicalIOException(final String message, final Throwable cause) {
+        super(message);
+        initCause(cause);
     }
 
     /**
      * Constructor.
-     *
-     * @param cause exception cause
+     * 
+     * @param cause
+     *            exception cause
      */
-    public HierarchicalIOException( final Throwable cause )
-    {
+    public HierarchicalIOException(final Throwable cause) {
         super();
-        initCause( cause );
+        initCause(cause);
     }
 }

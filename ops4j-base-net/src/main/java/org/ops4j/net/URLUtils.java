@@ -81,21 +81,36 @@ public class URLUtils
      */
     public static String decode( String url )
     {
-        String decoded = url;
-        if ( url != null )
+        if ( url == null )
         {
-            int pos = -1;
-            while ( ( pos = decoded.indexOf( '%', pos + 1 ) ) >= 0 )
+            return null;
+        }
+        StringBuilder decoded = new StringBuilder();
+        int pos = 0;
+        while (pos < url.length()) 
+        {
+            char ch = url.charAt(pos);
+            if (ch == '%')
             {
-                if ( pos + 2 < decoded.length() )
+                if ( pos + 2 < url.length() )
                 {
-                    String hexStr = decoded.substring( pos + 1, pos + 3 );
-                    char ch = (char) Integer.parseInt( hexStr, 16 );
-                    decoded = decoded.substring( 0, pos ) + ch + decoded.substring( pos + 3 );
+                    String hexStr = url.substring( pos + 1, pos + 3 );
+                    char hexChar = (char) Integer.parseInt( hexStr, 16 );
+                    decoded.append( hexChar );
+                    pos += 3;
+                }
+                else 
+                {
+                    throw new IllegalStateException("'%' escape must be followed by two hex digits");
                 }
             }
+            else
+            {
+                decoded.append( ch );
+                pos++;
+            }
         }
-        return decoded;
+        return decoded.toString();
     }
 
     /**

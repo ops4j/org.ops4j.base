@@ -15,11 +15,17 @@
  */
 package org.ops4j.net;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class URLUtilsTest
 {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();   
 
     @Test
     public void testDecodingUsernameWithEncodings()
@@ -28,5 +34,14 @@ public class URLUtilsTest
         assertEquals("user@gmail.com:mypassword", URLUtils.decode("user@gmail.com:mypassword"));
         assertEquals("user:mypassword", URLUtils.decode("user:mypassword"));
         assertEquals("user@gmail.com:mypass+word", URLUtils.decode("user%40gmail.com:mypass%2Bword"));
+        assertNull(URLUtils.decode(null));
+    }
+
+    @Test
+    public void testInvalidEncodedUsername()
+    {
+        thrown.expect(IllegalStateException.class);
+        thrown.expectMessage("must be followed by two hex digits");
+        URLUtils.decode("foo%");
     }
 }

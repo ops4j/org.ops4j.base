@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.ops4j</groupId>
     <artifactId>master</artifactId>
-    <version>1.0.4</version>
+    <version>3.1.0</version>
   </parent>
   
   <groupId>org.ops4j</groupId>
@@ -20,22 +20,11 @@
 
   <url>http://www.ops4j.org/projects/base/</url>
 
-   <scm>
+  <scm>
     <connection>scm:git:git://github.com/ops4j/org.ops4j.base.git</connection>
-    <developerConnection>${release-base-altGitURL}</developerConnection>
-    <url>http://github.com/ops4j/org.ops4j.base/tree/master</url>
+    <developerConnection>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</developerConnection>
+    <url>http://github.com/ops4j/org.ops4j.base/tree/base-1.2.x</url>
   </scm>
-
-   <properties>
-      <release-base-altGitURL>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</release-base-altGitURL>
-   </properties>
-
-  <distributionManagement>
-    <site>
-      <id>ops4j.website.deploy</id>
-      <url>scpexe://www.ops4j.org/var/http/www.ops4j.org/projects/base</url>
-    </site>
-  </distributionManagement>
 
   <issueManagement>
     <system>jira</system>
@@ -44,12 +33,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <tagBase>https://scm.ops4j.org/repos/ops4j/qa/base</tagBase>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>retrotranslator-maven-plugin</artifactId>

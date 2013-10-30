@@ -172,11 +172,18 @@ public class URLUtils
     {
         final URLConnection conn = url.openConnection();
         prepareForAuthentication( conn );
+        prepareHttpHeaders( conn );
         if( acceptAnyCertificate )
         {
             prepareForSSL( conn );
         }
         return conn.getInputStream();
+    }
+
+    private static void prepareHttpHeaders(URLConnection conn) {
+        if (conn instanceof java.net.HttpURLConnection) {
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+        }
     }
 
 }

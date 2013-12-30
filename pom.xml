@@ -10,7 +10,7 @@
   
   <groupId>org.ops4j</groupId>
   <artifactId>base</artifactId>
-  <version>1.2.5-SNAPSHOT</version>
+  <version>1.2.5</version>
   <packaging>pom</packaging>
 
   <name>OPS4J Base</name>
@@ -24,7 +24,7 @@
     <connection>scm:git:git://github.com/ops4j/org.ops4j.base.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</developerConnection>
     <url>http://github.com/ops4j/org.ops4j.base/tree/base-1.2.x</url>
-    <tag>HEAD</tag>
+    <tag>base-1.2.5</tag>
   </scm>
 
   <issueManagement>

@@ -35,6 +35,8 @@ import org.ops4j.io.StreamUtils;
 import org.ops4j.io.FileUtils;
 import org.ops4j.store.Handle;
 
+import static org.ops4j.store.StoreFactory.convertToHex;
+
 /**
  * Entity store like implementation.
  * Stores incoming data (store) to disk at a temporary location.
@@ -45,6 +47,8 @@ import org.ops4j.store.Handle;
 public class TemporaryStore implements StreamStore
 {
 
+    public static final String FILENAME_PREFIX = "ops4jstore-";
+    public static final String FILENAME_SUFFIX = ".bin";
     private static Logger LOG = LoggerFactory.getLogger( TemporaryStore.class );
     final private File m_dir;
 
@@ -64,7 +68,7 @@ public class TemporaryStore implements StreamStore
         throws IOException
     {
         LOG.debug( "Enter store()" );
-        final File intermediate = File.createTempFile( "tinybundles_", ".tmp" );
+        final File intermediate = File.createTempFile( FILENAME_PREFIX, ".tmp" );
 
         FileOutputStream fis = null;
         final String h;
@@ -99,7 +103,12 @@ public class TemporaryStore implements StreamStore
 
     private File getLocation( String id )
     {
-        return new File( m_dir, "tinybundles_" + id + ".bin" );
+        return new File( m_dir, getFileName( id ) );
+    }
+
+    private String getFileName( String id )
+    {
+        return FILENAME_PREFIX + id + FILENAME_SUFFIX;
     }
 
     public InputStream load( Handle handle )
@@ -149,28 +158,6 @@ public class TemporaryStore implements StreamStore
         return convertToHex( sha1hash );
     }
 
-    private static String convertToHex( byte[] data )
-    {
-        StringBuffer buf = new StringBuffer();
-        for( int i = 0; i < data.length; i++ )
-        {
-            int halfbyte = ( data[ i ] >>> 4 ) & 0x0F;
-            int two_halfs = 0;
-            do
-            {
-                if( ( 0 <= halfbyte ) && ( halfbyte <= 9 ) )
-                {
-                    buf.append( (char) ( '0' + halfbyte ) );
-                }
-                else
-                {
-                    buf.append( (char) ( 'a' + ( halfbyte - 10 ) ) );
-                }
-                halfbyte = data[ i ] & 0x0F;
-            }
-            while( two_halfs++ < 1 );
-        }
-        return buf.toString();
-    }
+
 
 }

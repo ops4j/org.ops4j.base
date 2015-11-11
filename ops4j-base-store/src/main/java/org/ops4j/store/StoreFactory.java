@@ -39,7 +39,7 @@ public class StoreFactory
      *
      * @return {@link #sharedLocalStore()}
      */
-    public static Store<InputStream> defaultStore()
+    public static StreamStore defaultStore()
     {
         return sharedLocalStore();
     }
@@ -55,7 +55,7 @@ public class StoreFactory
      *
      * @return a store instance pointing to a local folder on disk.
      */
-    public static Store<InputStream> sharedLocalStore()
+    public static StreamStore sharedLocalStore()
     {
         return newStore(new File( System.getProperty( "java.io.tmpdir" ) + RELATIVE_STORAGE ));
     }
@@ -67,7 +67,7 @@ public class StoreFactory
      * @return A ready to use store.
      * @since 1.6.0
      */
-    public static Store<InputStream> newStore( File path )
+    public static StreamStore newStore( File path )
     {
         return new TemporaryStore( path, false );
     }
@@ -81,7 +81,7 @@ public class StoreFactory
      * @return A ready to use store.
      * @since 1.6.0
      */
-    public static Store<InputStream> newStore( File path, boolean flush)
+    public static StreamStore newStore( File path, boolean flush)
     {
         return new TemporaryStore( path, flush );
     }
@@ -94,7 +94,7 @@ public class StoreFactory
      *
      * @throws java.io.IOException in case no temp folder has been found.
      */
-    public static Store<InputStream> anonymousStore()
+    public static StreamStore anonymousStore()
         throws IOException
     {
         File temp = File.createTempFile( "ops4j-store-anonymous-", "" );

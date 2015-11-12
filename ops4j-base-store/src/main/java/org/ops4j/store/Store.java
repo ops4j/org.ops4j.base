@@ -23,7 +23,7 @@ import java.net.URI;
 /**
  * Entity Store Style Interface to store and retrieve data of type T.
  */
-public interface Store<T>
+public interface Store<T> extends AutoCloseable
 {
 
     /**

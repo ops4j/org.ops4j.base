@@ -69,34 +69,20 @@ public class TemporaryStore implements StreamStore
     {
         LOG.debug( "Enter store()" );
         final File intermediate = File.createTempFile( FILENAME_PREFIX, ".tmp" );
-
-        FileOutputStream fis = null;
         final String h;
-
-        fis = new FileOutputStream( intermediate );
-        h = hash( inp, fis );
-
-        fis.close();
+        try (FileOutputStream fis = new FileOutputStream( intermediate )){
+            h = hash( inp, fis );
+        }
         if( !getLocation( h ).exists() )
         {
-            StreamUtils.copyStream( new FileInputStream( intermediate ), new FileOutputStream( getLocation( h ) ),
-                                    true
-            );
+            StreamUtils.copyStream( new FileInputStream( intermediate ), new FileOutputStream( getLocation( h ) ), true );
         }
         else
         {
             LOG.debug( "Object for " + h + " already exists in store." );
         }
         intermediate.delete();
-
-        Handle handle = new Handle()
-        {
-
-            public String getIdentification()
-            {
-                return h;
-            }
-        };
+        Handle handle = new LocalHandle(h);
         LOG.debug( "Exit store(): " + h );
         return handle;
     }
@@ -158,6 +144,13 @@ public class TemporaryStore implements StreamStore
         return convertToHex( sha1hash );
     }
 
+    @Override public void close() throws Exception
+    {
+        clear();
+    }
 
-
+    private void clear()
+    {
+        FileUtils.delete( m_dir );
+    }
 }

@@ -17,6 +17,7 @@
  */
 package org.ops4j.net;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 
 /**
@@ -35,6 +36,7 @@ public class FreePort
     private int m_from = 0;
     private int m_to = Integer.MAX_VALUE;
     private int m_found = -1;
+    private ServerSocket sock;
 
     /**
      * @param from Begin of range to search for free port (including)
@@ -51,7 +53,7 @@ public class FreePort
      *
      * @return a free port (from first call)
      *
-     * @throws RuntimeException if no port has been found. (TODO change this to an apropriate checked exception)
+     * @throws RuntimeException if no port has been found. (TODO change this to an appropriate checked exception)
      */
     public int getPort()
     {
@@ -64,11 +66,11 @@ public class FreePort
 
     private int findFree()
     {
-        for( int i = m_from; i <= m_to; i++ )
+        for( int i = m_from; i <= m_to; i+=2 )
         {
             if( isFree( i ) )
             {
-                return i;
+                return i+1;
             }
         }
         throw new RuntimeException( "No free port in range " + m_from + ":" + m_to );
@@ -87,8 +89,7 @@ public class FreePort
     {
         try
         {
-            ServerSocket sock = new ServerSocket( port );
-            sock.close();
+            sock = new ServerSocket( port );
             // is free:
             return true;
             // We rely on an exception thrown to determine availability or not availability.
@@ -97,6 +98,10 @@ public class FreePort
             // not free.
             return false;
         }
+    }
+
+    public void close() throws IOException {
+         sock.close();
     }
 
     /**

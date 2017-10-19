@@ -7,7 +7,7 @@ PLease find the documentation in the [ops4j base wiki](https://ops4j1.jira.com/w
 Issues
 ------
 
-[Jira BASE](https://ops4j1.jira.com/projects/BASE)
+[Jira BASE](https://ops4j1.jira.com/wiki/spaces/base/overview)
 
 Build
 -----

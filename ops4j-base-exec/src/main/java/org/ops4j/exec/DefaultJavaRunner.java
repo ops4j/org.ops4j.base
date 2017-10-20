@@ -19,13 +19,10 @@ package org.ops4j.exec;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 
-import org.ops4j.io.Pipe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,22 +100,13 @@ public class DefaultJavaRunner
             throw new ExecutionException( "Platform already started" );
         }
 
-        final StringBuilder cp = new StringBuilder();
-
-        for( String path : classpath )
-        {
-            if( cp.length() != 0 )
-            {
-                cp.append( File.pathSeparator );
-            }
-            cp.append( path );
-        }
+        String cp = String.join(File.pathSeparator, classpath);
 
         final CommandLineBuilder commandLine = new CommandLineBuilder()
             .append( getJavaExecutable( javaHome ) )
             .append( vmOptions )
             .append( "-cp" )
-            .append( cp.toString() )
+            .append( cp )
             .append( mainClass )
             .append( programOptions );
 
@@ -127,7 +115,11 @@ public class DefaultJavaRunner
         try
         {
             LOG.debug( "Starting platform process." );
-            m_frameworkProcess = Runtime.getRuntime().exec( commandLine.toArray(), createEnvironmentVars( envOptions ), workingDirectory );
+            ProcessBuilder pb = new ProcessBuilder(commandLine.toArray())
+            .directory(workingDirectory)
+            .inheritIO();
+            setEnv(envOptions, pb);
+            m_frameworkProcess = pb.start();
         }
         catch( IOException e )
         {
@@ -150,15 +142,14 @@ public class DefaultJavaRunner
         }
     }
 
-    private String[] createEnvironmentVars( String[] envOptions )
-    {
-        List<String> env = new ArrayList<String>(  );
-        Map<String, String> getenv = System.getenv();
-        for (String key : getenv.keySet() ) {
-            env.add( key + "=" + getenv.get( key ) );
+    private void setEnv(final String[] envOptions, ProcessBuilder pb) {
+        HashSet<String> envSet = new HashSet<String>(Arrays.asList(envOptions));
+        Map<String, String> env = pb.environment();
+        HashSet<String> toRemove = new HashSet<String>(env.keySet());
+        toRemove.removeAll(envSet);
+        for (String key : toRemove) {
+            env.remove(key);
         }
-        if (envOptions != null) Collections.addAll( env, envOptions );
-        return env.toArray( new String[env.size()] );
     }
 
     /**
@@ -218,22 +209,11 @@ public class DefaultJavaRunner
     {
         LOG.debug( "Wrapping stream I/O." );
 
-        final Pipe errPipe = new Pipe( process.getErrorStream(), System.err ).start( "Error pipe" );
-        final Pipe outPipe = new Pipe( process.getInputStream(), System.out ).start( "Out pipe" );
-        final Pipe inPipe = new Pipe( process.getOutputStream(), System.in ).start( "In pipe" );
-
         return new Thread(
             new Runnable()
             {
                 public void run()
                 {
-                    System.out.println();
-                    LOG.debug( "Unwrapping stream I/O." );
-
-                    inPipe.stop();
-                    outPipe.stop();
-                    errPipe.stop();
-
                     try
                     {
                         process.destroy();

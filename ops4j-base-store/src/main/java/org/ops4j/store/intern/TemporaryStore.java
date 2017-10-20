@@ -27,11 +27,10 @@ import java.io.FileNotFoundException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.net.URI;
+import java.nio.file.Files;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.ops4j.io.StreamUtils;
-import org.ops4j.io.FileUtils;
 import org.ops4j.store.Handle;
 import org.ops4j.store.Store;
 
@@ -58,7 +57,7 @@ public class TemporaryStore implements Store<InputStream>
 
         if( m_dir.exists() && flushStoreage )
         {
-            FileUtils.delete( m_dir );
+            delete( m_dir );
         }
         m_dir.mkdirs();
         LOG.debug( "Storage Area is " + m_dir.getAbsolutePath() );
@@ -79,9 +78,7 @@ public class TemporaryStore implements Store<InputStream>
         fis.close();
         if( !getLocation( h ).exists() )
         {
-            StreamUtils.copyStream( new FileInputStream( intermediate ), new FileOutputStream( getLocation( h ) ),
-                                    true
-            );
+            Files.copy( intermediate.toPath(), new FileOutputStream( getLocation( h ) ));
         }
         else
         {
@@ -158,6 +155,23 @@ public class TemporaryStore implements Store<InputStream>
         return convertToHex( sha1hash );
     }
 
-
+    private boolean delete(final File file) {
+        boolean delete = false;
+        if (file != null && file.exists()) {
+            // even if is a directory try to delete. maybe is empty or maybe is a *nix symbolic link
+            delete = file.delete();
+            if (!delete && file.isDirectory()) {
+                File[] childs = file.listFiles();
+                if (childs != null && childs.length > 0) {
+                    for (File child : childs) {
+                        delete(child);
+                    }
+                    // then try again as by now the directory can be empty
+                    delete = file.delete();
+                }
+            }
+        }
+        return delete;
+    }
 
 }

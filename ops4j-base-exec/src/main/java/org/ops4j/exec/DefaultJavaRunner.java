@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * @since 0.6.1, December 09, 2008
  */
 public class DefaultJavaRunner
-    implements StoppableJavaRunner
+    implements StoppableJavaRunner, ProcessProvider
 {
 
     /**
@@ -245,6 +245,11 @@ public class DefaultJavaRunner
             throw new ExecutionException( "JAVA_HOME is not set." );
         }
         return javaHome + "/bin/java";
+    }
+
+    @Override
+    public Process getProcess() {
+        return m_frameworkProcess;
     }
 
 }

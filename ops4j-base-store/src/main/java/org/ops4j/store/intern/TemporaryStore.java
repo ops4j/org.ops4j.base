@@ -28,12 +28,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.net.URI;
 
-import org.ops4j.store.StreamStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.ops4j.io.StreamUtils;
 import org.ops4j.io.FileUtils;
 import org.ops4j.store.Handle;
+import org.ops4j.store.Store;
 
 import static org.ops4j.store.StoreFactory.convertToHex;
 
@@ -44,7 +44,7 @@ import static org.ops4j.store.StoreFactory.convertToHex;
  *
  * Uses an SHA-1 hash for indexing.
  */
-public class TemporaryStore implements StreamStore
+public class TemporaryStore implements Store<InputStream>
 {
 
     public static final String FILENAME_PREFIX = "ops4jstore-";

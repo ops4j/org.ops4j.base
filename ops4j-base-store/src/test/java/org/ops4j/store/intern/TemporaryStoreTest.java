@@ -17,17 +17,16 @@
  */
 package org.ops4j.store.intern;
 
-import org.junit.Test;
-import org.ops4j.store.Handle;
-import org.ops4j.store.StoreFactory;
-import org.ops4j.store.StreamStore;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import org.junit.Test;
+import org.ops4j.store.Store;
+import org.ops4j.store.StoreFactory;
 
 /**
  * @author Toni Menzel (toni.menzel@rebaze.com)
@@ -37,8 +36,8 @@ public class TemporaryStoreTest
     @Test
     public void testAnonymousStore() throws IOException
     {
-        StreamStore store1 = StoreFactory.anonymousStore();
-        StreamStore store2 = StoreFactory.anonymousStore();
+        Store<InputStream> store1 = StoreFactory.anonymousStore();
+        Store<InputStream> store2 = StoreFactory.anonymousStore();
         File f1 = new File(store1.getLocation( store1.store( resource1() ) )).getParentFile();
         File f2 = new File(store2.getLocation( store2.store( resource1() ) )).getParentFile();
         assertFalse("Anonymous Stores should not share the same parent (since they are anonymous)", f1.equals( f2 ));
@@ -47,8 +46,8 @@ public class TemporaryStoreTest
     @Test
     public void testSharedStore() throws IOException
     {
-        StreamStore store1 = StoreFactory.sharedLocalStore();
-        StreamStore store2 = StoreFactory.sharedLocalStore();
+        Store<InputStream> store1 = StoreFactory.sharedLocalStore();
+        Store<InputStream> store2 = StoreFactory.sharedLocalStore();
         File f1 = new File(store1.getLocation( store1.store( resource1() ) )).getParentFile();
         File f2 = new File(store2.getLocation( store2.store( resource1() ) )).getParentFile();
         assertEquals("Shared Stores should share the same parent (since they are shared)", f1,f2 );
@@ -57,7 +56,7 @@ public class TemporaryStoreTest
     @Test
     public void testPuttingTheSameResourceTwice() throws IOException
     {
-        StreamStore store = StoreFactory.sharedLocalStore();
+        Store<InputStream> store = StoreFactory.sharedLocalStore();
         String id1 =  store.store( resource1()).getIdentification();
         String id2 =  store.store( resource1()).getIdentification();
         assertEquals(id1,id2);

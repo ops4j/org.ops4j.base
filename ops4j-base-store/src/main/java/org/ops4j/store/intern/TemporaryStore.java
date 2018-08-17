@@ -60,6 +60,7 @@ public class TemporaryStore implements Store<InputStream>
             delete( m_dir );
         }
         m_dir.mkdirs();
+        m_dir.deleteOnExit();
         LOG.debug( "Storage Area is " + m_dir.getAbsolutePath() );
     }
 
@@ -100,7 +101,9 @@ public class TemporaryStore implements Store<InputStream>
 
     private File getLocation( String id )
     {
-        return new File( m_dir, getFileName( id ) );
+        File file = new File( m_dir, getFileName( id ) );
+        file.deleteOnExit();
+        return file;
     }
 
     private String getFileName( String id )

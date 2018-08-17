@@ -69,13 +69,10 @@ public class TemporaryStore implements Store<InputStream>
     {
         LOG.debug( "Enter store()" );
         final File intermediate = File.createTempFile( FILENAME_PREFIX, ".tmp" );
-
-        FileOutputStream fis = null;
-        final String h;
-
-        fis = new FileOutputStream( intermediate );
-        h = hash( inp, fis );
-
+        intermediate.deleteOnExit();
+        
+        FileOutputStream fis = new FileOutputStream( intermediate );
+        final String h = hash( inp, fis );
         fis.close();
         if( !getLocation( h ).exists() )
         {

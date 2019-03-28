@@ -17,8 +17,6 @@
  */
 package org.ops4j.net;
 
-import java.net.ServerSocket;
-
 /**
  * Find a not-taken port on localhost.
  * First call to getPort will try to find a free port in range given by contructor.
@@ -32,8 +30,9 @@ import java.net.ServerSocket;
 public class FreePort
 {
 
-    private int m_from = 0;
-    private int m_to = Integer.MAX_VALUE;
+    private final int m_from;
+    private final int m_to;
+    private final FreePortStrategy m_strategy;
     private int m_found = -1;
 
     /**
@@ -42,9 +41,20 @@ public class FreePort
      */
     public FreePort( int from, int to )
     {
+        this(from, to, new LinearFreePortStrategy(new DefaultPortTester()));
+    }
+
+    /**
+     * @param from Begin of range to search for free port (including)
+     * @param to   End of range to search for free port (including)
+     */
+    public FreePort( int from, int to, FreePortStrategy strategy)
+    {
         m_from = from;
         m_to = to;
+        m_strategy = strategy;
     }
+
 
     /**
      * Finds a free socket upon first calll and returns the same for every next call.
@@ -57,46 +67,9 @@ public class FreePort
     {
         if( m_found == -1 )
         {
-            m_found = findFree();
+            m_found = m_strategy.findFree(m_from, m_to);
         }
         return m_found;
-    }
-
-    private int findFree()
-    {
-        for( int i = m_from; i <= m_to; i++ )
-        {
-            if( isFree( i ) )
-            {
-                return i;
-            }
-        }
-        throw new RuntimeException( "No free port in range " + m_from + ":" + m_to );
-    }
-
-    /**
-     * Checks a given port for availability (by creating a temporary socket)
-     *
-     * Package visibility to enable overwriting in test.
-     *
-     * @param port Port to check
-     *
-     * @return true if its free, otherwise false.
-     */
-    boolean isFree( int port )
-    {
-        try
-        {
-            ServerSocket sock = new ServerSocket( port );
-            sock.close();
-            // is free:
-            return true;
-            // We rely on an exception thrown to determine availability or not availability.
-        } catch( Exception e )
-        {
-            // not free.
-            return false;
-        }
     }
 
     /**

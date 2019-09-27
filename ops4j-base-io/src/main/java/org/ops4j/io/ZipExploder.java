@@ -234,7 +234,7 @@ public class ZipExploder {
      */
     public void processFile(File zipFile, File destDir) throws IOException {
         if (!destDir.exists()) {
-            throw new IOException("Destionation directory '" + destDir + "' does not exists, or can't be read!");
+            throw new IOException("Destination directory '" + destDir + "' does not exist, or can't be read!");
         }
         ZipFile f = null;
         try {
@@ -314,6 +314,11 @@ public class ZipExploder {
     }
 
     protected void copyFileEntry(File destDir, boolean destIsDir, String destFileName, InputStream dis) throws IOException {
+        File outFile = new File(destDir, destFileName);
+        if (!outFile.getCanonicalPath().startsWith(destDir.getCanonicalPath())) {
+            throw new IOException("The output file is not contained in the destination directory");
+        }
+
         File file = new File(destFileName);
         String parent = file.getParent();
         if (parent != null && parent.length() > 0) {
@@ -322,7 +327,6 @@ public class ZipExploder {
                 dir.mkdirs();
             }
         }
-        File outFile = new File(destDir, destFileName);
         if (destIsDir) {
             outFile.mkdir();
         } else {

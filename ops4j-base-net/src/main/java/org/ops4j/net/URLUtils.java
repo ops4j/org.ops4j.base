@@ -114,7 +114,8 @@ public class URLUtils
     }
 
     /**
-     * Prepares an url connection for authentication if necessary.
+     * Prepares an url connection for authentication if necessary. It disables trust verification
+     * in the remote cert, and so should only be called if the certicate check should be skipped.
      *
      * @param connection the connection to be prepared
      *
@@ -140,7 +141,7 @@ public class URLUtils
         {
             try
             {
-                SSLContext ctx = SSLContext.getInstance( "SSLv3" );
+                SSLContext ctx = SSLContext.getInstance( "TLS" );
                 ctx.init( null, new TrustManager[]{ new AllCertificatesTrustManager() }, null );
                 ( (HttpsURLConnection) conn ).setSSLSocketFactory( ctx.getSocketFactory() );
             }

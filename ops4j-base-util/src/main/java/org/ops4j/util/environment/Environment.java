@@ -100,15 +100,19 @@ public class Environment extends Properties
     {
         if( isUnix() )
         {
-            String dirname = "/home/" + USERNAME + "." + applicationname.toLowerCase();
+            String prefix = "/home/" + USERNAME + ".";
+            String dirname = prefix + applicationname.toLowerCase();
             File dir = new File( dirname );
+            checkDirectoryPathStartsWithPrefix( prefix, dir );
             return dir;
         }
         if( isWindows() )
         {
+            String prefix = getEnvVariable( "APPDATA" ) + File.separator;
             String name = toFirstCap( applicationname );
-            String dirname = getEnvVariable( "APPDATA" ) + File.separator + name;
+            String dirname = prefix + name;
             File dir = new File( dirname );
+            checkDirectoryPathStartsWithPrefix( prefix, dir );
             return dir;
         }
         String message = "Environment operations not supported on unrecognized operatings system";
@@ -142,8 +146,10 @@ public class Environment extends Properties
         if( isUnix() )
         {
             String name = applicationname.toLowerCase();
-            String dirname = "/home/" + USERNAME + name;
+            String prefix = "/home/" + USERNAME;
+            String dirname = prefix + name;
             File homeDir = new File( dirname );
+            checkDirectoryPathStartsWithPrefix( prefix, homeDir );
             if( homeDir.exists() )
             {
                 return homeDir;
@@ -173,11 +179,26 @@ public class Environment extends Properties
                 shared = "C:\\Program Files\\";
             }
             File dir = new File( shared, name );
+            checkDirectoryPathStartsWithPrefix( shared, dir );
             return dir;
         }
         String message = "Environment operations not supported on unrecognized operatings system";
         UnsupportedOperationException cause = new UnsupportedOperationException( message );
         throw new EnvironmentException( cause );
+    }
+
+    private static void checkDirectoryPathStartsWithPrefix(String prefix, File dir)
+    {
+        try {
+            if( !dir.getCanonicalPath().startsWith(prefix) )
+            {
+                String message = "The supplied name contains illegal characters";
+                UnsupportedOperationException cause = new UnsupportedOperationException( message );
+                throw new EnvironmentException( cause );
+            }
+        } catch (IOException e) {
+            throw new EnvironmentException( e );
+        }
     }
 
     /**

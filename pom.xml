@@ -20,8 +20,8 @@
     <url>http://team.ops4j.org/wiki/display/base/</url>
 
     <scm>
-        <connection>scm:git:git://github.com/ops4j/org.ops4j.base.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/ops4j/org.ops4j.base.git</developerConnection>
+        <connection>scm:git:https://github.com/ops4j/org.ops4j.base</connection>
+        <developerConnection>scm:git:https://github.com/ops4j/org.ops4j.base</developerConnection>
         <url>http://github.com/ops4j/org.ops4j.base/tree/master</url>
       <tag>HEAD</tag>
   </scm>

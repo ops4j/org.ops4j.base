@@ -41,8 +41,7 @@ public interface JavaRunner
      * @param workingDir     working directory
      * @param environmentVariables optional environment variables
      *
-     * @throws org.ops4j.ExecutionException.runner.platform.PlatformException
-     *          if something goes wrong
+     * @throws ExecutionException if something goes wrong
      */
     void exec( String[] vmOptions,
                String[] classpath,
@@ -63,8 +62,7 @@ public interface JavaRunner
      * @param javaHome       java home directory
      * @param workingDir     working directory
      *
-     * @throws org.ops4j.ExecutionException.runner.platform.PlatformException
-     *          if something goes wrong
+     * @throws ExecutionException if something goes wrong
      */
      void exec( String[] vmOptions,
                String[] classpath,

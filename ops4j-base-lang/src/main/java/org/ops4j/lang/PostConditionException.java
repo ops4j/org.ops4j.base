@@ -20,7 +20,6 @@ package org.ops4j.lang;
 /**
  * PostConditionException is used to validate computed results in methods and if not within the
  * supported ranges, throw an appropriate exception describing the problem.
- * <p/>
  * This Exception is used to make the code more robust by ensuring that the output is within the
  * predicted ranges.
  */
@@ -75,7 +74,7 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the value is greater than a limit.
      *
-     * This method ensures that <code>value > limit</code>.
+     * This method ensures that <code>value &gt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must exceed.
@@ -96,7 +95,7 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the value is greater than a limit.
      *
-     * This method ensures that <code>value > limit</code>.
+     * This method ensures that <code>value &gt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must exceed.
@@ -117,7 +116,7 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the value is greater than a limit.
      *
-     * This method ensures that <code>value > limit</code>.
+     * This method ensures that <code>value &gt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must exceed.
@@ -138,7 +137,7 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the value is lesser than a limit.
      *
-     * This method ensures that <code>value < limit</code>.
+     * This method ensures that <code>value &lt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must be smaller than.
@@ -159,7 +158,7 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the value is lesser than a limit.
      *
-     * This method ensures that <code>value < limit</code>.
+     * This method ensures that <code>value &lt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must be smaller than.
@@ -180,7 +179,7 @@ public class PostConditionException extends RuntimeException
     /**
      * Validates that the value is lesser than a limit.
      *
-     * This method ensures that <code>value < limit</code>.
+     * This method ensures that <code>value &lt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must be smaller than.

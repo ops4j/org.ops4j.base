@@ -23,19 +23,18 @@ import java.util.Properties;
 /**
  * Exception thrown when the argument to a method or constructor is
  * <i>null</i> and not handled by the method/constructor/class.
- * <p/>
  * The argument in the only constructor of this exception should only
  * take the name of the declared argument that is null, for instance;
- * <code><pre>
+ * <code>
  *     public Person( String name, int age )
  *     {
  *         NullArgumentException.validateNotEmpty( name, "name" )
- *         if( age > 120 )
- *             throw new IllegalArgumentException( "age > 120" );
- *         if( age < 0 )
- *             throw new IllegalArgumentException( "age < 0" );
+ *         if( age &gt; 120 )
+ *             throw new IllegalArgumentException( "age &gt; 120" );
+ *         if( age &lt; 0 )
+ *             throw new IllegalArgumentException( "age &lt; 0" );
  *     }
- * </pre></code>
+ * </code>
  *
  * @author <a href="http://www.ops4j.org">Open Particpation Software for Java</a>
  * @version $Id$

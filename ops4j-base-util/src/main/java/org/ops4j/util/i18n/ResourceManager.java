@@ -111,11 +111,8 @@ public final class ResourceManager
      * Clear the cache of all resources currently loaded into the system.
      * This method is useful if you need to dump the complete cache and because part of the application is reloading
      * and thus the resources may need to be reloaded.
-     * <p/>
-     * <p/>
      * Note that the caller must have been granted the "i18n.clearCompleteCache" {@link RuntimePermission} or
      * else a security exception will be thrown.
-     * </p>
      *
      * @throws SecurityException if the caller does not have permission to clear cache
      */

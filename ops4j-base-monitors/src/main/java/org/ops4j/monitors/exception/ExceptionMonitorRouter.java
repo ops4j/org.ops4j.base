@@ -25,7 +25,6 @@ import java.util.List;
 /**
  * A monitor of a Exceptions occuring, and capability to route/delegate these
  * events to 0..n registered ExceptionMonitor implementations.
- * <p/>
  * The purpose of this class is to support that many monitors are registered to the
  * same Exception source.
  *

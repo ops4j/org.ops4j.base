@@ -123,7 +123,6 @@ public final class ConnectionCache
      * to create a thread, starting the thread causes the object's
      * <code>run</code> method to be called in that separately executing
      * thread.
-     * <p/>
      * The general contract of the method <code>run</code> is that it may
      * take any action whatsoever.
      *
@@ -196,7 +195,6 @@ public final class ConnectionCache
      * @param monitor The ExceptionMonitor to be notified.
      *
      * @throws TooManyMonitorsException If more than one monitor is registered.
-     * @requires HansaPermission "api.exceptionmonitor", "add"
      */
     public void registerExceptionMonitor( ExceptionMonitor monitor )
         throws TooManyMonitorsException
@@ -216,7 +214,6 @@ public final class ConnectionCache
      *
      * @param monitor The ExceptionMonitor to be unregistered.
      *
-     * @requires HansaPermission "api.exceptionmonitor", "remove"
      */
     public void unregisterExceptionMonitor( ExceptionMonitor monitor )
     {
@@ -235,7 +232,6 @@ public final class ConnectionCache
      *
      * @return all ExceptionMonitors that are registered.
      *
-     * @requires HansaPermission "api.exceptionmonitor", "get"
      */
     public List<ExceptionMonitor> getExceptionMonitors()
     {

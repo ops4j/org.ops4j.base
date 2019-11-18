@@ -60,31 +60,23 @@ public final class PropertiesUtils
 
     /**
      * Read a set of properties from a property file provided as an Inputstream.
-     * <p/>
      * Property files may reference symbolic properties in the form ${name}. Translations occur from both the
      * <code>mappings</code> properties as well as all values within the Properties that are being read.
-     * </p>
-     * <p/>
      * Example;
-     * </p>
-     * <code><pre>
+     * <code>
      *   Properties mappings = System.getProperties();
      *   Properties myProps = PropertiesUtils.readProperties( "mine.properties", mappings );
-     * </pre></code>
-     * <p/>
+     * </code>
      * and the "mine.properties" file contains;
-     * </p>
-     * <code><pre>
+     * <code>
      * mything=${myplace}/mything
      * myplace=${user.home}/myplace
-     * </pre></code>
-     * <p/>
+     * </code>
      * then the Properties object <i>myProps</i> will contain;
-     * </p>
-     * <code><pre>
+     * <code>
      * mything=/home/niclas/myplace/mything
      * myplace=/home/niclas/myplace
-     * </pre></code>
+     * </code>
      *
      * @param stream      the InputStream of the property file to read.
      * @param mappings    Properties that will be available for translations initially.

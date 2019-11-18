@@ -55,7 +55,6 @@ public class ExecutionException
         super( message, cause );
     }
     /**
-     * @param message The exception message.
      * @param cause   The original cause of this exception.
      *
      * @see Exception#Exception(String,Throwable)

@@ -20,7 +20,7 @@ package org.ops4j.lang;
 /**
  * PreConditionException is used to validate incoming arguments to methods and if not within the
  * supported ranges, throw an appropriate exception describing the problem.
- * <p/>
+ * 
  * This Exception is used to make the code more robust, and ensure that clients use it as expected.
  */
 public class PreConditionException extends RuntimeException
@@ -73,8 +73,7 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value is greater than a limit.
-     * <p/>
-     * This method ensures that <code>value > limit</code>.
+     * This method ensures that <code>value &gt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must exceed.
@@ -94,8 +93,7 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value is greater than a limit.
-     * <p/>
-     * This method ensures that <code>value > limit</code>.
+     * This method ensures that <code>value &gt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must exceed.
@@ -115,8 +113,7 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value is greater than a limit.
-     * <p/>
-     * This method ensures that <code>value > limit</code>.
+     * This method ensures that <code>value &gt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must exceed.
@@ -136,8 +133,7 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value is lesser than a limit.
-     * <p/>
-     * This method ensures that <code>value < limit</code>.
+     * This method ensures that <code>value &lt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must be smaller than.
@@ -157,8 +153,7 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value is lesser than a limit.
-     * <p/>
-     * This method ensures that <code>value < limit</code>.
+     * This method ensures that <code>value &lt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must be smaller than.
@@ -178,8 +173,7 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value is lesser than a limit.
-     * <p/>
-     * This method ensures that <code>value < limit</code>.
+     * This method ensures that <code>value &lt; limit</code>.
      *
      * @param identifier The name of the object.
      * @param limit      The limit that the value must be smaller than.
@@ -199,7 +193,6 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value under test is a particular value.
-     * <p/>
      * This method ensures that <code>value == condition</code>.
      *
      * @param identifier The name of the object.
@@ -220,7 +213,6 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value under test is a particular value.
-     * <p/>
      * This method ensures that <code>value == condition</code>.
      *
      * @param identifier The name of the object.
@@ -241,7 +233,6 @@ public class PreConditionException extends RuntimeException
 
     /**
      * Validates that the value under test is a particular value.
-     * <p/>
      * This method ensures that <code>value == condition</code>.
      *
      * @param identifier The name of the object.

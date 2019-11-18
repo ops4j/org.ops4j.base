@@ -24,14 +24,11 @@ import org.ops4j.monitors.stream.StreamMonitor;
 /**
  * PrintStreamMonitor is a convenience implementation of the StreamMonitor for output to
  * a PrintStream, such as <code>System.out</code>.
- * <p/>
- * <p/>
  * Example of usage;
  * <pre><code>
  *      StreamMonitor monitor = new PrintStreamMonitor( System.out );
  *      StreamUtils.copyStream( monitor, sourceURL, length, srcStream, destStream, true );
  * </code></pre>
- * </p>
  */
 public class PrintStreamMonitor
     implements StreamMonitor

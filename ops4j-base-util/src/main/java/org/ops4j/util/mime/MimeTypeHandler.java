@@ -64,7 +64,6 @@ public final class MimeTypeHandler
 
     /**
      * Returns the number of MimeTypes that has been defined.
-     * <p/>
      * Only for use with testcases.
      *
      * @return the known mimetype count

@@ -30,7 +30,6 @@ import java.util.ResourceBundle;
 /**
  * A class to simplify extracting localized strings, icons
  * and other common resources from a ResourceBundle.
- * <p/>
  * Reworked to mirror behaviour of StringManager from Tomcat (format() to getString()).
  *
  * @author <a href="http://www.ops4j.org">Open Participation Software for Java</a>

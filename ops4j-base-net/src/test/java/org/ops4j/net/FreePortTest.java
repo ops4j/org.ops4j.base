@@ -30,11 +30,11 @@ public class FreePortTest
     @Test
     public void testFreePortFirstTimeWithOneRange()
     {
-        FreePort p = new FreePort( 1, 1 )
+        PortTester portTester = new PortTester()
         {
             public boolean alreadyCalled = false;
 
-            boolean isFree( int port )
+            public boolean isFree( int port )
             {
                 assertEquals( 1, port );
                 if( alreadyCalled )
@@ -49,18 +49,19 @@ public class FreePortTest
             }
 
         };
-        assertEquals( 1, p.getPort() );
-        assertEquals( 1, p.getPort() );
+        FreePort freePort = new FreePort( 1, 1, new LinearFreePortStrategy(portTester));
+        assertEquals( 1, freePort.getPort() );
+        assertEquals( 1, freePort.getPort() );
     }
 
     @Test
     public void testFreePortFirstTimeWithOneRangeNonFree()
     {
-        FreePort p = new FreePort( 1, 1 )
+        PortTester portTester = new PortTester()
         {
             public boolean alreadyCalled = false;
 
-            boolean isFree( int port )
+            public boolean isFree( int port )
             {
                 assertEquals( 1, port );
                 if( alreadyCalled )
@@ -78,26 +79,27 @@ public class FreePortTest
             }
 
         };
+        FreePort freePort = new FreePort( 1, 1, new LinearFreePortStrategy(portTester));
         try
         {
-            assertEquals( 1, p.getPort() );
+            assertEquals( 1, freePort.getPort() );
             fail( "Exception expected." );
         } catch( RuntimeException e )
         {
 
         }
         // second check should be made
-        assertEquals( 1, p.getPort() );
+        assertEquals( 1, freePort.getPort() );
     }
 
     @Test
     public void testRangeTraverse()
     {
-        FreePort p = new FreePort( 1, 3 )
+        PortTester portTester = new PortTester()
         {
             public int alreadyCalled = 0;
 
-            boolean isFree( int port )
+            public boolean isFree( int port )
             {
                 // this is the amount of required checks
 
@@ -130,9 +132,10 @@ public class FreePortTest
 
         };
 
-        assertEquals( 3, p.getPort() );
+        FreePort freePort = new FreePort( 1, 3, new LinearFreePortStrategy(portTester));
+        assertEquals( 3, freePort.getPort() );
         // subsequent call:
-        assertEquals( 3, p.getPort() );
+        assertEquals( 3, freePort.getPort() );
 
     }
 }
